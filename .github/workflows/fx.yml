@@ -1,0 +1,40 @@
+# Guardar en: .github/workflows/fx.yml
+name: Sistema FX
+
+on:
+  schedule:
+    - cron: "0 5 * * *"          # 00:00 Colombia -> resumen del día
+    - cron: "*/15 * * * 1-5"     # cada 15 min, lunes a viernes -> alertas
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "briefing o alerts"
+        default: "briefing"
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ejecutar
+        env:
+          REPORT_TZ: America/Bogota
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '*/15 * * * 1-5' && 'alerts' || 'briefing') }}
+        run: python fx_system.py "$MODE"
+      - name: Guardar resumen
+        if: env.MODE == 'briefing'
+        env:
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '*/15 * * * 1-5' && 'alerts' || 'briefing') }}
+        run: |
+          git config user.name "fx-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add reports/ || true
+          git diff --staged --quiet || (git commit -m "Resumen $(date -u +%F)" && git push)
