@@ -1,0 +1,54 @@
+📅 EVENTOS RELEVANTES — Tuesday 29/09/2026 (America/Bogota)
+
+━━━ AUD ━━━
+🕐 20:30 | 🔴 ALTA | AUD — Inflación (IPC)
+   (CPI m/m)
+   Previo: 1.0% | Pronóstico: 0.5%
+   Qué es: Inflación general. Mueve las expectativas de tasas.
+   ▲ Si sale MAYOR que el pronóstico → AUD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → AUD se DEBILITA
+   Nota: Si hay dato core/subyacente, ese pesa más que el general.
+
+🕐 20:30 | 🔴 ALTA | AUD — Inflación (IPC)
+   (CPI y/y)
+   Previo: 3.5% | Pronóstico: 4.1%
+   Qué es: Inflación general. Mueve las expectativas de tasas.
+   ▲ Si sale MAYOR que el pronóstico → AUD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → AUD se DEBILITA
+   Nota: Si hay dato core/subyacente, ese pesa más que el general.
+
+🕐 20:30 | 🔴 ALTA | AUD — Inflación subyacente (media recortada)
+   (Trimmed Mean CPI m/m)
+   Previo: 0.5% | Pronóstico: 0.3%
+   Qué es: Inflación sin precios volátiles. Es la que más pesa en las decisiones del banco central de Australia.
+   ▲ Si sale MAYOR que el pronóstico → AUD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → AUD se DEBILITA
+   Nota: Dato alto = más alzas de tasas esperadas.
+
+━━━ CAD ━━━
+🕐 07:30 | 🟠 MEDIA | CAD — PIB
+   (GDP m/m)
+   Previo: 0.3% | Pronóstico: 0.0%
+   Qué es: Crecimiento de la economía.
+   ▲ Si sale MAYOR que el pronóstico → CAD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → CAD se DEBILITA
+   Nota: Revisa si es preliminar o final.
+
+🎯 MEJORES ESCENARIOS DEL DÍA
+▪️ AUDCAD (sesgo previo: VENTA)
+   20:30 CPI m/m: dato mayor que el pronóstico → COMPRA AUDCAD | dato menor → VENTA AUDCAD
+   07:30 GDP m/m: dato mayor que el pronóstico → VENTA AUDCAD | dato menor → COMPRA AUDCAD
+
+▪️ GBPAUD (sesgo previo: COMPRA)
+   20:30 CPI m/m: dato mayor que el pronóstico → VENTA GBPAUD | dato menor → COMPRA GBPAUD
+
+▪️ EURAUD (sesgo previo: COMPRA)
+   20:30 CPI m/m: dato mayor que el pronóstico → VENTA EURAUD | dato menor → COMPRA EURAUD
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
