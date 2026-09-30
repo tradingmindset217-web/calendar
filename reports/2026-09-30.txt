@@ -1,0 +1,62 @@
+📅 EVENTOS RELEVANTES — Wednesday 30/09/2026 (America/Bogota)
+
+━━━ USD ━━━
+🕐 07:15 | 🟠 MEDIA | USD — Empleo (NFP)
+   (ADP Non-Farm Employment Change)
+   Previo: 38K | Pronóstico: 73K
+   Qué es: Termómetro del mercado laboral de EE. UU.; mueve al USD y al oro.
+   ▲ Si sale MAYOR que el pronóstico → USD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → USD se DEBILITA
+   Nota: Mira también salarios y revisiones del mes anterior.
+
+🕐 07:30 | 🔴 ALTA | USD — Inflación PCE
+   (Core PCE Price Index m/m)
+   Previo: 0.2% | Pronóstico: 0.3%
+   Qué es: Inflación que prefiere la Fed.
+   ▲ Si sale MAYOR que el pronóstico → USD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → USD se DEBILITA
+   Nota: Alto = Fed más dura = USD sube.
+
+🕐 07:30 | 🔴 ALTA | USD — PIB
+   (Final GDP q/q)
+   Previo: 1.5% | Pronóstico: 1.5%
+   Qué es: Crecimiento de la economía.
+   ▲ Si sale MAYOR que el pronóstico → USD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → USD se DEBILITA
+   Nota: Revisa si es preliminar o final.
+
+🕐 07:30 | 🟠 MEDIA | USD — PIB
+   (Final GDP Price Index q/q)
+   Previo: 6.4% | Pronóstico: 6.4%
+   Qué es: Crecimiento de la economía.
+   ▲ Si sale MAYOR que el pronóstico → USD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → USD se DEBILITA
+   Nota: Revisa si es preliminar o final.
+
+━━━ EUR ━━━
+🕐 01:29 | 🟠 MEDIA | EUR — Inflación (IPC)
+   (German Prelim CPI m/m)
+   Previo: 0.2% | Pronóstico: 0.5%
+   Qué es: Inflación general. Mueve las expectativas de tasas.
+   ▲ Si sale MAYOR que el pronóstico → EUR se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → EUR se DEBILITA
+   Nota: Si hay dato core/subyacente, ese pesa más que el general.
+
+🎯 MEJORES ESCENARIOS DEL DÍA
+▪️ EURUSD (sesgo previo: VENTA)
+   01:29 German Prelim CPI m/m: dato mayor que el pronóstico → COMPRA EURUSD | dato menor → VENTA EURUSD
+   07:30 Core PCE Price Index m/m: dato mayor que el pronóstico → VENTA EURUSD | dato menor → COMPRA EURUSD
+
+▪️ USDJPY (sesgo previo: COMPRA)
+   07:30 Core PCE Price Index m/m: dato mayor que el pronóstico → COMPRA USDJPY | dato menor → VENTA USDJPY
+
+▪️ USDCHF (sesgo previo: COMPRA)
+   07:30 Core PCE Price Index m/m: dato mayor que el pronóstico → COMPRA USDCHF | dato menor → VENTA USDCHF
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
