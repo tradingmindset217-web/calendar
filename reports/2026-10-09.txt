@@ -1,0 +1,35 @@
+📅 EVENTOS RELEVANTES — Friday 09/10/2026 (America/Bogota)
+
+━━━ CAD ━━━
+🕐 07:30 | 🔴 ALTA | CAD — Cambio en empleo
+   (Employment Change)
+   Previo: -41.7K | Pronóstico: 6.1K
+   Qué es: Empleos creados en el mes.
+   ▲ Si sale MAYOR que el pronóstico → CAD se FORTALECE
+   ▼ Si sale MENOR que el pronóstico → CAD se DEBILITA
+   Nota: Junto a la tasa de desempleo forma el cuadro completo.
+
+🕐 07:30 | 🔴 ALTA | CAD — Tasa de desempleo
+   (Unemployment Rate)
+   Previo: 6.4% | Pronóstico: 6.5%
+   Qué es: Salud del empleo. Más desempleo = divisa débil.
+   ▲ Si sale MAYOR que el pronóstico → CAD se DEBILITA
+   ▼ Si sale MENOR que el pronóstico → CAD se FORTALECE
+
+🎯 MEJORES ESCENARIOS DEL DÍA
+▪️ USDCAD (sin sesgo previo, opera la reacción)
+   07:30 Employment Change: dato mayor que el pronóstico → VENTA USDCAD | dato menor → COMPRA USDCAD
+
+▪️ GBPCAD (sin sesgo previo, opera la reacción)
+   07:30 Employment Change: dato mayor que el pronóstico → VENTA GBPCAD | dato menor → COMPRA GBPCAD
+
+▪️ EURCAD (sin sesgo previo, opera la reacción)
+   07:30 Employment Change: dato mayor que el pronóstico → VENTA EURCAD | dato menor → COMPRA EURCAD
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
