@@ -1,6 +1,38 @@
 📆 PLAN SEMANAL — 19/10 al 23/10/2026 (America/Bogota)
 
-🌍 CONTEXTO GEOPOLÍTICO
+━━━ 📌 RESUMEN ━━━
+🎯 Ningún par tiene hoy una dirección clara (fundamental, técnico y geopolítico alineados). Conviene esperar o reducir el riesgo.
+🌍 Geopolítica: aversión al riesgo alta.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+🔄 CAMBIOS VS EL PLAN ANTERIOR
+Es el primer plan guardado; desde el próximo verás qué cambió.
+
+━━━ 🎯 ESCENARIOS ━━━
+Hoy no hay pares con dirección clara: no se generan escenarios. Esperar nuevos datos o reducir el riesgo.
+
+━━━ 🧭 TODOS LOS PARES (referencia) ━━━
+GBPUSD  📉 BAJISTA  calidad -  -5.0  [téc -3 · fund +0.0 · geo -2.0]
+USDCAD  📈 ALCISTA  calidad -  +5.0  [téc +3 · fund +0.0 · geo +2.0]
+NZDUSD  📉 BAJISTA  calidad -  -5.0  [téc -3 · fund +0.0 · geo -2.0]
+EURJPY  📉 BAJISTA  calidad -  -5.0  [téc -3 · fund +0.0 · geo -2.0]
+EURUSD  📉 BAJISTA  calidad -  -4.5  [téc -3 · fund +0.0 · geo -1.5]
+AUDUSD  📉 BAJISTA  calidad -  -3.0  [téc -1 · fund +0.0 · geo -2.0]
+AUDJPY  📉 BAJISTA  calidad -  -3.0  [téc -1 · fund +0.0 · geo -2.0]
+EURGBP  📉 BAJISTA  calidad -  -2.5  [téc -3 · fund +0.0 · geo +0.5]
+USDCHF  📈 ALCISTA  calidad -  +2.0  [téc +3 · fund +0.0 · geo -1.0]
+GBPJPY  ↔️ NEUTRAL  calidad -  -1.0  [téc +1 · fund +0.0 · geo -2.0]
+USDJPY  ↔️ NEUTRAL  calidad -  +0.0  [téc +1 · fund +0.0 · geo -1.0]
+GBPAUD  ↔️ NEUTRAL  calidad -  +0.0  [téc -1 · fund +0.0 · geo +1.0]
+Puntaje = técnico (±3) + fundamental (±5, el que más pesa) + geopolítico (±2).
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (tasas, inflación, empleo, nóminas...) ━━━
+Sin eventos fundamentales relevantes en el periodo.
+
+━━━ 🗓 AGENDA DE LA SEMANA ━━━
+Sin eventos relevantes en el periodo: baja volatilidad esperada.
+
+━━━ 🌍 GEOPOLÍTICA ━━━
 Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
 Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
 🟢 Seis sitios energéticos ucranianos afectados por Rusia desde que Trump anunció el alto el fuego, dice Zelensky
@@ -11,83 +43,7 @@ Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
 🔻 Ucrania ataca el centro de datos de Yandex en el tercer ataque al gigante tecnológico ruso
 📰 Análisis: Los dolores de cabeza globales de Trump empeoran semanas antes de elecciones cruciales
 🔻 El aeropuerto de Riad ataca otro momento peligroso en un conflicto ya tenso
-La lectura es por palabras clave: revisa tú mismo las noticias antes de operar.
-
-🗓 No se encontraron eventos relevantes para la semana (el calendario de la próxima semana puede no estar publicado aún).
-
-🧭 SESGOS SEMANALES (dirección del par)
-NZDUSD  📉 BAJISTA (alta)  -6.0  [téc -3 · fund +0.0 · geo -3.0]
-EURJPY  📉 BAJISTA (alta)  -5.5  [téc -3 · fund +0.0 · geo -2.5]
-GBPUSD  📉 BAJISTA (alta)  -5.0  [téc -3 · fund +0.0 · geo -2.0]
-USDCAD  📈 ALCISTA (alta)  +5.0  [téc +3 · fund +0.0 · geo +2.0]
-EURUSD  📉 BAJISTA (alta)  -4.5  [téc -3 · fund +0.0 · geo -1.5]
-AUDUSD  📉 BAJISTA (alta)  -4.0  [téc -1 · fund +0.0 · geo -3.0]
-AUDJPY  📉 BAJISTA (alta)  -4.0  [téc -1 · fund +0.0 · geo -3.0]
-EURGBP  📉 BAJISTA (media)  -2.5  [téc -3 · fund +0.0 · geo +0.5]
-USDCHF  📈 ALCISTA (baja)  +2.0  [téc +3 · fund +0.0 · geo -1.0]
-GBPJPY  📉 BAJISTA (baja)  -2.0  [téc +1 · fund +0.0 · geo -3.0]
-USDJPY  ↔️ NEUTRAL / RANGO (baja)  +0.0  [téc +1 · fund +0.0 · geo -1.0]
-GBPAUD  ↔️ NEUTRAL / RANGO (baja)  +0.0  [téc -1 · fund +0.0 · geo +1.0]
-ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias, semana pasada) + fundamental (eventos de las divisas) + geopolítico. Fibonacci y liquidez se calculan en H1.
-
-🎯 ESCENARIOS LISTOS (SEMANA)
-
-▪️ GBPAUD — ↔️ NEUTRAL / RANGO (confianza baja) | puntaje +0.0 [técnico -1 · fundamental +0.0 · geopolítico +1.0]
-   Precio 1.89813 | SMA20 1.89153 | Semana pasada: máx 1.90295 · mín 1.89320
-   Rango probable entre 1.89320 y 1.90295: vender cerca del máximo / comprar cerca del mínimo con confirmación.
-   Ruptura con cierre diario fuera del rango → seguir la ruptura.
-   Fibonacci: impulso bajista 1.90320→1.89189 (últimas 120 velas H1). Rebote actual 55% | 50%: 1.89755 · 61.8%: 1.89888 · 78.6%: 1.90078 📍 EL PRECIO ESTÁ EN LA ZONA 61.8%
-   C) La zona 61.8% (1.89888) es la reacción probable: resistencia si el precio sube hasta ahí.
-   Liquidez en H1 (~10 días):
-   🔼 Pendiente arriba (BSL, liquidez compradora): 1.90201 (39 pips) · 1.90298 (48 pips)
-   🔽 Pendiente abajo (SSL, liquidez vendedora): 1.89189 (62 pips) · 1.89073 (74 pips)
-   📅 Día anterior: PDH 1.89777 (tomado) · PDL 1.89395 (pendiente)
-   ⚡ Toma de liquidez: barrido de máximos (BSL) en 1.89946 hace 2 h; cerró de vuelta abajo → rechazo BAJISTA
-   ⚡ Toma de liquidez: barrido de máximos (BSL) en 1.89934 hace 10 h; cerró de vuelta abajo → rechazo BAJISTA
-   D) Sin sesgo claro: el precio suele ir por la liquidez más cercana (arriba 1.90201 (39 pips) / abajo 1.89189 (62 pips)). Opera el barrido + reversión, no la ruptura.
-
-▪️ NZDUSD — 📉 BAJISTA (confianza alta) | puntaje -6.0 [técnico -3 · fundamental +0.0 · geopolítico -3.0]
-   Precio 0.55907 | SMA20 0.56649 | Semana pasada: máx 0.56300 · mín 0.55831
-   A) Continuación: cierre diario bajo 0.55831 → VENTA; stop sobre SMA20 (0.56649); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (0.56649) con vela de rechazo → VENTA; stop sobre 0.56300.
-   ✖ Invalidación: cierre diario sobre 0.56300 → anular el sesgo.
-   Fibonacci: impulso bajista 0.56294→0.55841 (últimas 120 velas H1). Rebote actual 14% | 50%: 0.56067 · 61.8%: 0.56121 · 78.6%: 0.56197
-   C) VENTA en rebote a la zona 61.8% (0.56121) con vela de rechazo; stop sobre 78.6% (0.56197); objetivo: mínimo del impulso (0.55841).
-   Liquidez en H1 (~10 días):
-   🔼 Pendiente arriba (BSL, liquidez compradora): 0.56136 (23 pips) · 0.56202 (30 pips)
-   🔽 Pendiente abajo (SSL, liquidez vendedora): 0.55850 (6 pips) · 0.55839 (7 pips, mín. iguales x2)
-   📅 Día anterior: PDH 0.56202 (pendiente) · PDL 0.56082 (tomado)
-   ⚡ Toma de liquidez: barrido de máximos (BSL) en 0.56186 hace 22 h; cerró de vuelta abajo → rechazo BAJISTA ✅ a favor del sesgo
-   ⭐ Confluencia: el 61.8% (0.56121) coincide con liquidez pendiente en 0.56136. Zona de alta probabilidad de reacción.
-   D) Objetivo en la liquidez pendiente de abajo: 0.55850 (6 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
-
-▪️ EURJPY — 📉 BAJISTA (confianza alta) | puntaje -5.5 [técnico -3 · fundamental +0.0 · geopolítico -2.5]
-   Precio 176.950 | SMA20 178.703 | Semana pasada: máx 178.314 · mín 176.557
-   A) Continuación: cierre diario bajo 176.557 → VENTA; stop sobre SMA20 (178.703); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (178.703) con vela de rechazo → VENTA; stop sobre 178.314.
-   ✖ Invalidación: cierre diario sobre 178.314 → anular el sesgo.
-   Fibonacci: impulso bajista 178.333→176.522 (últimas 120 velas H1). Rebote actual 24% | 50%: 177.427 · 61.8%: 177.641 · 78.6%: 177.945
-   C) VENTA en rebote a la zona 61.8% (177.641) con vela de rechazo; stop sobre 78.6% (177.945); objetivo: mínimo del impulso (176.522).
-   Liquidez en H1 (~10 días):
-   🔼 Pendiente arriba (BSL, liquidez compradora): 177.562 (61 pips) · 177.865 (92 pips)
-   🔽 Pendiente abajo (SSL, liquidez vendedora): 176.527 (42 pips, mín. iguales x2) · 176.203 (75 pips)
-   📅 Día anterior: PDH 177.466 (tomado) · PDL 177.174 (tomado)
-   ⚡ Sin tomas de liquidez recientes con rechazo.
-   D) Objetivo en la liquidez pendiente de abajo: 176.527 (42 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
-
-▪️ GBPUSD — 📉 BAJISTA (confianza alta) | puntaje -5.0 [técnico -3 · fundamental +0.0 · geopolítico -2.0]
-   Precio 1.32093 | SMA20 1.32916 | Semana pasada: máx 1.32873 · mín 1.31863
-   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32916); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (1.32916) con vela de rechazo → VENTA; stop sobre 1.32873.
-   ✖ Invalidación: cierre diario sobre 1.32873 → anular el sesgo.
-   Fibonacci: impulso bajista 1.32852→1.31855 (últimas 120 velas H1). Rebote actual 24% | 50%: 1.32353 · 61.8%: 1.32471 · 78.6%: 1.32638
-   C) VENTA en rebote a la zona 61.8% (1.32471) con vela de rechazo; stop sobre 78.6% (1.32638); objetivo: mínimo del impulso (1.31855).
-   Liquidez en H1 (~10 días):
-   🔼 Pendiente arriba (BSL, liquidez compradora): 1.32610 (52 pips) · 1.32852 (76 pips)
-   🔽 Pendiente abajo (SSL, liquidez vendedora): 1.32043 (5 pips) · 1.32029 (6 pips)
-   📅 Día anterior: PDH 1.32524 (tomado) · PDL 1.32312 (tomado)
-   ⚡ Toma de liquidez: barrido de máximos (BSL) en 1.32549 hace 17 h; cerró de vuelta abajo → rechazo BAJISTA ✅ a favor del sesgo
-   D) Objetivo en la liquidez pendiente de abajo: 1.32043 (5 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
 
 ⚠️ REGLAS DE EJECUCIÓN
 1. No abras operaciones 15 min antes de un evento 🔴.
