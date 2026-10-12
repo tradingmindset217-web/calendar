@@ -1,18 +1,18 @@
 # Guardar en: .github/workflows/fx.yml
-# Horas en UTC. Colombia = UTC-5  (21:00 Colombia = 02:00 UTC del día siguiente)
+# Las horas de GitHub están en UTC. Colombia = UTC-5, así que 19:30 Colombia = 00:30 UTC del día siguiente.
 name: Sistema FX
 
 on:
   schedule:
-    - cron: "0 5 * * 1-5"        # 00:00 Colombia, lunes a viernes -> resumen del día
-    - cron: "*/15 * * * 1-5"     # cada 15 min, lunes a viernes -> alertas
-    - cron: "0 2 * * 1"          # DOMINGO 21:00 Colombia -> plan semanal (principal)
-    - cron: "0 2 * * 2-5"        # lunes a jueves 21:00 Colombia -> sesgos y escenarios de mañana
+    - cron: "30 0 * * 1"         # DOMINGO 19:30 Colombia -> plan semanal
+    - cron: "30 0 * * 2-5"       # LUNES a JUEVES 19:30 Colombia -> plan diario para mañana
+    # Opcional: alertas antes de cada evento (descomenta la línea siguiente para activarlas)
+    # - cron: "*/15 * * * 1-5"
   workflow_dispatch:
     inputs:
       mode:
-        description: "briefing, alerts, weekly u outlook"
-        default: "briefing"
+        description: "outlook (plan diario), weekly (plan semanal), briefing o alerts"
+        default: "outlook"
 
 permissions:
   contents: write
@@ -21,7 +21,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      MODE: ${{ github.event.inputs.mode || (github.event.schedule == '*/15 * * * 1-5' && 'alerts' || (github.event.schedule == '0 2 * * 1' && 'weekly' || (github.event.schedule == '0 2 * * 2-5' && 'outlook' || 'briefing'))) }}
+      MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 0 * * 1' && 'weekly' || (github.event.schedule == '*/15 * * * 1-5' && 'alerts' || 'outlook')) }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -32,12 +32,17 @@ jobs:
           REPORT_TZ: America/Bogota
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          FOCUS_PAIRS: GBPAUD
+          # WhatsApp (opcional, no oficial). Si no creas estos secretos, simplemente no se usa.
+          GREENAPI_ID: ${{ secrets.GREENAPI_ID }}
+          GREENAPI_TOKEN: ${{ secrets.GREENAPI_TOKEN }}
+          GREENAPI_URL: ${{ secrets.GREENAPI_URL }}
+          WHATSAPP_CHAT_ID: ${{ secrets.WHATSAPP_CHAT_ID }}
+          MAX_SETUPS: "3"
         run: python fx_system.py "$MODE"
-      - name: Guardar reporte
+      - name: Guardar reporte y estado
         if: env.MODE != 'alerts'
         run: |
           git config user.name "fx-bot"
           git config user.email "bot@users.noreply.github.com"
           git add reports/ || true
-          git diff --staged --quiet || (git commit -m "Reporte $(date -u +%F)" && git push)
+          git diff --staged --quiet || (git commit -m "Plan $(date -u +%F)" && git push)
