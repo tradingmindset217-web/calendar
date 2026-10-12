@@ -1,0 +1,64 @@
+📆 PLAN SEMANAL — 19/10 al 23/10/2026 (America/Bogota)
+
+🌍 CONTEXTO GEOPOLÍTICO
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🔻 Saudi minister vows 'serious response' to Houthi attacks on airports
+🔻 Fridges in French supermarkets hit by cyber attack
+📰 Thousands march to Indian Supreme Court to demand election chief resign
+🔻 Ukraine strikes Yandex data centre in third attack on Russian tech giant
+🔻 Riyadh airport attacks another dangerous moment in already tense conflict
+🔻 Watch: CCTV shows people take cover as missile hits Riyadh airport
+🔻 AI minister warns 'likely' UK's cyber defences will be breached
+📰 Why some have no choice but to pay costly oil prices
+La lectura es por palabras clave: revisa tú mismo las noticias antes de operar.
+
+🗓 No se encontraron eventos relevantes para la semana (el calendario de la próxima semana puede no estar publicado aún).
+
+🧭 SESGOS SEMANALES (dirección del par)
+NZDUSD  📉 BAJISTA (alta)  -6.0  [téc -3 · fund +0.0 · geo -3.0]
+EURJPY  📉 BAJISTA (alta)  -5.5  [téc -3 · fund +0.0 · geo -2.5]
+GBPUSD  📉 BAJISTA (alta)  -5.0  [téc -3 · fund +0.0 · geo -2.0]
+USDCAD  📈 ALCISTA (alta)  +5.0  [téc +3 · fund +0.0 · geo +2.0]
+EURUSD  📉 BAJISTA (alta)  -4.5  [téc -3 · fund +0.0 · geo -1.5]
+AUDUSD  📉 BAJISTA (alta)  -4.0  [téc -1 · fund +0.0 · geo -3.0]
+AUDJPY  📉 BAJISTA (alta)  -4.0  [téc -1 · fund +0.0 · geo -3.0]
+EURGBP  📉 BAJISTA (media)  -2.5  [téc -3 · fund +0.0 · geo +0.5]
+USDCHF  📈 ALCISTA (baja)  +2.0  [téc +3 · fund +0.0 · geo -1.0]
+GBPJPY  📉 BAJISTA (baja)  -2.0  [téc +1 · fund +0.0 · geo -3.0]
+USDJPY  ↔️ NEUTRAL / RANGO (baja)  +0.0  [téc +1 · fund +0.0 · geo -1.0]
+GBPAUD  ↔️ NEUTRAL / RANGO (baja)  +0.0  [téc -1 · fund +0.0 · geo +1.0]
+ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias y semana pasada) + fundamental (pronóstico vs previo) + geopolítico.
+
+🎯 ESCENARIOS LISTOS
+
+▪️ GBPAUD — ↔️ NEUTRAL / RANGO (confianza baja) | puntaje +0.0 [técnico -1 · fundamental +0.0 · geopolítico +1.0]
+   Precio 1.89756 | SMA20 1.89150 | Semana pasada: máx 1.90295 · mín 1.89156
+   Rango probable entre 1.89156 y 1.90295: vender cerca del máximo / comprar cerca del mínimo con confirmación.
+   Ruptura con cierre diario fuera del rango → seguir la ruptura.
+
+▪️ NZDUSD — 📉 BAJISTA (confianza alta) | puntaje -6.0 [técnico -3 · fundamental +0.0 · geopolítico -3.0]
+   Precio 0.55885 | SMA20 0.56648 | Semana pasada: máx 0.56300 · mín 0.55831
+   A) Continuación: cierre diario bajo 0.55831 → VENTA; stop sobre SMA20 (0.56648); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (0.56648) con vela de rechazo → VENTA; stop sobre 0.56300.
+   ✖ Invalidación: cierre diario sobre 0.56300 → anular el sesgo.
+
+▪️ EURJPY — 📉 BAJISTA (confianza alta) | puntaje -5.5 [técnico -3 · fundamental +0.0 · geopolítico -2.5]
+   Precio 177.166 | SMA20 178.714 | Semana pasada: máx 178.314 · mín 176.557
+   A) Continuación: cierre diario bajo 176.557 → VENTA; stop sobre SMA20 (178.714); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (178.714) con vela de rechazo → VENTA; stop sobre 178.314.
+   ✖ Invalidación: cierre diario sobre 178.314 → anular el sesgo.
+
+▪️ GBPUSD — 📉 BAJISTA (confianza alta) | puntaje -5.0 [técnico -3 · fundamental +0.0 · geopolítico -2.0]
+   Precio 1.32072 | SMA20 1.32915 | Semana pasada: máx 1.32873 · mín 1.31863
+   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32915); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (1.32915) con vela de rechazo → VENTA; stop sobre 1.32873.
+   ✖ Invalidación: cierre diario sobre 1.32873 → anular el sesgo.
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
