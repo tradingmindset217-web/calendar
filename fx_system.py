@@ -12,6 +12,8 @@ Variables opcionales:
   FORCE=1          ejecuta aunque sea fin de semana (para pruebas)
   PAIRS=...        pares a evaluar, separados por coma
   FOCUS_PAIRS=...  pares que SIEMPRE llevan escenarios completos (por defecto GBPAUD)
+  FIB_H1_BARS=120  velas H1 para el impulso de Fibonacci
+  LIQ_H1_BARS=240  velas H1 para buscar zonas de liquidez
 
 Solo usa la librería estándar (Python 3.9+).
 """
@@ -43,7 +45,9 @@ FOCUS = [p.strip().upper() for p in os.getenv("FOCUS_PAIRS", "GBPAUD").split(","
 W = {"High": 3, "Medium": 2, "Low": 1}
 ES = {"High": "🔴 ALTA", "Medium": "🟠 MEDIA", "Low": "🟡 BAJA"}
 DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
-FIB_LOOKBACK = 60  # velas diarias para detectar el último impulso
+FIB_H1_BARS = int(os.getenv("FIB_H1_BARS", "120"))   # velas H1 del impulso de Fibonacci (~5 días)
+LIQ_H1_BARS = int(os.getenv("LIQ_H1_BARS", "240"))   # velas H1 para buscar liquidez (~10 días)
+LIQ_RECENT = 36                                       # una toma de liquidez es "reciente" si ocurrió en las últimas 36 velas H1
 
 # (palabras clave, nombre, por qué importa, invertido, es_clave, nota)
 # "invertido" = un valor MÁS ALTO es malo para la divisa (desempleo, subsidios).
@@ -207,14 +211,15 @@ def price_history(pair):
         return None
 
 
-def fibonacci(rows, price):
-    """Retroceso de Fibonacci del último impulso (máx. y mín. de las últimas FIB_LOOKBACK velas).
-    Si el mínimo ocurrió antes que el máximo, el impulso fue alcista y el retroceso baja;
-    si no, el impulso fue bajista y el retroceso sube."""
-    seg = rows[-FIB_LOOKBACK:]
-    hi_i = max(range(len(seg)), key=lambda i: seg[i][1])
-    lo_i = min(range(len(seg)), key=lambda i: seg[i][2])
-    hi, lo = seg[hi_i][1], seg[lo_i][2]
+def fibonacci(bars, price):
+    """Retroceso de Fibonacci del último impulso en velas H1 (máx. y mín. de las últimas
+    FIB_H1_BARS velas). Si el mínimo ocurrió antes que el máximo, el impulso fue alcista
+    y el retroceso baja; si no, el impulso fue bajista y el retroceso sube.
+    bars = lista de (timestamp, cierre, máximo, mínimo)."""
+    seg = bars[-FIB_H1_BARS:]
+    hi_i = max(range(len(seg)), key=lambda i: seg[i][2])
+    lo_i = min(range(len(seg)), key=lambda i: seg[i][3])
+    hi, lo = seg[hi_i][2], seg[lo_i][3]
     rng = hi - lo
     if rng <= 0:
         return None
@@ -243,7 +248,104 @@ def technicals(pair):
     score = (1 if price > sma20 else -1) + (1 if sma20 > sma50 else -1) + (1 if ret > 0 else -1)
     return {"price": price, "sma20": sma20, "sma50": sma50,
             "hi": max(r[1] for r in wk), "lo": min(r[2] for r in wk),
-            "ret": ret, "score": score, "fib": fibonacci(rows, price)}
+            "ret": ret, "score": score}
+
+
+# ---------- velas H1: Fibonacci y liquidez ----------
+_H1_CACHE = {}
+
+
+def h1_history(pair):
+    """Velas de 1 hora de Yahoo Finance (gratuito, no oficial): (timestamp, cierre, máx, mín)."""
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{pair}=X?range=1mo&interval=60m"
+    try:
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            res = json.load(r)["chart"]["result"][0]
+        q = res["indicators"]["quote"][0]
+        bars = [(t, c, h, l) for t, c, h, l in zip(res["timestamp"], q["close"], q["high"], q["low"])
+                if None not in (c, h, l)]
+        return bars if len(bars) >= 60 else None
+    except Exception as e:
+        print(f"Sin velas H1 para {pair}: {e}", file=sys.stderr)
+        return None
+
+
+def pip(pair):
+    return 0.01 if "JPY" in pair else 0.0001
+
+
+def cluster(levels, tol):
+    """Agrupa niveles cercanos (máximos o mínimos iguales = liquidez más fuerte)."""
+    out = []
+    for lv in sorted(levels):
+        if out and lv - out[-1][-1] <= tol:
+            out[-1].append(lv)
+        else:
+            out.append([lv])
+    return [(sum(c) / len(c), len(c)) for c in out]
+
+
+def liquidity(bars, k=3):
+    """Zonas de liquidez en H1.
+    - Pendiente: máximos/mínimos oscilantes (fractales de k velas) que el precio aún NO ha superado.
+      Arriba de los máximos hay liquidez compradora (BSL); debajo de los mínimos, vendedora (SSL).
+    - Toma de liquidez: una vela superó un máximo/mínimo con la mecha pero CERRÓ de vuelta
+      dentro (barrido con rechazo) en las últimas LIQ_RECENT velas y el rechazo sigue vigente."""
+    seg = bars[-LIQ_H1_BARS:]
+    n = len(seg)
+    cs = [b[1] for b in seg]
+    hs = [b[2] for b in seg]
+    ls = [b[3] for b in seg]
+    price = cs[-1]
+    trs = [max(hs[i] - ls[i], abs(hs[i] - cs[i - 1]), abs(ls[i] - cs[i - 1])) for i in range(1, n)]
+    atr = sum(trs[-14:]) / 14
+    tol = 0.15 * atr
+    pend_hi, pend_lo, sweeps = [], [], []
+    for i in range(k, n - k):
+        if hs[i] > max(hs[i - k:i]) and hs[i] >= max(hs[i + 1:i + k + 1]):
+            j = next((j for j in range(i + k + 1, n) if hs[j] > hs[i]), None)
+            if j is None:
+                pend_hi.append(hs[i])
+            elif cs[j] < hs[i] and j >= n - LIQ_RECENT and max(cs[j:]) <= hs[i]:
+                sweeps.append({"side": "high", "level": hs[i], "ago": n - 1 - j})
+        if ls[i] < min(ls[i - k:i]) and ls[i] <= min(ls[i + 1:i + k + 1]):
+            j = next((j for j in range(i + k + 1, n) if ls[j] < ls[i]), None)
+            if j is None:
+                pend_lo.append(ls[i])
+            elif cs[j] > ls[i] and j >= n - LIQ_RECENT and min(cs[j:]) >= ls[i]:
+                sweeps.append({"side": "low", "level": ls[i], "ago": n - 1 - j})
+    above = [c for c in cluster(pend_hi, tol) if c[0] > price][:2]
+    below = [c for c in cluster(pend_lo, tol) if c[0] < price][::-1][:2]
+    sweeps.sort(key=lambda s_: s_["ago"])
+    return {"above": above, "below": below, "sweeps": sweeps[:2], "atr": atr}
+
+
+def day_levels(bars):
+    """Máximo y mínimo del día anterior (PDH/PDL), por día calendario de Colombia."""
+    days = {}
+    for t, c, h, l in bars:
+        d = datetime.fromtimestamp(t, TZ).date()
+        x = days.setdefault(d, [h, l])
+        x[0], x[1] = max(x[0], h), min(x[1], l)
+    ds = sorted(days)
+    if len(ds) < 2:
+        return None
+    pdh, pdl = days[ds[-2]]
+    return {"pdh": pdh, "pdl": pdl,
+            "pdh_taken": days[ds[-1]][0] > pdh, "pdl_taken": days[ds[-1]][1] < pdl}
+
+
+def h1_analysis(pair):
+    if pair not in _H1_CACHE:
+        bars = h1_history(pair)
+        res = None
+        if bars:
+            price = bars[-1][1]
+            res = {"price": price, "fib": fibonacci(bars, price),
+                   "liq": liquidity(bars), "days": day_levels(bars)}
+        _H1_CACHE[pair] = res
+    return _H1_CACHE[pair]
 
 
 # ---------- geopolítica (titulares por palabras clave) ----------
@@ -472,7 +574,7 @@ def fib_lines(p, total, f):
     hi, lo = fmt(p, f["hi"]), fmt(p, f["lo"])
     zone = " 📍 EL PRECIO ESTÁ EN LA ZONA 61.8%" if 55 <= f["retr"] <= 70 else ""
     if f["leg"] == "up":
-        head = (f"   Fibonacci: impulso alcista {lo}→{hi} (últimas {FIB_LOOKBACK} velas). "
+        head = (f"   Fibonacci: impulso alcista {lo}→{hi} (últimas {FIB_H1_BARS} velas H1). "
                 f"Retroceso actual {f['retr']:.0f}% | 50%: {lv[0.5]} · 61.8%: {lv[0.618]} · "
                 f"78.6%: {lv[0.786]}{zone}")
         if total >= 2:
@@ -484,7 +586,7 @@ def fib_lines(p, total, f):
         else:
             act = f"   C) La zona 61.8% ({lv[0.618]}) es la reacción probable: soporte si el precio baja hasta ahí."
     else:
-        head = (f"   Fibonacci: impulso bajista {hi}→{lo} (últimas {FIB_LOOKBACK} velas). "
+        head = (f"   Fibonacci: impulso bajista {hi}→{lo} (últimas {FIB_H1_BARS} velas H1). "
                 f"Rebote actual {f['retr']:.0f}% | 50%: {lv[0.5]} · 61.8%: {lv[0.618]} · "
                 f"78.6%: {lv[0.786]}{zone}")
         if total <= -2:
@@ -496,6 +598,62 @@ def fib_lines(p, total, f):
         else:
             act = f"   C) La zona 61.8% ({lv[0.618]}) es la reacción probable: resistencia si el precio sube hasta ahí."
     return [head, act]
+
+
+def liquidity_lines(p, total, h1):
+    L, f, d, price = h1["liq"], h1["fib"], h1["days"], h1["price"]
+
+    def dist(x):
+        return f"{abs(x - price) / pip(p):.0f} pips"
+
+    def fmt_levels(cl, tag):
+        return " · ".join(f"{fmt(p, lv)} ({dist(lv)}" + (f", {tag} x{n}" if n > 1 else "") + ")"
+                          for lv, n in cl) or "ninguna cercana"
+
+    lines = [f"   Liquidez en H1 (~{LIQ_H1_BARS // 24} días):",
+             f"   🔼 Pendiente arriba (BSL, liquidez compradora): {fmt_levels(L['above'], 'máx. iguales')}",
+             f"   🔽 Pendiente abajo (SSL, liquidez vendedora): {fmt_levels(L['below'], 'mín. iguales')}"]
+    if d:
+        lines.append(f"   📅 Día anterior: PDH {fmt(p, d['pdh'])} ({'tomado' if d['pdh_taken'] else 'pendiente'})"
+                     f" · PDL {fmt(p, d['pdl'])} ({'tomado' if d['pdl_taken'] else 'pendiente'})")
+    for s_ in L["sweeps"]:
+        if s_["side"] == "high":
+            txt = (f"barrido de máximos (BSL) en {fmt(p, s_['level'])} hace {s_['ago']} h; cerró de vuelta "
+                   f"abajo → rechazo BAJISTA")
+            favor = total <= -2
+        else:
+            txt = (f"barrido de mínimos (SSL) en {fmt(p, s_['level'])} hace {s_['ago']} h; cerró de vuelta "
+                   f"arriba → rechazo ALCISTA")
+            favor = total >= 2
+        tag = " ✅ a favor del sesgo" if favor else (" ⚠️ contra el sesgo" if abs(total) >= 2 else "")
+        lines.append(f"   ⚡ Toma de liquidez: {txt}{tag}")
+    if not L["sweeps"]:
+        lines.append("   ⚡ Sin tomas de liquidez recientes con rechazo.")
+
+    # Confluencia: 61.8% de Fibonacci cerca de liquidez pendiente
+    if f:
+        lv618 = f["lv"][0.618]
+        near = [lv for lv, _ in L["above"] + L["below"] if abs(lv - lv618) <= 0.5 * L["atr"]]
+        if near:
+            lines.append(f"   ⭐ Confluencia: el 61.8% ({fmt(p, lv618)}) coincide con liquidez pendiente "
+                         f"en {fmt(p, near[0])}. Zona de alta probabilidad de reacción.")
+
+    up = L["above"][0][0] if L["above"] else None
+    dn = L["below"][0][0] if L["below"] else None
+    if total >= 2:
+        tgt = f"{fmt(p, up)} ({dist(up)})" if up else "el máximo reciente"
+        lines.append(f"   D) Objetivo en la liquidez pendiente de arriba: {tgt}. Entrada de mayor calidad: "
+                     f"barrido de mínimos con cierre de vuelta arriba, idealmente desde la zona 61.8%.")
+    elif total <= -2:
+        tgt = f"{fmt(p, dn)} ({dist(dn)})" if dn else "el mínimo reciente"
+        lines.append(f"   D) Objetivo en la liquidez pendiente de abajo: {tgt}. Entrada de mayor calidad: "
+                     f"barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.")
+    else:
+        a = f"{fmt(p, up)} ({dist(up)})" if up else "-"
+        b = f"{fmt(p, dn)} ({dist(dn)})" if dn else "-"
+        lines.append(f"   D) Sin sesgo claro: el precio suele ir por la liquidez más cercana (arriba {a} / "
+                     f"abajo {b}). Opera el barrido + reversión, no la ruptura.")
+    return lines
 
 
 def scenario_block(r, events, with_day=True):
@@ -521,10 +679,15 @@ def scenario_block(r, events, with_day=True):
             lines += [f"   Rango probable entre {fmt(p, t['lo'])} y {fmt(p, t['hi'])}: "
                       f"vender cerca del máximo / comprar cerca del mínimo con confirmación.",
                       f"   Ruptura con cierre diario fuera del rango → seguir la ruptura."]
-        if t.get("fib"):
-            lines += fib_lines(p, r["total"], t["fib"])
     else:
-        lines.append("   (sin datos de precio: solo se usó fundamental y geopolítica)")
+        lines.append("   (sin datos de precio diarios: solo se usó fundamental y geopolítica)")
+    h1 = h1_analysis(p)
+    if h1:
+        if h1["fib"]:
+            lines += fib_lines(p, r["total"], h1["fib"])
+        lines += liquidity_lines(p, r["total"], h1)
+    else:
+        lines.append("   (sin velas H1: no hay Fibonacci ni liquidez para este par)")
     trig = trigger_lines(p, events, limit=3, with_day=with_day)
     if trig:
         lines.append("   Gatillos de datos:")
@@ -538,7 +701,7 @@ def bias_rows(results):
 
 
 LEGEND = ("ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias, "
-          "semana pasada) + fundamental (eventos de las divisas) + geopolítico.")
+          "semana pasada) + fundamental (eventos de las divisas) + geopolítico. Fibonacci y liquidez se calculan en H1.")
 
 
 def choose_pairs(results):
@@ -664,23 +827,30 @@ def chunks(text, n=3800):
 
 
 def send_telegram(text):
+    """TELEGRAM_CHAT_ID admite varios destinos separados por coma.
+    Para enviar a un TEMA (pestaña) de un grupo con temas: -1001234567890:5
+    (id del grupo, dos puntos, id del tema)."""
     token = (os.getenv("TELEGRAM_TOKEN") or "").strip()
-    chats = [c.strip() for c in (os.getenv("TELEGRAM_CHAT_ID") or "").split(",") if c.strip()]
+    targets = [c.strip() for c in (os.getenv("TELEGRAM_CHAT_ID") or "").split(",") if c.strip()]
     if not text:
         return
-    if not (token and chats):
+    if not (token and targets):
         print("ERROR: los secretos TELEGRAM_TOKEN o TELEGRAM_CHAT_ID llegan vacios", file=sys.stderr)
         return
-    for chat in chats:
+    for target in targets:
+        chat, _, thread = target.partition(":")
         for part in chunks(text):
-            data = urllib.parse.urlencode({"chat_id": chat, "text": part}).encode()
+            payload = {"chat_id": chat.strip(), "text": part}
+            if thread.strip():
+                payload["message_thread_id"] = thread.strip()
+            data = urllib.parse.urlencode(payload).encode()
             try:
                 urllib.request.urlopen(f"https://api.telegram.org/bot{token}/sendMessage",
                                        data=data, timeout=30)
-                print(f"Telegram: enviado a {chat}")
+                print(f"Telegram: enviado a {target}")
             except Exception as e:
                 cuerpo = e.read().decode() if hasattr(e, "read") else ""
-                print(f"Telegram ERROR ({chat}): {e} {cuerpo}", file=sys.stderr)
+                print(f"Telegram ERROR ({target}): {e} {cuerpo}", file=sys.stderr)
 
 
 def save(name, text):
