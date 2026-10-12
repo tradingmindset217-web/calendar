@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """
-Sistema de eventos económicos para Forex.
+Sistema FX: plan diario con fundamentales, técnico (SMA, Fibonacci H1), liquidez y geopolítica.
 
 Modos:
-  python fx_system.py briefing  -> resumen del día (lunes a viernes, 00:00)
-  python fx_system.py alerts    -> avisos previos y lectura de datos (lunes a viernes)
-  python fx_system.py weekly    -> PLAN SEMANAL principal (domingo 9 pm)
-  python fx_system.py outlook   -> sesgos y escenarios para el día siguiente (lun a jue, 9 pm)
+  python fx_system.py weekly    -> PLAN SEMANAL (domingo 7:30 pm Colombia)
+  python fx_system.py outlook   -> PLAN DIARIO para el día siguiente (lun-jue 7:30 pm)
+  python fx_system.py briefing  -> resumen de eventos de hoy (manual)
+  python fx_system.py alerts    -> avisos previos a eventos (manual / opcional)
 
 Variables opcionales:
-  FORCE=1          ejecuta aunque sea fin de semana (para pruebas)
+  FORCE=1          ejecuta aunque sea fin de semana (pruebas)
   PAIRS=...        pares a evaluar, separados por coma
-  FOCUS_PAIRS=...  pares que SIEMPRE llevan escenarios completos (por defecto GBPAUD)
+  FOCUS_PAIRS=...  pares que SIEMPRE se muestran aunque no sean claros (vacío por defecto)
+  MAX_SETUPS=3     máximo de pares con escenarios completos
   FIB_H1_BARS=120  velas H1 para el impulso de Fibonacci
-  LIQ_H1_BARS=240  velas H1 para buscar zonas de liquidez
+  LIQ_H1_BARS=240  velas H1 para buscar liquidez
 
 Solo usa la librería estándar (Python 3.9+).
 """
@@ -34,20 +35,24 @@ FEED_BASE = "https://nfs.faireconomy.media/"
 FEEDS = {"this": FEED_BASE + "ff_calendar_thisweek.json",
          "next": FEED_BASE + "ff_calendar_nextweek.json"}
 OUT_DIR = os.getenv("REPORT_DIR", "reports")
+STATE_FILE = os.path.join(OUT_DIR, "state.json")
 UA = {"User-Agent": "Mozilla/5.0"}
 FORCE = os.getenv("FORCE") == "1"
 
 PAIRS = [p.strip().upper() for p in os.getenv(
     "PAIRS", "EURUSD,GBPUSD,USDJPY,AUDUSD,USDCAD,USDCHF,NZDUSD,GBPAUD,GBPJPY,EURJPY,EURGBP,AUDJPY"
 ).split(",") if p.strip()]
-FOCUS = [p.strip().upper() for p in os.getenv("FOCUS_PAIRS", "GBPAUD").split(",") if p.strip()]
+FOCUS = [p.strip().upper() for p in os.getenv("FOCUS_PAIRS", "").split(",") if p.strip()]
+MAX_SETUPS = int(os.getenv("MAX_SETUPS", "3"))
+FIB_H1_BARS = int(os.getenv("FIB_H1_BARS", "120"))
+LIQ_H1_BARS = int(os.getenv("LIQ_H1_BARS", "240"))
+LIQ_RECENT = 36
 
 W = {"High": 3, "Medium": 2, "Low": 1}
 ES = {"High": "🔴 ALTA", "Medium": "🟠 MEDIA", "Low": "🟡 BAJA"}
 DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
-FIB_H1_BARS = int(os.getenv("FIB_H1_BARS", "120"))   # velas H1 del impulso de Fibonacci (~5 días)
-LIQ_H1_BARS = int(os.getenv("LIQ_H1_BARS", "240"))   # velas H1 para buscar liquidez (~10 días)
-LIQ_RECENT = 36                                       # una toma de liquidez es "reciente" si ocurrió en las últimas 36 velas H1
+DIR_TXT = {1: "ALCISTA", -1: "BAJISTA", 0: "NEUTRAL"}
+GRADE_RANK = {"A": 2, "B": 1, None: 0}
 
 # (palabras clave, nombre, por qué importa, invertido, es_clave, nota)
 # "invertido" = un valor MÁS ALTO es malo para la divisa (desempleo, subsidios).
@@ -97,8 +102,33 @@ PLAYBOOK = [
      "Anticipa el gasto.", False, False, ""),
 ]
 
+# Categoría y multiplicador de peso: los fundamentales que dirigen a una divisa pesan más
+CATS = {
+    "Decisión de tasas": ("Tasas de interés", 3.0),
+    "Decisión de la Fed": ("Tasas de interés", 3.0),
+    "Discurso de banco central": ("Tasas de interés", 1.0),
+    "Inflación subyacente (media recortada)": ("Inflación", 2.5),
+    "Inflación subyacente (IPC core)": ("Inflación", 2.5),
+    "Inflación (IPC)": ("Inflación", 2.5),
+    "Inflación PCE": ("Inflación", 2.5),
+    "Precios al productor": ("Inflación", 1.0),
+    "Empleo (NFP)": ("Empleo / nóminas", 2.5),
+    "Cambio en empleo": ("Empleo", 2.0),
+    "Tasa de desempleo": ("Desempleo", 2.0),
+    "Subsidios de desempleo": ("Desempleo", 1.0),
+    "PIB": ("Crecimiento", 1.5),
+    "Ventas minoristas": ("Consumo", 1.5),
+    "PMI / ISM": ("Actividad", 1.0),
+    "Balanza comercial": ("Comercio", 0.75),
+    "Confianza / sentimiento": ("Sentimiento", 0.75),
+}
+
 
 # ---------- utilidades ----------
+def clamp(x, lo, hi):
+    return max(lo, min(hi, x))
+
+
 def num(s):
     if s in (None, ""):
         return None
@@ -124,8 +154,13 @@ def inv(ev):
     return bool(ev["_rule"] and ev["_rule"][3])
 
 
+def cat_of(ev):
+    return CATS.get(ev["_rule"][1], ("Otros", 1.0)) if ev["_rule"] else ("Otros", 1.0)
+
+
 def weight(ev):
-    return W[ev["impact"]] + (1 if ev["_rule"] and ev["_rule"][4] else 0)
+    base = W[ev["impact"]] + (1 if ev["_rule"] and ev["_rule"][4] else 0)
+    return base * cat_of(ev)[1]
 
 
 def phrase(ev, higher):
@@ -135,7 +170,7 @@ def phrase(ev, higher):
 
 
 def expected_bias(ev):
-    """Expectativa previa: pronóstico vs dato anterior."""
+    """Expectativa previa: pronóstico vs dato anterior (+1 mejora, -1 deterioro)."""
     f, p = num(ev.get("forecast")), num(ev.get("previous"))
     if f is None or p is None or f == p:
         return 0
@@ -153,6 +188,10 @@ def surprise(ev):
 
 def fmt(pair, x):
     return f"{x:.3f}" if "JPY" in pair else f"{x:.5f}"
+
+
+def pip(pair):
+    return 0.01 if "JPY" in pair else 0.0001
 
 
 # ---------- descarga de datos ----------
@@ -211,30 +250,6 @@ def price_history(pair):
         return None
 
 
-def fibonacci(bars, price):
-    """Retroceso de Fibonacci del último impulso en velas H1 (máx. y mín. de las últimas
-    FIB_H1_BARS velas). Si el mínimo ocurrió antes que el máximo, el impulso fue alcista
-    y el retroceso baja; si no, el impulso fue bajista y el retroceso sube.
-    bars = lista de (timestamp, cierre, máximo, mínimo)."""
-    seg = bars[-FIB_H1_BARS:]
-    hi_i = max(range(len(seg)), key=lambda i: seg[i][2])
-    lo_i = min(range(len(seg)), key=lambda i: seg[i][3])
-    hi, lo = seg[hi_i][2], seg[lo_i][3]
-    rng = hi - lo
-    if rng <= 0:
-        return None
-    ratios = (0.382, 0.5, 0.618, 0.786)
-    if lo_i < hi_i:
-        leg = "up"
-        lv = {r: hi - rng * r for r in ratios}
-        retr = (hi - price) / rng * 100
-    else:
-        leg = "down"
-        lv = {r: lo + rng * r for r in ratios}
-        retr = (price - lo) / rng * 100
-    return {"leg": leg, "hi": hi, "lo": lo, "lv": lv, "retr": retr}
-
-
 def technicals(pair):
     rows = price_history(pair)
     if not rows:
@@ -271,8 +286,22 @@ def h1_history(pair):
         return None
 
 
-def pip(pair):
-    return 0.01 if "JPY" in pair else 0.0001
+def fibonacci(bars, price):
+    """Retroceso de Fibonacci del último impulso en H1 (máx. y mín. de las últimas FIB_H1_BARS velas).
+    Si el mínimo ocurrió antes que el máximo, el impulso fue alcista y el retroceso baja."""
+    seg = bars[-FIB_H1_BARS:]
+    hi_i = max(range(len(seg)), key=lambda i: seg[i][2])
+    lo_i = min(range(len(seg)), key=lambda i: seg[i][3])
+    hi, lo = seg[hi_i][2], seg[lo_i][3]
+    rng = hi - lo
+    if rng <= 0:
+        return None
+    ratios = (0.382, 0.5, 0.618, 0.786)
+    if lo_i < hi_i:
+        leg, lv, retr = "up", {r: hi - rng * r for r in ratios}, (hi - price) / rng * 100
+    else:
+        leg, lv, retr = "down", {r: lo + rng * r for r in ratios}, (price - lo) / rng * 100
+    return {"leg": leg, "hi": hi, "lo": lo, "lv": lv, "retr": retr}
 
 
 def cluster(levels, tol):
@@ -287,11 +316,8 @@ def cluster(levels, tol):
 
 
 def liquidity(bars, k=3):
-    """Zonas de liquidez en H1.
-    - Pendiente: máximos/mínimos oscilantes (fractales de k velas) que el precio aún NO ha superado.
-      Arriba de los máximos hay liquidez compradora (BSL); debajo de los mínimos, vendedora (SSL).
-    - Toma de liquidez: una vela superó un máximo/mínimo con la mecha pero CERRÓ de vuelta
-      dentro (barrido con rechazo) en las últimas LIQ_RECENT velas y el rechazo sigue vigente."""
+    """Liquidez en H1: pendiente (máx./mín. oscilantes aún no superados) y tomas de liquidez
+    (barridos con mecha que cerraron de vuelta dentro, en las últimas LIQ_RECENT velas)."""
     seg = bars[-LIQ_H1_BARS:]
     n = len(seg)
     cs = [b[1] for b in seg]
@@ -368,8 +394,7 @@ def has(words, text):
 
 
 def translate_es(text):
-    """Traduce al español con el servicio gratuito de Google Translate (no oficial).
-    Si falla, devuelve el titular original en inglés."""
+    """Traduce al español con Google Translate (gratuito, no oficial). Si falla, deja el original."""
     try:
         url = ("https://translate.googleapis.com/translate_a/single"
                "?client=gtx&sl=auto&tl=es&dt=t&q=" + urllib.parse.quote(text))
@@ -410,7 +435,6 @@ def geopolitics():
             tagged.append(("📰", t))
     net = off - on
     intensity = 0 if net <= 1 else 1 if net <= 4 else 2
-    # La clasificación se hizo en inglés; solo se traduce lo que se muestra
     shown = [(ic, translate_es(t)) for ic, t in tagged[:8]]
     return intensity, shown, len(titles)
 
@@ -426,7 +450,7 @@ def geo_section():
                "\n".join(f"{ic} {t}" for ic, t in heads)
     if total_heads == 0:
         txt += "\n(No se pudieron leer titulares; este bloque no se usó en los sesgos.)"
-    txt += "\nLa lectura es por palabras clave: revisa tú mismo las noticias antes de operar."
+    txt += "\nLectura por palabras clave: revisa tú mismo las noticias antes de operar."
     return intensity, txt
 
 
@@ -449,25 +473,11 @@ def event_block(ev):
 
 
 def currency_scores(events):
-    vol, score = defaultdict(int), defaultdict(float)
+    vol, score = defaultdict(float), defaultdict(float)
     for e in events:
         vol[e["country"]] += weight(e)
         score[e["country"]] += weight(e) * expected_bias(e)
     return vol, score
-
-
-def rank_pairs(events):
-    vol, score = currency_scores(events)
-    pairs = ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "AUDUSD", "NZDUSD", "USDCAD",
-             "EURGBP", "EURJPY", "GBPJPY", "AUDJPY", "EURAUD", "EURCHF", "AUDNZD",
-             "GBPCHF", "CADJPY", "EURCAD", "GBPAUD", "GBPCAD", "NZDJPY", "AUDCAD"]
-    res = []
-    for p in pairs:
-        v = vol.get(p[:3], 0) + vol.get(p[3:], 0)
-        if v >= 4:
-            res.append((v, abs(score[p[:3]] - score[p[3:]]), p, score[p[:3]] - score[p[3:]]))
-    res.sort(reverse=True)
-    return res[:3]
 
 
 def trigger_lines(pair, events, limit=3, with_day=False):
@@ -487,12 +497,6 @@ def trigger_lines(pair, events, limit=3, with_day=False):
     return lines
 
 
-def pair_plan(pair, d, events):
-    tilt = ("sesgo previo: COMPRA" if d > 0 else "sesgo previo: VENTA" if d < 0
-            else "sin sesgo previo, opera la reacción")
-    return "\n".join([f"▪️ {pair} ({tilt})"] + trigger_lines(pair, events))
-
-
 RULES = (
     "⚠️ REGLAS DE EJECUCIÓN\n"
     "1. No abras operaciones 15 min antes de un evento 🔴.\n"
@@ -504,7 +508,7 @@ RULES = (
 )
 
 
-# ---------- modo: resumen diario ----------
+# ---------- modos manuales: resumen de hoy y alertas ----------
 def briefing():
     now = datetime.now(TZ)
     events = [e for e in load_events() if e["_dt"].date() == now.date()]
@@ -517,17 +521,10 @@ def briefing():
     parts = [head]
     for cur in sorted(by_cur, key=lambda c: -sum(weight(e) for e in by_cur[c])):
         parts.append(f"━━━ {cur} ━━━\n" + "\n\n".join(event_block(e) for e in by_cur[cur]))
-    top = rank_pairs(events)
-    if top:
-        parts.append("🎯 MEJORES ESCENARIOS DEL DÍA\n" +
-                     "\n\n".join(pair_plan(p, d, events) for _, _, p, d in top))
-    else:
-        parts.append("🎯 Ningún par reúne suficiente catalizador hoy. Esperar.")
     parts.append(RULES)
     return "\n\n".join(parts)
 
 
-# ---------- modo: alertas ----------
 def release_read(ev):
     a, f = num(ev.get("actual")), num(ev.get("forecast"))
     if a is None or f is None:
@@ -550,24 +547,57 @@ def alerts():
     return "\n\n".join(msgs)
 
 
-# ---------- sesgos y escenarios (compartido por weekly y outlook) ----------
+# ---------- evaluación de pares ----------
 def evaluate(pair, tech, intensity, score):
+    """Puntaje = técnico (±3) + fundamental (±5, el que más pesa) + geopolítico (±2).
+    Solo recibe 'calidad' un par con fundamental alineado, sin factores fuertemente opuestos
+    y con suficiente puntaje."""
     b, q = pair[:3], pair[3:]
-    fund = max(-3.0, min(3.0, (score.get(b, 0) - score.get(q, 0)) / 3))
-    geo = max(-3.0, min(3.0, intensity * (TILT.get(b, 0) - TILT.get(q, 0))))
+    fund = clamp((score.get(b, 0) - score.get(q, 0)) / 4, -5.0, 5.0)
+    geo = clamp(intensity * (TILT.get(b, 0) - TILT.get(q, 0)), -2.0, 2.0)
     t = tech["score"] if tech else 0
     total = t + fund + geo
-    if total >= 2:
-        label = "📈 ALCISTA"
-    elif total <= -2:
-        label = "📉 BAJISTA"
-    else:
-        label = "↔️ NEUTRAL / RANGO"
-    conf = "alta" if abs(total) >= 4 else "media" if abs(total) >= 2.5 else "baja"
+    d = 1 if total >= 2 else -1 if total <= -2 else 0
+    comps, mins = (t, fund, geo), (1, 1.5, 0.5)
+    aligned = sum(1 for x, m in zip(comps, mins) if d and x * d >= m)
+    opposed = any(d and x * d <= -2 for x in comps)
+    grade = None
+    if d and fund * d >= 1.5 and not opposed:
+        if aligned >= 2 and abs(total) >= 6.5:
+            grade = "A"
+        elif aligned >= 2 and abs(total) >= 4:
+            grade = "B"
+    if grade == "A" and not tech:
+        grade = "B"
+    label = {1: "📈 ALCISTA", -1: "📉 BAJISTA", 0: "↔️ NEUTRAL"}[d]
     return {"pair": pair, "tech": t, "fund": round(fund, 1), "geo": round(geo, 1),
-            "total": round(total, 1), "label": label, "conf": conf, "t": tech}
+            "total": round(total, 1), "d": d, "aligned": aligned, "grade": grade,
+            "label": label, "t": tech}
 
 
+def rank_key(r):
+    return (-GRADE_RANK[r["grade"]], -abs(r["total"]))
+
+
+def choose_pairs(results):
+    """Solo los pares más claros; máximo 2 setups por divisa para no duplicar exposición."""
+    chosen, used = [], defaultdict(int)
+    for r in results:
+        if not r["grade"] or len(chosen) >= MAX_SETUPS:
+            continue
+        b, q = r["pair"][:3], r["pair"][3:]
+        if used[b] >= 2 or used[q] >= 2:
+            continue
+        chosen.append(r)
+        used[b] += 1
+        used[q] += 1
+    for r in results:  # pares de seguimiento definidos por el usuario (opcional)
+        if r["pair"] in FOCUS and r not in chosen:
+            chosen.append(r)
+    return chosen
+
+
+# ---------- escenarios ----------
 def fib_lines(p, total, f):
     """Escenario con retroceso de Fibonacci centrado en la zona 61.8%."""
     lv = {k: fmt(p, v) for k, v in f["lv"].items()}
@@ -629,15 +659,12 @@ def liquidity_lines(p, total, h1):
         lines.append(f"   ⚡ Toma de liquidez: {txt}{tag}")
     if not L["sweeps"]:
         lines.append("   ⚡ Sin tomas de liquidez recientes con rechazo.")
-
-    # Confluencia: 61.8% de Fibonacci cerca de liquidez pendiente
     if f:
         lv618 = f["lv"][0.618]
         near = [lv for lv, _ in L["above"] + L["below"] if abs(lv - lv618) <= 0.5 * L["atr"]]
         if near:
             lines.append(f"   ⭐ Confluencia: el 61.8% ({fmt(p, lv618)}) coincide con liquidez pendiente "
                          f"en {fmt(p, near[0])}. Zona de alta probabilidad de reacción.")
-
     up = L["above"][0][0] if L["above"] else None
     dn = L["below"][0][0] if L["below"] else None
     if total >= 2:
@@ -658,8 +685,11 @@ def liquidity_lines(p, total, h1):
 
 def scenario_block(r, events, with_day=True):
     p, t = r["pair"], r["t"]
-    lines = [f"▪️ {p} — {r['label']} (confianza {r['conf']}) | puntaje {r['total']:+} "
-             f"[técnico {r['tech']:+} · fundamental {r['fund']:+} · geopolítico {r['geo']:+}]"]
+    act = "COMPRA" if r["d"] > 0 else "VENTA" if r["d"] < 0 else "SIN DIRECCIÓN"
+    calidad = (f"CALIDAD {r['grade']} · {r['aligned']}/3 factores alineados" if r["grade"]
+               else "seguimiento (sin setup claro)")
+    lines = [f"▪️ {p} — {r['label']} → {act} · {calidad} · puntaje {r['total']:+}",
+             f"   [técnico {r['tech']:+} · fundamental {r['fund']:+} · geopolítico {r['geo']:+}]"]
     if t:
         lines.append(f"   Precio {fmt(p, t['price'])} | SMA20 {fmt(p, t['sma20'])} | "
                      f"Semana pasada: máx {fmt(p, t['hi'])} · mín {fmt(p, t['lo'])}")
@@ -695,62 +725,115 @@ def scenario_block(r, events, with_day=True):
     return "\n".join(lines)
 
 
-def bias_rows(results):
-    return "\n".join(f"{r['pair']}  {r['label']} ({r['conf']})  {r['total']:+}  "
-                     f"[téc {r['tech']:+} · fund {r['fund']:+} · geo {r['geo']:+}]" for r in results)
+# ---------- estado y cambios entre planes ----------
+def load_state():
+    try:
+        with open(STATE_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
 
 
-LEGEND = ("ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias, "
-          "semana pasada) + fundamental (eventos de las divisas) + geopolítico. Fibonacci y liquidez se calculan en H1.")
+def save_state(results, kind):
+    os.makedirs(OUT_DIR, exist_ok=True)
+    data = {"when": datetime.now(TZ).strftime("%d/%m %H:%M"), "plan": kind,
+            "pairs": {r["pair"]: {"total": r["total"], "d": r["d"], "grade": r["grade"]}
+                      for r in results}}
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False)
 
 
-def choose_pairs(results):
-    chosen = [r for r in results if r["pair"] in FOCUS]
+def changes_section(results, prev):
+    if not prev:
+        return "🔄 CAMBIOS VS EL PLAN ANTERIOR\nEs el primer plan guardado; desde el próximo verás qué cambió."
+    lines = []
     for r in results:
-        if r not in chosen and abs(r["total"]) >= 2 and len(chosen) < len(FOCUS) + 3:
-            chosen.append(r)
-    return chosen
+        old = prev.get("pairs", {}).get(r["pair"])
+        if not old:
+            continue
+        if old["d"] != r["d"] or abs(old["total"] - r["total"]) >= 2 or old["grade"] != r["grade"]:
+            og, ng = old["grade"] or "-", r["grade"] or "-"
+            lines.append(f"   {r['pair']}: {DIR_TXT[old['d']]} ({old['total']:+}, calidad {og}) → "
+                         f"{DIR_TXT[r['d']]} ({r['total']:+}, calidad {ng})")
+    head = f"🔄 CAMBIOS VS EL PLAN ANTERIOR ({prev.get('when', '?')})"
+    return head + "\n" + ("\n".join(lines) if lines else "   Sin cambios relevantes en los sesgos.")
 
 
-# ---------- modo: plan semanal (domingo) ----------
-def weekly():
-    now = datetime.now(TZ)
-    start = ((now + timedelta(days=1)) if now.weekday() == 6
-             else (now + timedelta(days=7 - now.weekday()))).date()
-    end = start + timedelta(days=4)
-    events = [e for e in load_events(("this", "next")) if start <= e["_dt"].date() <= end]
-    parts = [f"📆 PLAN SEMANAL — {start:%d/%m} al {end:%d/%m/%Y} ({TZ.key})"]
+# ---------- secciones del plan ----------
+def section(title, paras):
+    """Pone el título de sección en el primer párrafo (para que el chunker no lo deje solo)."""
+    paras = [p for p in paras if p]
+    if not paras:
+        return []
+    paras[0] = f"━━━ {title} ━━━\n{paras[0]}"
+    return paras
 
-    intensity, geo_txt = geo_section()
-    parts.append(geo_txt)
 
-    if events:
-        by_day = defaultdict(list)
-        for e in events:
-            by_day[e["_dt"].date()].append(e)
-        agenda = ["🗓 AGENDA CLAVE DE LA SEMANA"]
-        for d in sorted(by_day):
-            top = sorted(by_day[d], key=lambda e: (-weight(e), e["_dt"]))[:8]
-            rows = [f"   {e['_dt']:%H:%M} {'🔴' if e['impact'] == 'High' else '🟠'} {e['country']} "
-                    f"{e['title']} (prev {e.get('previous') or '-'} | pron {e.get('forecast') or '-'})"
-                    for e in sorted(top, key=lambda e: e["_dt"])]
-            agenda.append(f"{DIAS[d.weekday()]} {d:%d/%m}\n" + "\n".join(rows))
-        parts += ["\n".join(agenda[:2])] + agenda[2:]
+def fundamentals_paras(scope, past):
+    by = defaultdict(list)
+    for e in scope:
+        by[e["country"]].append(e)
+    if not by:
+        return ["Sin eventos fundamentales relevantes en el periodo."]
+    sc = defaultdict(float)
+    for e in scope:
+        sc[e["country"]] += weight(e) * expected_bias(e)
+    for e in past:
+        sc[e["country"]] += weight(e) * surprise(e)
+    paras = []
+    for cur in sorted(by, key=lambda c: -abs(sc[c])):
+        s = sc[cur]
+        tone = "🟢 POSITIVO" if s > 0 else "🔴 NEGATIVO" if s < 0 else "⚪ NEUTRAL"
+        rows = [f"💱 {cur} — sesgo fundamental {tone} ({s:+.1f})"]
+        for e in sorted(by[cur], key=lambda e: (-weight(e), e["_dt"]))[:4]:
+            b = expected_bias(e)
+            arrow = "↑ mejora" if b > 0 else "↓ deterioro" if b < 0 else "→ sin cambio"
+            name = e["_rule"][1] if e["_rule"] else e["title"]
+            rows.append(f"   • {cat_of(e)[0]}: {name} ({DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M}) "
+                        f"prev {e.get('previous') or '-'} → pron {e.get('forecast') or '-'} · {arrow}")
+        paras.append("\n".join(rows))
+    return paras
+
+
+def agenda_paras(events):
+    if not events:
+        return ["Sin eventos relevantes en el periodo: baja volatilidad esperada."]
+    by_day = defaultdict(list)
+    for e in events:
+        by_day[e["_dt"].date()].append(e)
+    paras = []
+    for d in sorted(by_day):
+        top = sorted(by_day[d], key=lambda e: (-weight(e), e["_dt"]))[:8]
+        rows = [f"   {e['_dt']:%H:%M} {'🔴' if e['impact'] == 'High' else '🟠'} {e['country']} "
+                f"{e['title']} (prev {e.get('previous') or '-'} | pron {e.get('forecast') or '-'})"
+                for e in sorted(top, key=lambda e: e["_dt"])]
+        paras.append(f"{DIAS[d.weekday()]} {d:%d/%m}\n" + "\n".join(rows))
+    return paras
+
+
+def summary_text(chosen, key_events, intensity):
+    lines = []
+    setups = [r for r in chosen if r["grade"]]
+    if setups:
+        lines.append("🎯 Setups más claros:")
+        for i, r in enumerate(setups, 1):
+            act = "COMPRA" if r["d"] > 0 else "VENTA"
+            lines.append(f"   {i}. {r['pair']} → {act} · calidad {r['grade']} · "
+                         f"{r['aligned']}/3 alineados · puntaje {r['total']:+}")
     else:
-        parts.append("🗓 No se encontraron eventos relevantes para la semana "
-                     "(el calendario de la próxima semana puede no estar publicado aún).")
+        lines.append("🎯 Ningún par tiene hoy una dirección clara (fundamental, técnico y geopolítico "
+                     "alineados). Conviene esperar o reducir el riesgo.")
+    if key_events:
+        lines.append("⚠️ Eventos clave:")
+        for e in key_events:
+            name = e["_rule"][1] if e["_rule"] else e["title"]
+            lines.append(f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} {e['country']} — {name}")
+    lines.append(f"🌍 Geopolítica: aversión al riesgo {['baja', 'moderada', 'alta'][intensity]}.")
+    lines.append("ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad "
+                 "estadística ni está validada con datos históricos.")
+    return "\n".join(lines)
 
-    _, score = currency_scores(events)
-    results = [evaluate(p, technicals(p), intensity, score) for p in PAIRS]
-    results.sort(key=lambda r: -abs(r["total"]))
-    parts.append("🧭 SESGOS SEMANALES (dirección del par)\n" + bias_rows(results) + "\n" + LEGEND)
-    parts.append("🎯 ESCENARIOS LISTOS (SEMANA)")
-    parts += [scenario_block(r, events, with_day=True) for r in choose_pairs(results)]
-    parts.append(RULES)
-    return "\n\n".join(parts)
 
-
-# ---------- modo: sesgos y escenarios del día siguiente (9 pm) ----------
 def next_trading_day(now):
     d = now.date() + timedelta(days=1)
     while d.weekday() >= 5:
@@ -758,56 +841,88 @@ def next_trading_day(now):
     return d
 
 
-def outlook():
+SHORT_TEXT = ""  # versión corta (resumen + cambios + escenarios) para WhatsApp
+
+
+def build_plan(kind):
+    global SHORT_TEXT
     now = datetime.now(TZ)
-    nd = next_trading_day(now)
-    monday = (now - timedelta(days=now.weekday())).date()
-    week_end = monday + timedelta(days=4)
     allev = load_events(("this", "next"))
+    monday = (now - timedelta(days=now.weekday())).date()
+    score = defaultdict(float)
+    past = []
 
-    past = [e for e in allev if monday <= e["_dt"].date() and e["_dt"] <= now and e.get("actual")]
-    future = [e for e in allev if e["_dt"] > now and e["_dt"].date() <= week_end]
-    next_ev = [e for e in future if e["_dt"].date() <= nd]
-
-    parts = [f"🌙 SESGOS Y ESCENARIOS PARA {DIAS[nd.weekday()].upper()} {nd:%d/%m/%Y} ({TZ.key})"]
+    if kind == "weekly":
+        start = ((now + timedelta(days=1)) if now.weekday() == 6
+                 else (now + timedelta(days=7 - now.weekday()))).date()
+        end = start + timedelta(days=4)
+        scope = [e for e in allev if start <= e["_dt"].date() <= end]
+        agenda_ev, trig_ev, with_day = scope, scope, True
+        title = f"📆 PLAN SEMANAL — {start:%d/%m} al {end:%d/%m/%Y} ({TZ.key})"
+        agenda_title = "🗓 AGENDA DE LA SEMANA"
+        for e in scope:
+            score[e["country"]] += weight(e) * expected_bias(e)
+    else:
+        nd = next_trading_day(now)
+        week_end = max(monday + timedelta(days=4), nd)
+        past = [e for e in allev if monday <= e["_dt"].date() and e["_dt"] <= now and e.get("actual")]
+        scope = [e for e in allev if e["_dt"] > now and e["_dt"].date() <= week_end]
+        agenda_ev = [e for e in scope if e["_dt"].date() <= nd]
+        trig_ev, with_day = agenda_ev, False
+        title = f"📋 PLAN DIARIO — para el {DIAS[nd.weekday()]} {nd:%d/%m/%Y} ({TZ.key})"
+        agenda_title = "🗓 PRÓXIMAS HORAS (hasta el cierre de mañana)"
+        for e in past:
+            score[e["country"]] += weight(e) * surprise(e)
+        for e in scope:  # los eventos de mañana pesan el doble
+            mult = 2 if e["_dt"].date() <= nd else 1
+            score[e["country"]] += mult * weight(e) * expected_bias(e)
 
     intensity, geo_txt = geo_section()
-    parts.append(geo_txt)
-
-    # Datos ya publicados esta semana (si el feed trae el valor real)
-    if past:
-        parts.append("📊 DATOS YA PUBLICADOS ESTA SEMANA\n" + "\n".join(
-            f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} {e['country']} {e['title']}: "
-            f"{release_read(e)}" for e in past[-10:]))
-    else:
-        parts.append("📊 DATOS PUBLICADOS: el calendario gratuito no incluye los valores reales; "
-                     "el sesgo recoge su efecto a través del comportamiento del precio.")
-
-    # Agenda de mañana
-    if next_ev:
-        rows = [f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} "
-                f"{'🔴' if e['impact'] == 'High' else '🟠'} {e['country']} {e['title']} "
-                f"(prev {e.get('previous') or '-'} | pron {e.get('forecast') or '-'})"
-                for e in sorted(next_ev, key=lambda e: e["_dt"])[:14]]
-        parts.append("🗓 PRÓXIMAS HORAS (hasta el cierre de mañana)\n" + "\n".join(rows))
-    else:
-        parts.append("🗓 Sin eventos relevantes hasta el cierre de mañana: día de baja volatilidad esperada.")
-
-    # Puntaje fundamental acumulado: sorpresas reales + expectativas (mañana pesa el doble)
-    score = defaultdict(float)
-    for e in past:
-        score[e["country"]] += weight(e) * surprise(e)
-    for e in future:
-        mult = 2 if e["_dt"].date() <= nd else 1
-        score[e["country"]] += mult * weight(e) * expected_bias(e)
-
     results = [evaluate(p, technicals(p), intensity, score) for p in PAIRS]
-    results.sort(key=lambda r: -abs(r["total"]))
-    parts.append("🧭 SESGOS PARA MAÑANA (dirección del par)\n" + bias_rows(results) + "\n" + LEGEND)
-    parts.append("🎯 ESCENARIOS LISTOS (MAÑANA)")
-    parts += [scenario_block(r, next_ev, with_day=False) for r in choose_pairs(results)]
-    parts.append(RULES)
+    results.sort(key=rank_key)
+    chosen = choose_pairs(results)
+    prev = load_state()
+    key_events = sorted(sorted(agenda_ev, key=lambda e: -weight(e))[:4], key=lambda e: e["_dt"])
+
+    resumen = section("📌 RESUMEN", [summary_text(chosen, key_events, intensity)])
+    cambios = [changes_section(results, prev)]
+    if chosen:
+        esc = section("🎯 ESCENARIOS (solo los pares más claros)",
+                      [scenario_block(r, trig_ev, with_day) for r in chosen])
+    else:
+        esc = section("🎯 ESCENARIOS", ["Hoy no hay pares con dirección clara: no se generan escenarios. "
+                                        "Esperar nuevos datos o reducir el riesgo."])
+    tabla = section("🧭 TODOS LOS PARES (referencia)", [
+        "\n".join(f"{r['pair']}  {r['label']}  calidad {r['grade'] or '-'}  {r['total']:+}  "
+                  f"[téc {r['tech']:+} · fund {r['fund']:+} · geo {r['geo']:+}]" for r in results) +
+        "\nPuntaje = técnico (±3) + fundamental (±5, el que más pesa) + geopolítico (±2)."])
+    fund = section("💱 FUNDAMENTALES POR DIVISA (tasas, inflación, empleo, nóminas...)",
+                   fundamentals_paras(scope, past))
+    pub = []
+    if kind == "outlook":
+        if past:
+            pub = section("📊 DATOS YA PUBLICADOS ESTA SEMANA", [
+                "\n".join(f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} {e['country']} {e['title']}: "
+                          f"{release_read(e)}" for e in past[-10:])])
+        else:
+            pub = ["📊 Datos publicados: el calendario gratuito no incluye los valores reales; "
+                   "el sesgo recoge su efecto a través del comportamiento del precio."]
+    agenda = section(agenda_title, agenda_paras(agenda_ev))
+    geo = section("🌍 GEOPOLÍTICA", [geo_txt.split("\n", 1)[1]])
+
+    parts = [title] + resumen + cambios + esc
+    SHORT_TEXT = "\n\n".join(parts)
+    parts += tabla + fund + pub + agenda + geo + [RULES]
+    save_state(results, kind)
     return "\n\n".join(parts)
+
+
+def weekly():
+    return build_plan("weekly")
+
+
+def outlook():
+    return build_plan("outlook")
 
 
 # ---------- envío ----------
@@ -821,15 +936,14 @@ def chunks(text, n=3800):
     if cur:
         out.append(cur)
     final = []
-    for c in out:  # seguridad: ningún trozo supera el límite de Telegram
-        final += [c[i:i + 4000] for i in range(0, len(c), 4000)]
+    for c in out:  # seguridad: ningún trozo supera el límite
+        final += [c[i:i + n + 200] for i in range(0, len(c), n + 200)]
     return final
 
 
 def send_telegram(text):
     """TELEGRAM_CHAT_ID admite varios destinos separados por coma.
-    Para enviar a un TEMA (pestaña) de un grupo con temas: -1001234567890:5
-    (id del grupo, dos puntos, id del tema)."""
+    Para enviar a un TEMA (pestaña) de un grupo con temas: -1001234567890:5"""
     token = (os.getenv("TELEGRAM_TOKEN") or "").strip()
     targets = [c.strip() for c in (os.getenv("TELEGRAM_CHAT_ID") or "").split(",") if c.strip()]
     if not text:
@@ -853,6 +967,30 @@ def send_telegram(text):
                 print(f"Telegram ERROR ({target}): {e} {cuerpo}", file=sys.stderr)
 
 
+def send_whatsapp(text):
+    """OPCIONAL y no oficial: usa el servicio de terceros Green-API (tu WhatsApp se vincula con QR).
+    Requiere GREENAPI_ID, GREENAPI_TOKEN y WHATSAPP_CHAT_ID (id del grupo, termina en @g.us).
+    GREENAPI_URL es la 'apiUrl' que muestra tu panel de Green-API (por defecto api.green-api.com).
+    Envía solo la versión corta para no saturar el grupo."""
+    inst = (os.getenv("GREENAPI_ID") or "").strip()
+    tok = (os.getenv("GREENAPI_TOKEN") or "").strip()
+    chat = (os.getenv("WHATSAPP_CHAT_ID") or "").strip()
+    if not (inst and tok and chat and text):
+        return
+    base = (os.getenv("GREENAPI_URL") or "https://api.green-api.com").rstrip("/")
+    for part in chunks(text, 3500):
+        body = json.dumps({"chatId": chat, "message": part}).encode()
+        req = urllib.request.Request(f"{base}/waInstance{inst}/sendMessage/{tok}", data=body,
+                                     headers={"Content-Type": "application/json"})
+        try:
+            urllib.request.urlopen(req, timeout=30)
+            print("WhatsApp: enviado")
+        except Exception as e:
+            cuerpo = e.read().decode() if hasattr(e, "read") else ""
+            print(f"WhatsApp ERROR: {e} {cuerpo}", file=sys.stderr)
+        time.sleep(3)  # sin ráfagas
+
+
 def save(name, text):
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, name), "w", encoding="utf-8") as f:
@@ -860,15 +998,13 @@ def save(name, text):
 
 
 def main():
-    mode = sys.argv[1] if len(sys.argv) > 1 else "briefing"
+    mode = sys.argv[1] if len(sys.argv) > 1 else "outlook"
     now = datetime.now(TZ)
-    # Sin mensajes diarios en fin de semana (el plan semanal del domingo sí se envía)
     if mode in ("briefing", "alerts") and now.weekday() >= 5 and not FORCE:
         print("Fin de semana: no se envía resumen ni alertas diarias.")
         return
-    # El análisis del día siguiente solo de lunes a jueves por la noche
     if mode == "outlook" and now.weekday() >= 4 and not FORCE:
-        print("Viernes a domingo: no se envía el análisis del día siguiente.")
+        print("Viernes a domingo: no se envía el plan diario (el domingo llega el plan semanal).")
         return
     if mode == "alerts":
         text = alerts()
@@ -884,6 +1020,7 @@ def main():
     if text:
         print(text)
         send_telegram(text)
+        send_whatsapp(SHORT_TEXT or text)
 
 
 if __name__ == "__main__":
