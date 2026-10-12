@@ -8,9 +8,9 @@ Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
 📰 Miles de personas marchan hacia la Corte Suprema de la India para exigir la renuncia del jefe electoral
 🔻 Ucrania ataca el centro de datos de Yandex en el tercer ataque al gigante tecnológico ruso
 🔻 El aeropuerto de Riad ataca otro momento peligroso en un conflicto ya tenso
+🟢 Ver: ¿Qué podría significar el alto el fuego energético de Trump para Ucrania?
 🔻 Ver: CCTV muestra a personas cubriéndose mientras un misil impacta en el aeropuerto de Riad
 🔻 El ministro de IA advierte que es "probable" que se violen las defensas cibernéticas del Reino Unido
-📰 Por qué algunos no tienen más remedio que pagar los costosos precios del petróleo
 La lectura es por palabras clave: revisa tú mismo las noticias antes de operar.
 
 🗓 No se encontraron eventos relevantes para la semana (el calendario de la próxima semana puede no estar publicado aún).
@@ -33,26 +33,26 @@ ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs
 🎯 ESCENARIOS LISTOS
 
 ▪️ GBPAUD — ↔️ NEUTRAL / RANGO (confianza baja) | puntaje +0.0 [técnico -1 · fundamental +0.0 · geopolítico +1.0]
-   Precio 1.89755 | SMA20 1.89150 | Semana pasada: máx 1.90295 · mín 1.89156
+   Precio 1.89753 | SMA20 1.89150 | Semana pasada: máx 1.90295 · mín 1.89156
    Rango probable entre 1.89156 y 1.90295: vender cerca del máximo / comprar cerca del mínimo con confirmación.
    Ruptura con cierre diario fuera del rango → seguir la ruptura.
 
 ▪️ NZDUSD — 📉 BAJISTA (confianza alta) | puntaje -6.0 [técnico -3 · fundamental +0.0 · geopolítico -3.0]
-   Precio 0.55891 | SMA20 0.56648 | Semana pasada: máx 0.56300 · mín 0.55831
-   A) Continuación: cierre diario bajo 0.55831 → VENTA; stop sobre SMA20 (0.56648); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (0.56648) con vela de rechazo → VENTA; stop sobre 0.56300.
+   Precio 0.55869 | SMA20 0.56647 | Semana pasada: máx 0.56300 · mín 0.55831
+   A) Continuación: cierre diario bajo 0.55831 → VENTA; stop sobre SMA20 (0.56647); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (0.56647) con vela de rechazo → VENTA; stop sobre 0.56300.
    ✖ Invalidación: cierre diario sobre 0.56300 → anular el sesgo.
 
 ▪️ EURJPY — 📉 BAJISTA (confianza alta) | puntaje -5.5 [técnico -3 · fundamental +0.0 · geopolítico -2.5]
-   Precio 177.120 | SMA20 178.711 | Semana pasada: máx 178.314 · mín 176.557
-   A) Continuación: cierre diario bajo 176.557 → VENTA; stop sobre SMA20 (178.711); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (178.711) con vela de rechazo → VENTA; stop sobre 178.314.
+   Precio 177.098 | SMA20 178.710 | Semana pasada: máx 178.314 · mín 176.557
+   A) Continuación: cierre diario bajo 176.557 → VENTA; stop sobre SMA20 (178.710); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (178.710) con vela de rechazo → VENTA; stop sobre 178.314.
    ✖ Invalidación: cierre diario sobre 178.314 → anular el sesgo.
 
 ▪️ GBPUSD — 📉 BAJISTA (confianza alta) | puntaje -5.0 [técnico -3 · fundamental +0.0 · geopolítico -2.0]
-   Precio 1.32072 | SMA20 1.32915 | Semana pasada: máx 1.32873 · mín 1.31863
-   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32915); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (1.32915) con vela de rechazo → VENTA; stop sobre 1.32873.
+   Precio 1.32057 | SMA20 1.32914 | Semana pasada: máx 1.32873 · mín 1.31863
+   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32914); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (1.32914) con vela de rechazo → VENTA; stop sobre 1.32873.
    ✖ Invalidación: cierre diario sobre 1.32873 → anular el sesgo.
 
 ⚠️ REGLAS DE EJECUCIÓN
