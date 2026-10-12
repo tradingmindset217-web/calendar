@@ -3,14 +3,15 @@
 Sistema de eventos económicos para Forex.
 
 Modos:
-  python fx_system.py briefing  -> resumen del día (solo lunes a viernes)
-  python fx_system.py alerts    -> avisos previos y lectura de datos (solo lunes a viernes)
-  python fx_system.py weekly    -> plan semanal: sesgos, geopolítica y escenarios (domingo)
+  python fx_system.py briefing  -> resumen del día (lunes a viernes, 00:00)
+  python fx_system.py alerts    -> avisos previos y lectura de datos (lunes a viernes)
+  python fx_system.py weekly    -> PLAN SEMANAL principal (domingo 9 pm)
+  python fx_system.py outlook   -> sesgos y escenarios para el día siguiente (lun a jue, 9 pm)
 
 Variables opcionales:
   FORCE=1          ejecuta aunque sea fin de semana (para pruebas)
-  PAIRS=...        pares a evaluar en el plan semanal, separados por coma
-  FOCUS_PAIRS=...  pares que SIEMPRE aparecen con escenarios (por defecto GBPAUD)
+  PAIRS=...        pares a evaluar, separados por coma
+  FOCUS_PAIRS=...  pares que SIEMPRE llevan escenarios completos (por defecto GBPAUD)
 
 Solo usa la librería estándar (Python 3.9+).
 """
@@ -42,6 +43,7 @@ FOCUS = [p.strip().upper() for p in os.getenv("FOCUS_PAIRS", "GBPAUD").split(","
 W = {"High": 3, "Medium": 2, "Low": 1}
 ES = {"High": "🔴 ALTA", "Medium": "🟠 MEDIA", "Low": "🟡 BAJA"}
 DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
+FIB_LOOKBACK = 60  # velas diarias para detectar el último impulso
 
 # (palabras clave, nombre, por qué importa, invertido, es_clave, nota)
 # "invertido" = un valor MÁS ALTO es malo para la divisa (desempleo, subsidios).
@@ -129,11 +131,20 @@ def phrase(ev, higher):
 
 
 def expected_bias(ev):
+    """Expectativa previa: pronóstico vs dato anterior."""
     f, p = num(ev.get("forecast")), num(ev.get("previous"))
     if f is None or p is None or f == p:
         return 0
     sign = 1 if f > p else -1
     return -sign if inv(ev) else sign
+
+
+def surprise(ev):
+    """Sorpresa real (si el feed trae el dato): +1 favorable a la divisa, -1 desfavorable."""
+    a, f = num(ev.get("actual")), num(ev.get("forecast"))
+    if a is None or f is None or a == f:
+        return 0
+    return 1 if (a > f) != inv(ev) else -1
 
 
 def fmt(pair, x):
@@ -196,6 +207,29 @@ def price_history(pair):
         return None
 
 
+def fibonacci(rows, price):
+    """Retroceso de Fibonacci del último impulso (máx. y mín. de las últimas FIB_LOOKBACK velas).
+    Si el mínimo ocurrió antes que el máximo, el impulso fue alcista y el retroceso baja;
+    si no, el impulso fue bajista y el retroceso sube."""
+    seg = rows[-FIB_LOOKBACK:]
+    hi_i = max(range(len(seg)), key=lambda i: seg[i][1])
+    lo_i = min(range(len(seg)), key=lambda i: seg[i][2])
+    hi, lo = seg[hi_i][1], seg[lo_i][2]
+    rng = hi - lo
+    if rng <= 0:
+        return None
+    ratios = (0.382, 0.5, 0.618, 0.786)
+    if lo_i < hi_i:
+        leg = "up"
+        lv = {r: hi - rng * r for r in ratios}
+        retr = (hi - price) / rng * 100
+    else:
+        leg = "down"
+        lv = {r: lo + rng * r for r in ratios}
+        retr = (price - lo) / rng * 100
+    return {"leg": leg, "hi": hi, "lo": lo, "lv": lv, "retr": retr}
+
+
 def technicals(pair):
     rows = price_history(pair)
     if not rows:
@@ -209,7 +243,7 @@ def technicals(pair):
     score = (1 if price > sma20 else -1) + (1 if sma20 > sma50 else -1) + (1 if ret > 0 else -1)
     return {"price": price, "sma20": sma20, "sma50": sma50,
             "hi": max(r[1] for r in wk), "lo": min(r[2] for r in wk),
-            "ret": ret, "score": score}
+            "ret": ret, "score": score, "fib": fibonacci(rows, price)}
 
 
 # ---------- geopolítica (titulares por palabras clave) ----------
@@ -277,6 +311,21 @@ def geopolitics():
     # La clasificación se hizo en inglés; solo se traduce lo que se muestra
     shown = [(ic, translate_es(t)) for ic, t in tagged[:8]]
     return intensity, shown, len(titles)
+
+
+def geo_section():
+    intensity, heads, total_heads = geopolitics()
+    msg = {0: "Sin señales fuertes de aversión al riesgo en los titulares.",
+           1: "Tensión moderada: favorece a JPY, CHF y USD frente a AUD, NZD, CAD y GBP.",
+           2: "Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables."}[intensity]
+    txt = "🌍 CONTEXTO GEOPOLÍTICO\n" + msg
+    if heads:
+        txt += "\nTitulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):\n" + \
+               "\n".join(f"{ic} {t}" for ic, t in heads)
+    if total_heads == 0:
+        txt += "\n(No se pudieron leer titulares; este bloque no se usó en los sesgos.)"
+    txt += "\nLa lectura es por palabras clave: revisa tú mismo las noticias antes de operar."
+    return intensity, txt
 
 
 # ---------- bloques de texto ----------
@@ -399,7 +448,7 @@ def alerts():
     return "\n\n".join(msgs)
 
 
-# ---------- modo: plan semanal ----------
+# ---------- sesgos y escenarios (compartido por weekly y outlook) ----------
 def evaluate(pair, tech, intensity, score):
     b, q = pair[:3], pair[3:]
     fund = max(-3.0, min(3.0, (score.get(b, 0) - score.get(q, 0)) / 3))
@@ -417,7 +466,39 @@ def evaluate(pair, tech, intensity, score):
             "total": round(total, 1), "label": label, "conf": conf, "t": tech}
 
 
-def scenario_block(r, events):
+def fib_lines(p, total, f):
+    """Escenario con retroceso de Fibonacci centrado en la zona 61.8%."""
+    lv = {k: fmt(p, v) for k, v in f["lv"].items()}
+    hi, lo = fmt(p, f["hi"]), fmt(p, f["lo"])
+    zone = " 📍 EL PRECIO ESTÁ EN LA ZONA 61.8%" if 55 <= f["retr"] <= 70 else ""
+    if f["leg"] == "up":
+        head = (f"   Fibonacci: impulso alcista {lo}→{hi} (últimas {FIB_LOOKBACK} velas). "
+                f"Retroceso actual {f['retr']:.0f}% | 50%: {lv[0.5]} · 61.8%: {lv[0.618]} · "
+                f"78.6%: {lv[0.786]}{zone}")
+        if total >= 2:
+            act = (f"   C) COMPRA en retroceso a la zona 61.8% ({lv[0.618]}) con vela de rechazo; "
+                   f"stop bajo 78.6% ({lv[0.786]}); objetivo: máximo del impulso ({hi}).")
+        elif total <= -2:
+            act = (f"   C) Si cierra por debajo del 61.8% ({lv[0.618]}) → VENTA hacia 78.6% "
+                   f"({lv[0.786]}) y el mínimo del impulso ({lo}).")
+        else:
+            act = f"   C) La zona 61.8% ({lv[0.618]}) es la reacción probable: soporte si el precio baja hasta ahí."
+    else:
+        head = (f"   Fibonacci: impulso bajista {hi}→{lo} (últimas {FIB_LOOKBACK} velas). "
+                f"Rebote actual {f['retr']:.0f}% | 50%: {lv[0.5]} · 61.8%: {lv[0.618]} · "
+                f"78.6%: {lv[0.786]}{zone}")
+        if total <= -2:
+            act = (f"   C) VENTA en rebote a la zona 61.8% ({lv[0.618]}) con vela de rechazo; "
+                   f"stop sobre 78.6% ({lv[0.786]}); objetivo: mínimo del impulso ({lo}).")
+        elif total >= 2:
+            act = (f"   C) Si cierra por encima del 61.8% ({lv[0.618]}) → COMPRA hacia 78.6% "
+                   f"({lv[0.786]}) y el máximo del impulso ({hi}).")
+        else:
+            act = f"   C) La zona 61.8% ({lv[0.618]}) es la reacción probable: resistencia si el precio sube hasta ahí."
+    return [head, act]
+
+
+def scenario_block(r, events, with_day=True):
     p, t = r["pair"], r["t"]
     lines = [f"▪️ {p} — {r['label']} (confianza {r['conf']}) | puntaje {r['total']:+} "
              f"[técnico {r['tech']:+} · fundamental {r['fund']:+} · geopolítico {r['geo']:+}]"]
@@ -440,15 +521,35 @@ def scenario_block(r, events):
             lines += [f"   Rango probable entre {fmt(p, t['lo'])} y {fmt(p, t['hi'])}: "
                       f"vender cerca del máximo / comprar cerca del mínimo con confirmación.",
                       f"   Ruptura con cierre diario fuera del rango → seguir la ruptura."]
+        if t.get("fib"):
+            lines += fib_lines(p, r["total"], t["fib"])
     else:
         lines.append("   (sin datos de precio: solo se usó fundamental y geopolítica)")
-    trig = trigger_lines(p, events, limit=3, with_day=True)
+    trig = trigger_lines(p, events, limit=3, with_day=with_day)
     if trig:
-        lines.append("   Gatillos de datos de la semana:")
+        lines.append("   Gatillos de datos:")
         lines += trig
     return "\n".join(lines)
 
 
+def bias_rows(results):
+    return "\n".join(f"{r['pair']}  {r['label']} ({r['conf']})  {r['total']:+}  "
+                     f"[téc {r['tech']:+} · fund {r['fund']:+} · geo {r['geo']:+}]" for r in results)
+
+
+LEGEND = ("ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias, "
+          "semana pasada) + fundamental (eventos de las divisas) + geopolítico.")
+
+
+def choose_pairs(results):
+    chosen = [r for r in results if r["pair"] in FOCUS]
+    for r in results:
+        if r not in chosen and abs(r["total"]) >= 2 and len(chosen) < len(FOCUS) + 3:
+            chosen.append(r)
+    return chosen
+
+
+# ---------- modo: plan semanal (domingo) ----------
 def weekly():
     now = datetime.now(TZ)
     start = ((now + timedelta(days=1)) if now.weekday() == 6
@@ -457,21 +558,9 @@ def weekly():
     events = [e for e in load_events(("this", "next")) if start <= e["_dt"].date() <= end]
     parts = [f"📆 PLAN SEMANAL — {start:%d/%m} al {end:%d/%m/%Y} ({TZ.key})"]
 
-    # 1. Geopolítica
-    intensity, heads, total_heads = geopolitics()
-    msg = {0: "Sin señales fuertes de aversión al riesgo en los titulares.",
-           1: "Tensión moderada: favorece a JPY, CHF y USD frente a AUD, NZD, CAD y GBP.",
-           2: "Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables."}[intensity]
-    geo_txt = "🌍 CONTEXTO GEOPOLÍTICO\n" + msg
-    if heads:
-        geo_txt += "\nTitulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):\n" + \
-                   "\n".join(f"{ic} {t}" for ic, t in heads)
-    if total_heads == 0:
-        geo_txt += "\n(No se pudieron leer titulares; este bloque no se usó en los sesgos.)"
-    geo_txt += "\nLa lectura es por palabras clave: revisa tú mismo las noticias antes de operar."
+    intensity, geo_txt = geo_section()
     parts.append(geo_txt)
 
-    # 2. Agenda
     if events:
         by_day = defaultdict(list)
         for e in events:
@@ -483,29 +572,77 @@ def weekly():
                     f"{e['title']} (prev {e.get('previous') or '-'} | pron {e.get('forecast') or '-'})"
                     for e in sorted(top, key=lambda e: e["_dt"])]
             agenda.append(f"{DIAS[d.weekday()]} {d:%d/%m}\n" + "\n".join(rows))
-        parts += ["\n".join(agenda[:1] + [agenda[1]])] + agenda[2:]
+        parts += ["\n".join(agenda[:2])] + agenda[2:]
     else:
         parts.append("🗓 No se encontraron eventos relevantes para la semana "
                      "(el calendario de la próxima semana puede no estar publicado aún).")
 
-    # 3. Sesgos
     _, score = currency_scores(events)
     results = [evaluate(p, technicals(p), intensity, score) for p in PAIRS]
     results.sort(key=lambda r: -abs(r["total"]))
-    rows = [f"{r['pair']}  {r['label']} ({r['conf']})  {r['total']:+}  "
-            f"[téc {r['tech']:+} · fund {r['fund']:+} · geo {r['geo']:+}]" for r in results]
-    parts.append("🧭 SESGOS SEMANALES (dirección del par)\n" + "\n".join(rows) +
-                 "\nALCISTA = sube la divisa base frente a la cotizada. "
-                 "Puntaje: técnico (precio vs medias y semana pasada) + fundamental "
-                 "(pronóstico vs previo) + geopolítico.")
+    parts.append("🧭 SESGOS SEMANALES (dirección del par)\n" + bias_rows(results) + "\n" + LEGEND)
+    parts.append("🎯 ESCENARIOS LISTOS (SEMANA)")
+    parts += [scenario_block(r, events, with_day=True) for r in choose_pairs(results)]
+    parts.append(RULES)
+    return "\n\n".join(parts)
 
-    # 4. Escenarios
-    chosen = [r for r in results if r["pair"] in FOCUS]
-    for r in results:
-        if r not in chosen and abs(r["total"]) >= 2 and len(chosen) < len(FOCUS) + 3:
-            chosen.append(r)
-    parts.append("🎯 ESCENARIOS LISTOS")
-    parts += [scenario_block(r, events) for r in chosen]
+
+# ---------- modo: sesgos y escenarios del día siguiente (9 pm) ----------
+def next_trading_day(now):
+    d = now.date() + timedelta(days=1)
+    while d.weekday() >= 5:
+        d += timedelta(days=1)
+    return d
+
+
+def outlook():
+    now = datetime.now(TZ)
+    nd = next_trading_day(now)
+    monday = (now - timedelta(days=now.weekday())).date()
+    week_end = monday + timedelta(days=4)
+    allev = load_events(("this", "next"))
+
+    past = [e for e in allev if monday <= e["_dt"].date() and e["_dt"] <= now and e.get("actual")]
+    future = [e for e in allev if e["_dt"] > now and e["_dt"].date() <= week_end]
+    next_ev = [e for e in future if e["_dt"].date() <= nd]
+
+    parts = [f"🌙 SESGOS Y ESCENARIOS PARA {DIAS[nd.weekday()].upper()} {nd:%d/%m/%Y} ({TZ.key})"]
+
+    intensity, geo_txt = geo_section()
+    parts.append(geo_txt)
+
+    # Datos ya publicados esta semana (si el feed trae el valor real)
+    if past:
+        parts.append("📊 DATOS YA PUBLICADOS ESTA SEMANA\n" + "\n".join(
+            f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} {e['country']} {e['title']}: "
+            f"{release_read(e)}" for e in past[-10:]))
+    else:
+        parts.append("📊 DATOS PUBLICADOS: el calendario gratuito no incluye los valores reales; "
+                     "el sesgo recoge su efecto a través del comportamiento del precio.")
+
+    # Agenda de mañana
+    if next_ev:
+        rows = [f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} "
+                f"{'🔴' if e['impact'] == 'High' else '🟠'} {e['country']} {e['title']} "
+                f"(prev {e.get('previous') or '-'} | pron {e.get('forecast') or '-'})"
+                for e in sorted(next_ev, key=lambda e: e["_dt"])[:14]]
+        parts.append("🗓 PRÓXIMAS HORAS (hasta el cierre de mañana)\n" + "\n".join(rows))
+    else:
+        parts.append("🗓 Sin eventos relevantes hasta el cierre de mañana: día de baja volatilidad esperada.")
+
+    # Puntaje fundamental acumulado: sorpresas reales + expectativas (mañana pesa el doble)
+    score = defaultdict(float)
+    for e in past:
+        score[e["country"]] += weight(e) * surprise(e)
+    for e in future:
+        mult = 2 if e["_dt"].date() <= nd else 1
+        score[e["country"]] += mult * weight(e) * expected_bias(e)
+
+    results = [evaluate(p, technicals(p), intensity, score) for p in PAIRS]
+    results.sort(key=lambda r: -abs(r["total"]))
+    parts.append("🧭 SESGOS PARA MAÑANA (dirección del par)\n" + bias_rows(results) + "\n" + LEGEND)
+    parts.append("🎯 ESCENARIOS LISTOS (MAÑANA)")
+    parts += [scenario_block(r, next_ev, with_day=False) for r in choose_pairs(results)]
     parts.append(RULES)
     return "\n\n".join(parts)
 
@@ -555,14 +692,22 @@ def save(name, text):
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "briefing"
     now = datetime.now(TZ)
+    # Sin mensajes diarios en fin de semana (el plan semanal del domingo sí se envía)
     if mode in ("briefing", "alerts") and now.weekday() >= 5 and not FORCE:
         print("Fin de semana: no se envía resumen ni alertas diarias.")
+        return
+    # El análisis del día siguiente solo de lunes a jueves por la noche
+    if mode == "outlook" and now.weekday() >= 4 and not FORCE:
+        print("Viernes a domingo: no se envía el análisis del día siguiente.")
         return
     if mode == "alerts":
         text = alerts()
     elif mode == "weekly":
         text = weekly()
         save(f"semana-{now:%Y-%m-%d}.txt", text)
+    elif mode == "outlook":
+        text = outlook()
+        save(f"dia-{now:%Y-%m-%d}.txt", text)
     else:
         text = briefing()
         save(f"{now:%Y-%m-%d}.txt", text)
