@@ -231,6 +231,22 @@ def has(words, text):
     return any(re.search(r"\b" + re.escape(w), text) for w in words)
 
 
+def translate_es(text):
+    """Traduce al español con el servicio gratuito de Google Translate (no oficial).
+    Si falla, devuelve el titular original en inglés."""
+    try:
+        url = ("https://translate.googleapis.com/translate_a/single"
+               "?client=gtx&sl=auto&tl=es&dt=t&q=" + urllib.parse.quote(text))
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=15) as r:
+            data = json.load(r)
+        out = "".join(seg[0] for seg in data[0] if seg and seg[0])
+        return out or text
+    except Exception as e:
+        print(f"Traducción fallida: {e}", file=sys.stderr)
+        return text
+
+
 def geopolitics():
     titles = []
     for url in RSS:
@@ -258,7 +274,9 @@ def geopolitics():
             tagged.append(("📰", t))
     net = off - on
     intensity = 0 if net <= 1 else 1 if net <= 4 else 2
-    return intensity, tagged[:8], len(titles)
+    # La clasificación se hizo en inglés; solo se traduce lo que se muestra
+    shown = [(ic, translate_es(t)) for ic, t in tagged[:8]]
+    return intensity, shown, len(titles)
 
 
 # ---------- bloques de texto ----------
