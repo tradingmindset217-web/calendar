@@ -4,13 +4,13 @@
 Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
 Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
 🟢 Seis sitios energéticos ucranianos afectados por Rusia desde que Trump anunció el alto el fuego, dice Zelensky
+🟢 Por qué Moscú se mantiene callado sobre el alto el fuego energético de Trump
 🔻 Ministro saudí promete una "respuesta seria" a los ataques hutíes a aeropuertos
 🔻 Los frigoríficos de los supermercados franceses sufren un ciberataque
 📰 Miles de personas marchan hacia la Corte Suprema de la India para exigir la renuncia del jefe electoral
 🔻 Ucrania ataca el centro de datos de Yandex en el tercer ataque al gigante tecnológico ruso
+📰 Análisis: Los dolores de cabeza globales de Trump empeoran semanas antes de elecciones cruciales
 🔻 El aeropuerto de Riad ataca otro momento peligroso en un conflicto ya tenso
-🟢 Ver: ¿Qué podría significar el alto el fuego energético de Trump para Ucrania?
-🔻 Ver: CCTV muestra a personas cubriéndose mientras un misil impacta en el aeropuerto de Riad
 La lectura es por palabras clave: revisa tú mismo las noticias antes de operar.
 
 🗓 No se encontraron eventos relevantes para la semana (el calendario de la próxima semana puede no estar publicado aún).
@@ -28,32 +28,40 @@ USDCHF  📈 ALCISTA (baja)  +2.0  [téc +3 · fund +0.0 · geo -1.0]
 GBPJPY  📉 BAJISTA (baja)  -2.0  [téc +1 · fund +0.0 · geo -3.0]
 USDJPY  ↔️ NEUTRAL / RANGO (baja)  +0.0  [téc +1 · fund +0.0 · geo -1.0]
 GBPAUD  ↔️ NEUTRAL / RANGO (baja)  +0.0  [téc -1 · fund +0.0 · geo +1.0]
-ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias y semana pasada) + fundamental (pronóstico vs previo) + geopolítico.
+ALCISTA = sube la divisa base frente a la cotizada. Puntaje: técnico (precio vs medias, semana pasada) + fundamental (eventos de las divisas) + geopolítico.
 
-🎯 ESCENARIOS LISTOS
+🎯 ESCENARIOS LISTOS (SEMANA)
 
 ▪️ GBPAUD — ↔️ NEUTRAL / RANGO (confianza baja) | puntaje +0.0 [técnico -1 · fundamental +0.0 · geopolítico +1.0]
-   Precio 1.89794 | SMA20 1.89152 | Semana pasada: máx 1.90295 · mín 1.89156
-   Rango probable entre 1.89156 y 1.90295: vender cerca del máximo / comprar cerca del mínimo con confirmación.
+   Precio 1.89658 | SMA20 1.89145 | Semana pasada: máx 1.90295 · mín 1.89320
+   Rango probable entre 1.89320 y 1.90295: vender cerca del máximo / comprar cerca del mínimo con confirmación.
    Ruptura con cierre diario fuera del rango → seguir la ruptura.
+   Fibonacci: impulso bajista 1.92591→1.87326 (últimas 60 velas). Rebote actual 44% | 50%: 1.89959 · 61.8%: 1.90580 · 78.6%: 1.91464
+   C) La zona 61.8% (1.90580) es la reacción probable: resistencia si el precio sube hasta ahí.
 
 ▪️ NZDUSD — 📉 BAJISTA (confianza alta) | puntaje -6.0 [técnico -3 · fundamental +0.0 · geopolítico -3.0]
-   Precio 0.55872 | SMA20 0.56647 | Semana pasada: máx 0.56300 · mín 0.55831
-   A) Continuación: cierre diario bajo 0.55831 → VENTA; stop sobre SMA20 (0.56647); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (0.56647) con vela de rechazo → VENTA; stop sobre 0.56300.
+   Precio 0.55919 | SMA20 0.56649 | Semana pasada: máx 0.56300 · mín 0.55831
+   A) Continuación: cierre diario bajo 0.55831 → VENTA; stop sobre SMA20 (0.56649); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (0.56649) con vela de rechazo → VENTA; stop sobre 0.56300.
    ✖ Invalidación: cierre diario sobre 0.56300 → anular el sesgo.
+   Fibonacci: impulso bajista 0.59888→0.55820 (últimas 60 velas). Rebote actual 2% | 50%: 0.57854 · 61.8%: 0.58334 · 78.6%: 0.59018
+   C) VENTA en rebote a la zona 61.8% (0.58334) con vela de rechazo; stop sobre 78.6% (0.59018); objetivo: mínimo del impulso (0.55820).
 
 ▪️ EURJPY — 📉 BAJISTA (confianza alta) | puntaje -5.5 [técnico -3 · fundamental +0.0 · geopolítico -2.5]
-   Precio 177.073 | SMA20 178.709 | Semana pasada: máx 178.314 · mín 176.557
-   A) Continuación: cierre diario bajo 176.557 → VENTA; stop sobre SMA20 (178.709); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (178.709) con vela de rechazo → VENTA; stop sobre 178.314.
+   Precio 176.839 | SMA20 178.697 | Semana pasada: máx 178.314 · mín 176.557
+   A) Continuación: cierre diario bajo 176.557 → VENTA; stop sobre SMA20 (178.697); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (178.697) con vela de rechazo → VENTA; stop sobre 178.314.
    ✖ Invalidación: cierre diario sobre 178.314 → anular el sesgo.
+   Fibonacci: impulso bajista 187.411→176.211 (últimas 60 velas). Rebote actual 6% | 50%: 181.811 · 61.8%: 183.133 · 78.6%: 185.014
+   C) VENTA en rebote a la zona 61.8% (183.133) con vela de rechazo; stop sobre 78.6% (185.014); objetivo: mínimo del impulso (176.211).
 
 ▪️ GBPUSD — 📉 BAJISTA (confianza alta) | puntaje -5.0 [técnico -3 · fundamental +0.0 · geopolítico -2.0]
-   Precio 1.32090 | SMA20 1.32916 | Semana pasada: máx 1.32873 · mín 1.31863
-   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32916); objetivo mínimo 1:2.
-   B) Rebote: toque de SMA20 (1.32916) con vela de rechazo → VENTA; stop sobre 1.32873.
+   Precio 1.32107 | SMA20 1.32917 | Semana pasada: máx 1.32873 · mín 1.31863
+   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32917); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (1.32917) con vela de rechazo → VENTA; stop sobre 1.32873.
    ✖ Invalidación: cierre diario sobre 1.32873 → anular el sesgo.
+   Fibonacci: impulso bajista 1.36750→1.31822 (últimas 60 velas). Rebote actual 6% | 50%: 1.34286 · 61.8%: 1.34868 · 78.6%: 1.35696
+   C) VENTA en rebote a la zona 61.8% (1.34868) con vela de rechazo; stop sobre 78.6% (1.35696); objetivo: mínimo del impulso (1.31822).
 
 ⚠️ REGLAS DE EJECUCIÓN
 1. No abras operaciones 15 min antes de un evento 🔴.
