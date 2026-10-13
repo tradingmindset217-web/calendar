@@ -1,0 +1,125 @@
+📋 PLAN DIARIO — para el Mar 13/10/2026 (America/Bogota)
+
+━━━ 📌 RESUMEN ━━━
+🎯 Setups más claros:
+   1. GBPUSD → VENTA · calidad A · 3/3 alineados · puntaje -10.0
+   2. USDCAD → COMPRA · calidad A · 3/3 alineados · puntaje +8.5
+   3. AUDJPY → VENTA · calidad B · 3/3 alineados · puntaje -5.0
+🌍 Geopolítica: aversión al riesgo alta.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+🔄 CAMBIOS VS EL PLAN ANTERIOR (12/10 18:04)
+   GBPUSD: BAJISTA (-5.0, calidad -) → BAJISTA (-10.0, calidad A)
+   USDCAD: ALCISTA (+5.0, calidad -) → ALCISTA (+8.5, calidad A)
+   NZDUSD: BAJISTA (-5.0, calidad -) → BAJISTA (-8.5, calidad A)
+   EURUSD: BAJISTA (-4.5, calidad -) → BAJISTA (-8.0, calidad A)
+   AUDUSD: BAJISTA (-3.0, calidad -) → BAJISTA (-8.0, calidad A)
+   USDCHF: ALCISTA (+2.0, calidad -) → ALCISTA (+5.5, calidad B)
+   AUDJPY: BAJISTA (-3.0, calidad -) → BAJISTA (-5.0, calidad B)
+   USDJPY: NEUTRAL (+0.0, calidad -) → ALCISTA (+3.5, calidad -)
+   GBPJPY: NEUTRAL (-1.0, calidad -) → BAJISTA (-2.5, calidad -)
+   EURGBP: BAJISTA (-2.5, calidad -) → NEUTRAL (-1.0, calidad -)
+
+━━━ 🎯 ESCENARIOS (solo los pares más claros) ━━━
+▪️ GBPUSD — 📉 BAJISTA → VENTA · CALIDAD A · 3/3 factores alineados · puntaje -10.0
+   [técnico -3 · fundamental -5.0 · geopolítico -2.0]
+   Precio 1.32083 | SMA20 1.32916 | Semana pasada: máx 1.32873 · mín 1.31863
+   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32916); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (1.32916) con vela de rechazo → VENTA; stop sobre 1.32873.
+   ✖ Invalidación: cierre diario sobre 1.32873 → anular el sesgo.
+   Fibonacci: impulso bajista 1.32852→1.31855 (últimas 120 velas H1). Rebote actual 23% | 50%: 1.32353 · 61.8%: 1.32471 · 78.6%: 1.32638
+   C) VENTA en rebote a la zona 61.8% (1.32471) con vela de rechazo; stop sobre 78.6% (1.32638); objetivo: mínimo del impulso (1.31855).
+   Liquidez en H1 (~10 días):
+   🔼 Pendiente arriba (BSL, liquidez compradora): 1.32610 (53 pips) · 1.32852 (77 pips)
+   🔽 Pendiente abajo (SSL, liquidez vendedora): 1.32043 (4 pips) · 1.32029 (5 pips)
+   📅 Día anterior: PDH 1.32524 (tomado) · PDL 1.32312 (tomado)
+   ⚡ Toma de liquidez: barrido de máximos (BSL) en 1.32549 hace 17 h; cerró de vuelta abajo → rechazo BAJISTA ✅ a favor del sesgo
+   D) Objetivo en la liquidez pendiente de abajo: 1.32043 (4 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
+
+▪️ USDCAD — 📈 ALCISTA → COMPRA · CALIDAD A · 3/3 factores alineados · puntaje +8.5
+   [técnico +3 · fundamental +3.5 · geopolítico +2.0]
+   Precio 1.42760 | SMA20 1.41306 | Semana pasada: máx 1.42966 · mín 1.42060
+   A) Continuación: cierre diario sobre 1.42966 → COMPRA; stop bajo SMA20 (1.41306); objetivo mínimo 1:2.
+   B) Retroceso: toque de SMA20 (1.41306) con vela de rechazo → COMPRA; stop bajo 1.42060.
+   ✖ Invalidación: cierre diario bajo 1.42060 → anular el sesgo.
+   Fibonacci: impulso alcista 1.42000→1.42987 (últimas 120 velas H1). Retroceso actual 20% | 50%: 1.42493 · 61.8%: 1.42377 · 78.6%: 1.42211
+   C) COMPRA en retroceso a la zona 61.8% (1.42377) con vela de rechazo; stop bajo 78.6% (1.42211); objetivo: máximo del impulso (1.42987).
+   Liquidez en H1 (~10 días):
+   🔼 Pendiente arriba (BSL, liquidez compradora): 1.42875 (9 pips) · 1.42987 (20 pips)
+   🔽 Pendiente abajo (SSL, liquidez vendedora): 1.42500 (29 pips) · 1.42360 (43 pips)
+   📅 Día anterior: PDH 1.42647 (tomado) · PDL 1.42470 (tomado)
+   ⚡ Toma de liquidez: barrido de máximos (BSL) en 1.42936 hace 34 h; cerró de vuelta abajo → rechazo BAJISTA ⚠️ contra el sesgo
+   ⭐ Confluencia: el 61.8% (1.42377) coincide con liquidez pendiente en 1.42360. Zona de alta probabilidad de reacción.
+   D) Objetivo en la liquidez pendiente de arriba: 1.42875 (9 pips). Entrada de mayor calidad: barrido de mínimos con cierre de vuelta arriba, idealmente desde la zona 61.8%.
+
+▪️ AUDJPY — 📉 BAJISTA → VENTA · CALIDAD B · 3/3 factores alineados · puntaje -5.0
+   [técnico -1 · fundamental -2.0 · geopolítico -2.0]
+   Precio 110.204 | SMA20 110.544 | Semana pasada: máx 110.639 · mín 109.642
+   A) Continuación: cierre diario bajo 109.642 → VENTA; stop sobre SMA20 (110.544); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (110.544) con vela de rechazo → VENTA; stop sobre 110.639.
+   ✖ Invalidación: cierre diario sobre 110.639 → anular el sesgo.
+   Fibonacci: impulso bajista 110.643→109.615 (últimas 120 velas H1). Rebote actual 57% | 50%: 110.129 · 61.8%: 110.250 · 78.6%: 110.423 📍 EL PRECIO ESTÁ EN LA ZONA 61.8%
+   C) VENTA en rebote a la zona 61.8% (110.250) con vela de rechazo; stop sobre 78.6% (110.423); objetivo: mínimo del impulso (109.615).
+   Liquidez en H1 (~10 días):
+   🔼 Pendiente arriba (BSL, liquidez compradora): 110.624 (42 pips) · 110.643 (44 pips)
+   🔽 Pendiente abajo (SSL, liquidez vendedora): 109.615 (59 pips) · 109.420 (78 pips)
+   📅 Día anterior: PDH 110.589 (tomado) · PDL 110.415 (tomado)
+   ⚡ Toma de liquidez: barrido de máximos (BSL) en 110.609 hace 11 h; cerró de vuelta abajo → rechazo BAJISTA ✅ a favor del sesgo
+   ⚡ Toma de liquidez: barrido de máximos (BSL) en 110.604 hace 16 h; cerró de vuelta abajo → rechazo BAJISTA ✅ a favor del sesgo
+   D) Objetivo en la liquidez pendiente de abajo: 109.615 (59 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
+
+━━━ 🧭 TODOS LOS PARES (referencia) ━━━
+GBPUSD  📉 BAJISTA  calidad A  -10.0  [téc -3 · fund -5.0 · geo -2.0]
+USDCAD  📈 ALCISTA  calidad A  +8.5  [téc +3 · fund +3.5 · geo +2.0]
+NZDUSD  📉 BAJISTA  calidad A  -8.5  [téc -3 · fund -3.5 · geo -2.0]
+EURUSD  📉 BAJISTA  calidad A  -8.0  [téc -3 · fund -3.5 · geo -1.5]
+AUDUSD  📉 BAJISTA  calidad A  -8.0  [téc -1 · fund -5.0 · geo -2.0]
+USDCHF  📈 ALCISTA  calidad B  +5.5  [téc +3 · fund +3.5 · geo -1.0]
+AUDJPY  📉 BAJISTA  calidad B  -5.0  [téc -1 · fund -2.0 · geo -2.0]
+EURJPY  📉 BAJISTA  calidad -  -5.0  [téc -3 · fund +0.0 · geo -2.0]
+USDJPY  📈 ALCISTA  calidad -  +3.5  [téc +1 · fund +3.5 · geo -1.0]
+GBPJPY  📉 BAJISTA  calidad -  -2.5  [téc +1 · fund -1.5 · geo -2.0]
+EURGBP  ↔️ NEUTRAL  calidad -  -1.0  [téc -3 · fund +1.5 · geo +0.5]
+GBPAUD  ↔️ NEUTRAL  calidad -  +0.5  [téc -1 · fund +0.5 · geo +1.0]
+Puntaje = técnico (±3) + fundamental (±5, el que más pesa) + geopolítico (±2).
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (tasas, inflación, empleo, nóminas...) ━━━
+💱 USD — sesgo fundamental 🟢 POSITIVO (+14.0)
+   • Inflación: Inflación subyacente (IPC core) (Mié 07:30) prev 0.3% → pron 0.2% · ↓ deterioro
+   • Inflación: Inflación subyacente (IPC core) (Mié 07:30) prev 2.4% → pron 2.5% · ↑ mejora
+   • Inflación: Inflación (IPC) (Mié 07:30) prev 0.4% → pron 0.6% · ↑ mejora
+   • Inflación: Inflación (IPC) (Mié 07:30) prev 3.4% → pron 3.6% · ↑ mejora
+
+💱 AUD — sesgo fundamental 🔴 NEGATIVO (-8.0)
+   • Empleo: Cambio en empleo (Mié 19:30) prev 39.5K → pron 19.6K · ↓ deterioro
+   • Desempleo: Tasa de desempleo (Mié 19:30) prev 4.6% → pron 4.6% · → sin cambio
+
+💱 GBP — sesgo fundamental 🔴 NEGATIVO (-6.0)
+   • Crecimiento: PIB (Jue 01:00) prev 0.4% → pron -0.1% · ↓ deterioro
+   • Tasas de interés: Discurso de banco central (Jue 21:00) prev - → pron - · → sin cambio
+
+📊 Datos publicados: el calendario gratuito no incluye los valores reales; el sesgo recoge su efecto a través del comportamiento del precio.
+
+━━━ 🗓 PRÓXIMAS HORAS (hasta el cierre de mañana) ━━━
+Sin eventos relevantes en el periodo: baja volatilidad esperada.
+
+━━━ 🌍 GEOPOLÍTICA ━━━
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🟢 Seis sitios energéticos ucranianos afectados por Rusia desde que Trump anunció el alto el fuego, dice Zelensky
+🟢 Por qué Moscú se mantiene callado sobre el alto el fuego energético de Trump
+🔻 Ministro saudí promete una "respuesta seria" a los ataques hutíes a aeropuertos
+🔻 Los frigoríficos de los supermercados franceses sufren un ciberataque
+📰 Miles de personas marchan hacia la Corte Suprema de la India para exigir la renuncia del jefe electoral
+🔻 Ucrania ataca el centro de datos de Yandex en el tercer ataque al gigante tecnológico ruso
+📰 Análisis: Los dolores de cabeza globales de Trump empeoran semanas antes de elecciones cruciales
+🔻 El aeropuerto de Riad ataca otro momento peligroso en un conflicto ya tenso
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
