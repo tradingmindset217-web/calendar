@@ -6,22 +6,35 @@ on:
   schedule:
     - cron: "30 0 * * 1"         # DOMINGO 19:30 Colombia -> plan semanal
     - cron: "30 0 * * 2-5"       # LUNES a JUEVES 19:30 Colombia -> plan diario para mañana
-    # Opcional: alertas antes de cada evento (descomenta la línea siguiente para activarlas)
-    # - cron: "*/15 * * * 1-5"
+    - cron: "*/5 * * * 1-5"      # cada 5 min, lunes a viernes -> aviso antes del dato y reacción después
   workflow_dispatch:
     inputs:
       mode:
-        description: "outlook (plan diario), weekly (plan semanal), briefing o alerts"
+        description: "outlook (plan diario), weekly (plan semanal), alerts o dato (dato real a mano)"
         default: "outlook"
+      currency:
+        description: "Solo para el modo dato: divisa (ej. AUD)"
+        default: ""
+      event:
+        description: "Solo para el modo dato: nombre del evento tal como sale en el calendario (ej. Cash Rate)"
+        default: ""
+      actual:
+        description: "Solo para el modo dato: valor real publicado (ej. 4.60)"
+        default: ""
 
 permissions:
   contents: write
+
+# Evita que dos ejecuciones escriban a la vez en reports/
+concurrency:
+  group: fx-system
+  cancel-in-progress: false
 
 jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 0 * * 1' && 'weekly' || (github.event.schedule == '*/15 * * * 1-5' && 'alerts' || 'outlook')) }}
+      MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 0 * * 1' && 'weekly' || (github.event.schedule == '*/5 * * * 1-5' && 'alerts' || 'outlook')) }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -32,17 +45,26 @@ jobs:
           REPORT_TZ: America/Bogota
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          # WhatsApp (opcional, no oficial). Si no creas estos secretos, simplemente no se usa.
+          # Fuente OPCIONAL del dato real. Si no creas estos secretos, no se usa.
+          ACTUALS_URL: ${{ secrets.ACTUALS_URL }}
+          ACTUALS_KEY: ${{ secrets.ACTUALS_KEY }}
+          # WhatsApp (opcional, no oficial)
           GREENAPI_ID: ${{ secrets.GREENAPI_ID }}
           GREENAPI_TOKEN: ${{ secrets.GREENAPI_TOKEN }}
           GREENAPI_URL: ${{ secrets.GREENAPI_URL }}
           WHATSAPP_CHAT_ID: ${{ secrets.WHATSAPP_CHAT_ID }}
           MAX_SETUPS: "3"
-        run: python fx_system.py "$MODE"
-      - name: Guardar reporte y estado
-        if: env.MODE != 'alerts'
+          IN_CUR: ${{ github.event.inputs.currency }}
+          IN_EVT: ${{ github.event.inputs.event }}
+          IN_ACT: ${{ github.event.inputs.actual }}
+        run: python fx_system.py "$MODE" "$IN_CUR" "$IN_EVT" "$IN_ACT"
+      - name: Guardar estado, historial y registro de resultados
         run: |
           git config user.name "fx-bot"
           git config user.email "bot@users.noreply.github.com"
           git add reports/ || true
-          git diff --staged --quiet || (git commit -m "Plan $(date -u +%F)" && git push)
+          if ! git diff --staged --quiet; then
+            git commit -m "FX $MODE $(date -u +%F-%H%M)"
+            git pull --rebase || true
+            git push
+          fi
