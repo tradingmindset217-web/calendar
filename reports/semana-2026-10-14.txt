@@ -7,21 +7,12 @@
 ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
 
 ━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
-Comparado con el plan del 13/10 21:51:
+Comparado con el plan del 14/10 16:41:
 💱 DIVISAS (fuerza y por qué):
-   JPY: +0.6 → +2.3 (+1.7) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) +1.7 (petróleo -1.0)
-   CHF: +1.2 → +2.9 (+1.7) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) +1.7 (rendimientos EE. UU. +0.6)
-   NZD: -0.8 → -2.2 (-1.4) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) -1.4 (aversión al riesgo (VIX) -0.5)
-   AUD: -0.3 → -1.7 (-1.4) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) -1.4 (petróleo +0.5)
-   USD: +0.0 → +1.1 (+1.0) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) +1.0 (rendimientos EE. UU. -1.1)
+   Sin cambios relevantes.
 
 📊 PARES (sesgo y fuerza):
-   AUDJPY: SIN DIRECCIÓN +1.0 (débil, calidad -) → SIN DIRECCIÓN -2.1 (débil, calidad -) — AUD -1.4 y JPY +1.7 en fuerza
-   NZDUSD: SIN DIRECCIÓN +0.2 (débil, calidad -) → SIN DIRECCIÓN -2.3 (débil, calidad -) — NZD -1.4 y USD +1.0 en fuerza
-   GBPJPY: SIN DIRECCIÓN -0.2 (débil, calidad -) → BAJISTA -2.7 (moderada, calidad -) — GBP -0.7 y JPY +1.7 en fuerza
-   AUDUSD: SIN DIRECCIÓN +0.7 (débil, calidad -) → SIN DIRECCIÓN -1.8 (débil, calidad -) — AUD -1.4 y USD +1.0 en fuerza
-   EURJPY: SIN DIRECCIÓN -0.6 (débil, calidad -) → BAJISTA -2.6 (moderada, calidad -) — EUR -0.3 y JPY +1.7 en fuerza
-   GBPUSD: SIN DIRECCIÓN -0.7 (débil, calidad -) → SIN DIRECCIÓN -2.4 (débil, calidad -) — GBP -0.7 y USD +1.0 en fuerza
+   Sin cambios relevantes.
 
 ━━━ 💪 FUERZA FUNDAMENTAL DE CADA DIVISA (de más fuerte a más débil) ━━━
 1. CHF +2.9 ⚪ NEUTRAL
@@ -61,7 +52,7 @@ EURJPY  📉 BAJISTA moderada  -2.6  calidad -  [venir +0.0 · publ +0.0 · merc
 GBPUSD  ↔️ SIN DIRECCIÓN débil  -2.4  calidad -  [venir +0.0 · publ +0.0 · merc -0.4 · geo -2.0]
 NZDUSD  ↔️ SIN DIRECCIÓN débil  -2.3  calidad -  [venir +0.0 · publ +0.0 · merc -0.3 · geo -2.0]
 AUDJPY  ↔️ SIN DIRECCIÓN débil  -2.1  calidad -  [venir +0.0 · publ +0.0 · merc -0.1 · geo -2.0]
-EURUSD  ↔️ SIN DIRECCIÓN débil  -1.9  calidad -  [venir +0.0 · publ +0.0 · merc -0.4 · geo -1.5]
+EURUSD  ↔️ SIN DIRECCIÓN débil  -1.8  calidad -  [venir +0.0 · publ +0.0 · merc -0.3 · geo -1.5]
 AUDUSD  ↔️ SIN DIRECCIÓN débil  -1.8  calidad -  [venir +0.0 · publ +0.0 · merc +0.2 · geo -2.0]
 USDCHF  ↔️ SIN DIRECCIÓN débil  -1.8  calidad -  [venir +0.0 · publ +0.0 · merc -0.8 · geo -1.0]
 USDJPY  ↔️ SIN DIRECCIÓN débil  -1.3  calidad -  [venir +0.0 · publ +0.0 · merc -0.3 · geo -1.0]
@@ -74,7 +65,7 @@ USDCAD  ↔️ SIN DIRECCIÓN débil  +0.2  calidad -  [venir +0.0 · publ +0.0 
 🏦 Bonos EE. UU.: 3M 4.09% (+3 pb) · 5A 4.99% (-2 pb) · 10A 5.19% (-3 pb) · 30A 5.53% (-4 pb)
    Curva 10A–3M: +1.11 pp (normal).
    10A: -9 pb en 5 días → rendimientos a la baja: resta apoyo al USD
-💵 Índice dólar DXY 102.55 (+0.36% hoy · +0.31% en 5 d).
+💵 Índice dólar DXY 102.55 (+0.36% hoy · +0.30% en 5 d).
 🛢 Petróleo WTI 95.17 (+1.1% hoy · +7.8% en 5 d) · Brent 106.06 (+0.4%) → sube: favorece al CAD y pesa sobre JPY y EUR.
 
 ━━━ 💱 FUNDAMENTALES POR DIVISA (por venir ⏭ y publicados ✔) ━━━
