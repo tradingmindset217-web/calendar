@@ -1,0 +1,140 @@
+📋 PLAN DIARIO — para el Mié 14/10/2026 (America/Bogota)
+
+━━━ 📌 RESUMEN ━━━
+🎯 Setups más claros:
+   1. GBPUSD → VENTA · calidad A · 3/3 alineados · puntaje -10.0
+   2. NZDUSD → VENTA · calidad A · 3/3 alineados · puntaje -10.0
+   3. AUDJPY → VENTA · calidad B · 2/3 alineados · puntaje -5.0
+⚠️ Eventos clave:
+   Mié 07:30 USD — Inflación subyacente (IPC core)
+   Mié 07:30 USD — Inflación subyacente (IPC core)
+   Mié 07:30 USD — Inflación (IPC)
+   Mié 07:30 USD — Inflación (IPC)
+🌍 Geopolítica: aversión al riesgo alta.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+🔄 CAMBIOS VS EL PLAN ANTERIOR (12/10 19:56)
+   USDCHF: ALCISTA (+5.5, calidad B) → ALCISTA (+7.0, calidad A)
+   USDJPY: ALCISTA (+3.5, calidad -) → ALCISTA (+5.0, calidad B)
+   GBPAUD: NEUTRAL (+0.5, calidad -) → ALCISTA (+2.5, calidad -)
+
+━━━ 🎯 ESCENARIOS (solo los pares más claros) ━━━
+▪️ GBPUSD — 📉 BAJISTA → VENTA · CALIDAD A · 3/3 factores alineados · puntaje -10.0
+   [técnico -3 · fundamental -5.0 · geopolítico -2.0]
+   Precio 1.32619 | SMA20 1.32681 | Semana pasada: máx 1.32635 · mín 1.31863
+   A) Continuación: cierre diario bajo 1.31863 → VENTA; stop sobre SMA20 (1.32681); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (1.32681) con vela de rechazo → VENTA; stop sobre 1.32635.
+   ✖ Invalidación: cierre diario sobre 1.32635 → anular el sesgo.
+   Fibonacci: impulso alcista 1.31855→1.32635 (últimas 120 velas H1). Retroceso actual 2% | 50%: 1.32245 · 61.8%: 1.32153 · 78.6%: 1.32022
+   C) Si cierra por debajo del 61.8% (1.32153) → VENTA hacia 78.6% (1.32022) y el mínimo del impulso (1.31855).
+   Liquidez en H1 (~10 días):
+   🔼 Pendiente arriba (BSL, liquidez compradora): 1.32852 (23 pips) · 1.33101 (48 pips)
+   🔽 Pendiente abajo (SSL, liquidez vendedora): 1.32392 (23 pips) · 1.32046 (57 pips, mín. iguales x2)
+   📅 Día anterior: PDH 1.32610 (tomado) · PDL 1.32029 (pendiente)
+   ⚡ Sin tomas de liquidez recientes con rechazo.
+   D) Objetivo en la liquidez pendiente de abajo: 1.32392 (23 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
+   Gatillos de datos:
+   07:30 Core CPI m/m (USD): dato mayor que el pronóstico → VENTA GBPUSD | dato menor → COMPRA GBPUSD
+   07:30 Core CPI y/y (USD): dato mayor que el pronóstico → VENTA GBPUSD | dato menor → COMPRA GBPUSD
+   07:30 CPI m/m (USD): dato mayor que el pronóstico → VENTA GBPUSD | dato menor → COMPRA GBPUSD
+
+▪️ NZDUSD — 📉 BAJISTA → VENTA · CALIDAD A · 3/3 factores alineados · puntaje -10.0
+   [técnico -3 · fundamental -5.0 · geopolítico -2.0]
+   Precio 0.56240 | SMA20 0.56501 | Semana pasada: máx 0.56300 · mín 0.55809
+   A) Continuación: cierre diario bajo 0.55809 → VENTA; stop sobre SMA20 (0.56501); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (0.56501) con vela de rechazo → VENTA; stop sobre 0.56300.
+   ✖ Invalidación: cierre diario sobre 0.56300 → anular el sesgo.
+   Fibonacci: impulso bajista 0.56278→0.55816 (últimas 120 velas H1). Rebote actual 92% | 50%: 0.56047 · 61.8%: 0.56101 · 78.6%: 0.56179
+   C) VENTA en rebote a la zona 61.8% (0.56101) con vela de rechazo; stop sobre 78.6% (0.56179); objetivo: mínimo del impulso (0.55816).
+   Liquidez en H1 (~10 días):
+   🔼 Pendiente arriba (BSL, liquidez compradora): 0.56278 (4 pips) · 0.56294 (5 pips, máx. iguales x2)
+   🔽 Pendiente abajo (SSL, liquidez vendedora): 0.56110 (13 pips) · 0.55816 (42 pips)
+   📅 Día anterior: PDH 0.56136 (tomado) · PDL 0.55816 (pendiente)
+   ⚡ Sin tomas de liquidez recientes con rechazo.
+   ⭐ Confluencia: el 61.8% (0.56101) coincide con liquidez pendiente en 0.56110. Zona de alta probabilidad de reacción.
+   D) Objetivo en la liquidez pendiente de abajo: 0.56110 (13 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
+   Gatillos de datos:
+   07:30 Core CPI m/m (USD): dato mayor que el pronóstico → VENTA NZDUSD | dato menor → COMPRA NZDUSD
+   07:30 Core CPI y/y (USD): dato mayor que el pronóstico → VENTA NZDUSD | dato menor → COMPRA NZDUSD
+   07:30 CPI m/m (USD): dato mayor que el pronóstico → VENTA NZDUSD | dato menor → COMPRA NZDUSD
+
+▪️ AUDJPY — 📉 BAJISTA → VENTA · CALIDAD B · 2/3 factores alineados · puntaje -5.0
+   [técnico +1 · fundamental -4.0 · geopolítico -2.0]
+   Precio 110.774 | SMA20 110.570 | Semana pasada: máx 110.811 · mín 109.642
+   A) Continuación: cierre diario bajo 109.642 → VENTA; stop sobre SMA20 (110.570); objetivo mínimo 1:2.
+   B) Rebote: toque de SMA20 (110.570) con vela de rechazo → VENTA; stop sobre 110.811.
+   ✖ Invalidación: cierre diario sobre 110.811 → anular el sesgo.
+   Fibonacci: impulso alcista 109.615→110.811 (últimas 120 velas H1). Retroceso actual 3% | 50%: 110.213 · 61.8%: 110.072 · 78.6%: 109.871
+   C) Si cierra por debajo del 61.8% (110.072) → VENTA hacia 78.6% (109.871) y el mínimo del impulso (109.615).
+   Liquidez en H1 (~10 días):
+   🔼 Pendiente arriba (BSL, liquidez compradora): ninguna cercana
+   🔽 Pendiente abajo (SSL, liquidez vendedora): 110.389 (39 pips) · 110.023 (75 pips)
+   📅 Día anterior: PDH 110.624 (tomado) · PDL 110.055 (tomado)
+   ⚡ Sin tomas de liquidez recientes con rechazo.
+   ⭐ Confluencia: el 61.8% (110.072) coincide con liquidez pendiente en 110.023. Zona de alta probabilidad de reacción.
+   D) Objetivo en la liquidez pendiente de abajo: 110.389 (39 pips). Entrada de mayor calidad: barrido de máximos con cierre de vuelta abajo, idealmente desde la zona 61.8%.
+   Gatillos de datos:
+   19:30 Employment Change (AUD): dato mayor que el pronóstico → COMPRA AUDJPY | dato menor → VENTA AUDJPY
+   19:30 Unemployment Rate (AUD): dato menor que el pronóstico → COMPRA AUDJPY | dato mayor → VENTA AUDJPY
+
+━━━ 🧭 TODOS LOS PARES (referencia) ━━━
+GBPUSD  📉 BAJISTA  calidad A  -10.0  [téc -3 · fund -5.0 · geo -2.0]
+NZDUSD  📉 BAJISTA  calidad A  -10.0  [téc -3 · fund -5.0 · geo -2.0]
+EURUSD  📉 BAJISTA  calidad A  -9.5  [téc -3 · fund -5.0 · geo -1.5]
+AUDUSD  📉 BAJISTA  calidad A  -8.0  [téc -1 · fund -5.0 · geo -2.0]
+USDCAD  📈 ALCISTA  calidad A  +8.0  [téc +1 · fund +5.0 · geo +2.0]
+USDCHF  📈 ALCISTA  calidad A  +7.0  [téc +3 · fund +5.0 · geo -1.0]
+USDJPY  📈 ALCISTA  calidad B  +5.0  [téc +1 · fund +5.0 · geo -1.0]
+AUDJPY  📉 BAJISTA  calidad B  -5.0  [téc +1 · fund -4.0 · geo -2.0]
+EURJPY  📉 BAJISTA  calidad -  -5.0  [téc -3 · fund +0.0 · geo -2.0]
+GBPAUD  📈 ALCISTA  calidad -  +2.5  [téc -1 · fund +2.5 · geo +1.0]
+GBPJPY  📉 BAJISTA  calidad -  -2.5  [téc +1 · fund -1.5 · geo -2.0]
+EURGBP  ↔️ NEUTRAL  calidad -  -1.0  [téc -3 · fund +1.5 · geo +0.5]
+Puntaje = técnico (±3) + fundamental (±5, el que más pesa) + geopolítico (±2).
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (tasas, inflación, empleo, nóminas...) ━━━
+💱 USD — sesgo fundamental 🟢 POSITIVO (+14.0)
+   • Inflación: Inflación subyacente (IPC core) (Mié 07:30) prev 0.3% → pron 0.2% · ↓ deterioro
+   • Inflación: Inflación subyacente (IPC core) (Mié 07:30) prev 2.4% → pron 2.5% · ↑ mejora
+   • Inflación: Inflación (IPC) (Mié 07:30) prev 0.4% → pron 0.6% · ↑ mejora
+   • Inflación: Inflación (IPC) (Mié 07:30) prev 3.4% → pron 3.6% · ↑ mejora
+
+💱 AUD — sesgo fundamental 🔴 NEGATIVO (-8.0)
+   • Empleo: Cambio en empleo (Mié 19:30) prev 39.5K → pron 19.6K · ↓ deterioro
+   • Desempleo: Tasa de desempleo (Mié 19:30) prev 4.6% → pron 4.6% · → sin cambio
+
+💱 GBP — sesgo fundamental 🔴 NEGATIVO (-6.0)
+   • Crecimiento: PIB (Jue 01:00) prev 0.4% → pron -0.1% · ↓ deterioro
+   • Tasas de interés: Discurso de banco central (Jue 21:00) prev - → pron - · → sin cambio
+
+📊 Datos publicados: el calendario gratuito no incluye los valores reales; el sesgo recoge su efecto a través del comportamiento del precio.
+
+━━━ 🗓 PRÓXIMAS HORAS (hasta el cierre de mañana) ━━━
+Mié 14/10
+   07:30 🔴 USD Core CPI m/m (prev 0.3% | pron 0.2%)
+   07:30 🔴 USD Core CPI y/y (prev 2.4% | pron 2.5%)
+   07:30 🔴 USD CPI m/m (prev 0.4% | pron 0.6%)
+   07:30 🔴 USD CPI y/y (prev 3.4% | pron 3.6%)
+   19:30 🔴 AUD Employment Change (prev 39.5K | pron 19.6K)
+   19:30 🔴 AUD Unemployment Rate (prev 4.6% | pron 4.6%)
+
+━━━ 🌍 GEOPOLÍTICA ━━━
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🔻 El jefe del MI5 advierte sobre las amenazas al Reino Unido por parte de Rusia, Irán y AI
+🔻 Misiles interceptados cerca de Riad después de que la coalición saudita atacara un depósito de combustible en Yemen
+🔻 Los ataques rusos alcanzaron una central eléctrica clave en Kyiv, dice Zelensky
+📰 Argentina apunta a Reino Unido en demanda legal por exploración petrolera en las Malvinas
+🔻 'Hablaría con la televisión': los acompañantes pagados que brindan calidez a los solitarios de China
+🔻 ¿Tiene razón Zelensky al decir que los ataques a centros de datos han acabado con los bots rusos?
+📰 Los clientes de gasóleo para calefacción se enfrentan a un duro invierno a pesar de la promesa de reestructuración
+🔻 El propietario de Phase Eight y Hobbs se ve afectado por un ciberataque, mientras H&M investiga un reclamo de piratería por separado
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
