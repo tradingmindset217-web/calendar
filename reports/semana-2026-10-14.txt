@@ -1,0 +1,113 @@
+📆 PLAN SEMANAL — 19/10 al 23/10/2026 (America/Bogota)
+
+━━━ 📌 RESUMEN ━━━
+🎯 Ningún par tiene hoy una dirección clara (datos, mercado y geopolítica alineados). Conviene esperar o reducir el riesgo.
+💪 Más fuerte: CHF (+2.9) · más débil: NZD (-2.2)
+🌍 Geopolítica: tensión alta.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Comparado con el plan del 13/10 21:51:
+💱 DIVISAS (fuerza y por qué):
+   JPY: +0.6 → +2.3 (+1.7) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) +1.7 (petróleo -1.0)
+   CHF: +1.2 → +2.9 (+1.7) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) +1.7 (rendimientos EE. UU. +0.6)
+   NZD: -0.8 → -2.2 (-1.4) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) -1.4 (aversión al riesgo (VIX) -0.5)
+   AUD: -0.3 → -1.7 (-1.4) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) -1.4 (petróleo +0.5)
+   USD: +0.0 → +1.1 (+1.0) ⚪ NEUTRAL — mercado (VIX/bonos/petróleo) +1.0 (rendimientos EE. UU. -1.1)
+
+📊 PARES (sesgo y fuerza):
+   AUDJPY: SIN DIRECCIÓN +1.0 (débil, calidad -) → SIN DIRECCIÓN -2.1 (débil, calidad -) — AUD -1.4 y JPY +1.7 en fuerza
+   NZDUSD: SIN DIRECCIÓN +0.2 (débil, calidad -) → SIN DIRECCIÓN -2.3 (débil, calidad -) — NZD -1.4 y USD +1.0 en fuerza
+   GBPJPY: SIN DIRECCIÓN -0.2 (débil, calidad -) → BAJISTA -2.7 (moderada, calidad -) — GBP -0.7 y JPY +1.7 en fuerza
+   AUDUSD: SIN DIRECCIÓN +0.7 (débil, calidad -) → SIN DIRECCIÓN -1.8 (débil, calidad -) — AUD -1.4 y USD +1.0 en fuerza
+   EURJPY: SIN DIRECCIÓN -0.6 (débil, calidad -) → BAJISTA -2.6 (moderada, calidad -) — EUR -0.3 y JPY +1.7 en fuerza
+   GBPUSD: SIN DIRECCIÓN -0.7 (débil, calidad -) → SIN DIRECCIÓN -2.4 (débil, calidad -) — GBP -0.7 y USD +1.0 en fuerza
+
+━━━ 💪 FUERZA FUNDAMENTAL DE CADA DIVISA (de más fuerte a más débil) ━━━
+1. CHF +2.9 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.9 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · rendimientos EE. UU. +0.6 · aversión al riesgo (VIX) +0.5
+2. JPY +2.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.3 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · petróleo -1.0 · rendimientos EE. UU. +0.8
+3. USD +1.1 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.1 · geo +1.0]
+   Por qué: rendimientos EE. UU. -1.1 · titulares de riesgo +1.0 · petróleo +0.5
+4. CAD +0.9 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +1.9 · geo -1.0]
+   Por qué: petróleo +2.0 · titulares de riesgo -1.0
+5. EUR -0.8 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.3 · geo -0.5]
+   Por qué: titulares de riesgo -0.5 · petróleo -0.5
+6. GBP -1.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.3 · geo -1.0]
+   Por qué: titulares de riesgo -1.0
+7. AUD -1.7 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.3 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · petróleo +0.5 · aversión al riesgo (VIX) -0.5
+8. NZD -2.2 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.2 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · aversión al riesgo (VIX) -0.5
+
+Datos publicados: historial en construcción (el calendario gratuito no trae el dato real; se infiere del 'previo' del siguiente lanzamiento y se llena con los días).
+⚡ = dato de hoy/mañana, con peso x2.5.
+
+━━━ 🎯 ESCENARIOS ━━━
+Hoy no hay pares con dirección clara: no se generan escenarios.
+
+━━━ 🧭 DIRECCIÓN Y FUERZA DE TODOS LOS PARES ━━━
+GBPJPY  📉 BAJISTA moderada  -2.7  calidad -  [venir +0.0 · publ +0.0 · merc -0.7 · geo -2.0]
+EURJPY  📉 BAJISTA moderada  -2.6  calidad -  [venir +0.0 · publ +0.0 · merc -0.6 · geo -2.0]
+GBPUSD  ↔️ SIN DIRECCIÓN débil  -2.4  calidad -  [venir +0.0 · publ +0.0 · merc -0.4 · geo -2.0]
+NZDUSD  ↔️ SIN DIRECCIÓN débil  -2.3  calidad -  [venir +0.0 · publ +0.0 · merc -0.3 · geo -2.0]
+AUDJPY  ↔️ SIN DIRECCIÓN débil  -2.1  calidad -  [venir +0.0 · publ +0.0 · merc -0.1 · geo -2.0]
+EURUSD  ↔️ SIN DIRECCIÓN débil  -1.9  calidad -  [venir +0.0 · publ +0.0 · merc -0.4 · geo -1.5]
+AUDUSD  ↔️ SIN DIRECCIÓN débil  -1.8  calidad -  [venir +0.0 · publ +0.0 · merc +0.2 · geo -2.0]
+USDCHF  ↔️ SIN DIRECCIÓN débil  -1.8  calidad -  [venir +0.0 · publ +0.0 · merc -0.8 · geo -1.0]
+USDJPY  ↔️ SIN DIRECCIÓN débil  -1.3  calidad -  [venir +0.0 · publ +0.0 · merc -0.3 · geo -1.0]
+EURGBP  ↔️ SIN DIRECCIÓN débil  +0.5  calidad -  [venir +0.0 · publ +0.0 · merc +0.0 · geo +0.5]
+GBPAUD  ↔️ SIN DIRECCIÓN débil  +0.4  calidad -  [venir +0.0 · publ +0.0 · merc -0.6 · geo +1.0]
+USDCAD  ↔️ SIN DIRECCIÓN débil  +0.2  calidad -  [venir +0.0 · publ +0.0 · merc -1.8 · geo +2.0]
+
+━━━ 📈 MERCADO: VIX, BONOS, DÓLAR Y PETRÓLEO ━━━
+😨 VIX 16.9 (+10.5% hoy · +11.9% en 5 d) — normal: sin señal clara de riesgo.
+🏦 Bonos EE. UU.: 3M 4.09% (+3 pb) · 5A 4.99% (-2 pb) · 10A 5.19% (-3 pb) · 30A 5.53% (-4 pb)
+   Curva 10A–3M: +1.11 pp (normal).
+   10A: -9 pb en 5 días → rendimientos a la baja: resta apoyo al USD
+💵 Índice dólar DXY 102.55 (+0.36% hoy · +0.31% en 5 d).
+🛢 Petróleo WTI 95.17 (+1.1% hoy · +7.8% en 5 d) · Brent 106.06 (+0.4%) → sube: favorece al CAD y pesa sobre JPY y EUR.
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (por venir ⏭ y publicados ✔) ━━━
+Sin eventos fundamentales relevantes en el periodo.
+
+━━━ 🗓 AGENDA DE LA SEMANA ━━━
+Sin eventos relevantes en el periodo: baja volatilidad esperada.
+
+━━━ 📒 REGISTRO DE RESULTADOS ━━━
+Aún no hay setups cerrados (0 abiertos). Cada setup se evalúa a 24 h (plan diario) o 5 días (plan semanal): −1R = stop, +2R = objetivo, R = ½ rango diario medio.
+
+━━━ 🌍 GEOPOLÍTICA ━━━
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🔻 Manifestantes estudiantiles atacan edificios gubernamentales en Tirana
+📰 La inflación estadounidense aumenta más de lo esperado: esto es lo que está sucediendo con los precios
+🔻 Cientos de miles de trabajadores en huelga en toda la República de Irlanda
+🔻 'Hablaría con la televisión': los acompañantes pagados que brindan calidez a los solitarios de China
+🔻 Ver: Bloque de viviendas destruido en los ataques rusos a Ucrania
+🔻 No construir una tercera pista sería una "gran oportunidad perdida", advierte el jefe de Heathrow
+📰 Los clientes de gasóleo para calefacción se enfrentan a un duro invierno a pesar de la promesa de reestructuración
+🔻 El propietario de Phase Eight y Hobbs se ve afectado por un ciberataque, mientras H&M investiga un reclamo de piratería por separado
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
+
+━━━ ⚙️ ESTADO DE LAS FUENTES ━━━
+calendario: ✅ 13 eventos relevantes
+mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo)
+titulares: ✅ 79 titulares leídos
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
