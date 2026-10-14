@@ -11,7 +11,7 @@ Sesgo de cada par = diferencia de fuerza entre sus dos divisas, a partir de:
 Modos:
   python fx_system.py weekly    -> plan semanal (domingo 7:30 pm Colombia)
   python fx_system.py outlook   -> plan diario para el día siguiente (lun-jue 7:30 pm)
-  python fx_system.py alerts    -> cada 5 min: aviso 5-30 min ANTES de cada evento y, 4-45 min DESPUÉS,
+  python fx_system.py alerts    -> revisa cada 5 min (en silencio): aviso 5-30 min ANTES de cada evento y ~5 min DESPUÉS,
                                    dirección actualizada de la divisa y los pares según el dato real
   python fx_system.py dato AUD "Cash Rate" 4.60  -> igual que lo anterior, con el dato real escrito a mano
 
@@ -1132,88 +1132,121 @@ def find_actual(e, provs):
     return None, None
 
 
-def reaction_message(e, actual, src, now):
-    """Dirección actualizada de la divisa y de sus pares tras el dato real."""
-    cur = e["country"]
+def reaction_message(items, now):
+    """Actualización completa ~5 min después de un dato relevante: fuerza de CADA divisa y sesgo
+    de CADA par, antes → ahora. items = lista de (evento, dato real o None, fuente) de la misma hora."""
+    fmt_d = "%Y-%m-%dT%H:%M"
     hist = load_json(HISTORY_FILE, {})
-    rel = hist.setdefault(f"{cur}|{e['title']}", {})
-    d = e["_dt"].strftime("%Y-%m-%dT%H:%M")
-    rel.setdefault(d, {"f": e.get("forecast") or "", "p": e.get("previous") or "", "a": "",
-                       "i": e["impact"]})["a"] = str(actual)
+    for e, actual, _ in items:
+        if actual:
+            rel = hist.setdefault(f"{e['country']}|{e['title']}", {})
+            rel.setdefault(e["_dt"].strftime(fmt_d), {"f": e.get("forecast") or "", "p": e.get("previous") or "",
+                                                      "a": "", "i": e["impact"]})["a"] = str(actual)
     save_json(HISTORY_FILE, hist)
 
-    e2 = dict(e)
-    e2["actual"] = str(actual)
-    a, f = num(actual), num(e.get("forecast"))
-    out = [f"📊 DATO PUBLICADO — {cur} {ev_name(e)} ({e['title']})",
-           f"   Real {actual} vs pronóstico {e.get('forecast') or '-'} (previo {e.get('previous') or '-'}) "
-           f"· fuente: {src}"]
-    higher = None
-    if a is not None and f is not None and a != f:
-        higher = a > f
-        out.append(f"   Sorpresa {a - f:+.2f}: {'MAYOR' if higher else 'MENOR'} que el pronóstico → "
-                   f"{phrase(e, higher)}")
-    elif a is not None and f is not None:
-        out.append("   En línea con el pronóstico → reacción débil; decide el precio.")
-    else:
-        out.append("   Sin pronóstico numérico comparable: no se puede medir la sorpresa.")
+    curs = sorted({e["country"] for e, _, _ in items})
+    out = [f"📊 DATO PUBLICADO — {', '.join(curs)} ({now:%H:%M})"]
+    missing = False
+    for e, actual, src in items:
+        base = f"   • {e['country']} {ev_name(e)} ({e['title']})"
+        if not actual:
+            out.append(f"{base}: valor real no disponible")
+            missing = True
+            continue
+        a, f = num(actual), num(e.get("forecast"))
+        line = f"{base}: real {actual} vs pron {e.get('forecast') or '-'} (previo {e.get('previous') or '-'}) [{src}]"
+        if a is not None and f is not None and a != f:
+            line += f" → {'MAYOR' if a > f else 'MENOR'}: {phrase(e, a > f)}"
+        elif a is not None and f is not None:
+            line += " → en línea con el pronóstico"
+        out.append(line)
+    if missing:
+        out.append("ℹ️ Sin el valor real (el calendario gratuito no lo incluye) se asume que el dato salió como "
+                   "se esperaba; la actualización recoge la reacción del mercado. Para añadirlo: Actions → "
+                   "Sistema FX → Run workflow → modo «dato».")
 
+    # --- recalcular el modelo con lo publicado hasta ahora ---
     allev = load_events(("this", "next"), required=False)
     hs = history_surprises(hist, now)
-    sur = surprise(e2)
-    if e["_dt"] > now and sur:   # dato escrito a mano antes de la hora oficial: se cuenta igualmente
-        hs.append({"cur": cur, "title": ev_name(e), "w": weight(e), "sur": sur, "age": 0.0, "decay": 1.0,
-                   "actual": str(actual), "forecast": e.get("forecast") or "", "how": "real", "dt": now})
+    for e, actual, _ in items:   # dato escrito a mano antes de la hora oficial: cuenta igualmente
+        sur = surprise(dict(e, actual=str(actual))) if actual else 0
+        if e["_dt"] > now and sur:
+            hs.append({"cur": e["country"], "title": ev_name(e), "w": weight(e), "sur": sur, "age": 0.0,
+                       "decay": 1.0, "actual": str(actual), "forecast": e.get("forecast") or "",
+                       "how": "real", "dt": now})
     first_day = next_trading_day(now)
     monday = (now - timedelta(days=now.weekday())).date()
     week_end = max(monday + timedelta(days=4), first_day)
-    same = lambda x: (x["title"], x["country"], x["date"]) == (e["title"], cur, e["date"])
-    scope = [x for x in allev if x["_dt"] > now and x["_dt"].date() <= week_end and not same(x)]
+    scope = []
+    for x in allev:   # eventos de hoy (ya publicados o no) y siguientes; el real sustituye al pronóstico
+        if x["country"] not in CURS or not (now.date() <= x["_dt"].date() <= week_end):
+            continue
+        known = hist.get(f"{x['country']}|{x['title']}", {}).get(x["_dt"].strftime(fmt_d), {}).get("a")
+        scope.append(dict(x, forecast=known) if known else x)
     m = market_snapshot()
     intensity, _ = geopolitics(translate=False)
     model = currency_model(scope, first_day, hs, m, intensity)
-    if cur not in model:
-        return "\n".join(out)
     results = [evaluate_pair(p, model) for p in PAIRS if p[:3] in model and p[3:] in model]
     results.sort(key=rank_key)
 
     live = load_json(LIVE_FILE, None) or load_state() or {}
-    old_c = live.get("currencies", {}).get(cur)
-    new_s = model[cur]["strength"]
-    why = " · ".join(t for _, t, _ in model[cur]["top"][:2]) or "sin factores destacados"
-    if old_c:
-        out.append(f"💱 {cur}: fuerza {old_c['strength']:+.1f} → {new_s:+.1f} ({new_s - old_c['strength']:+.1f}) "
-                   f"{strength_tag(new_s)}")
-    else:
-        out.append(f"💱 {cur}: fuerza {new_s:+.1f} {strength_tag(new_s)}")
-    out.append(f"   Por qué: {why}")
+    old_c, old_p = live.get("currencies", {}), live.get("pairs", {})
 
-    old_p = live.get("pairs", {})
-    rows = []
-    for r in results:
-        if cur not in (r["pair"][:3], r["pair"][3:]):
-            continue
+    out.append("💪 FUERZA DE CADA DIVISA (antes → ahora):")
+    for i, c in enumerate(sorted(model, key=lambda c: -model[c]["strength"]), 1):
+        n = model[c]["strength"]
+        o = old_c.get(c, {}).get("strength")
+        mark = "" if o is None or abs(n - o) < 0.5 else (" ▲" if n > o else " ▼")
+        out.append(f"   {i}. {c} {f'{o:+.1f} → ' if o is not None else ''}{n:+.1f} {strength_tag(n)}{mark}")
+    for c in sorted(model, key=lambda c: -abs(model[c]["strength"] - old_c.get(c, {}).get("strength", 0))):
+        o = old_c.get(c, {}).get("strength")
+        if c in curs or (o is not None and abs(model[c]["strength"] - o) >= 1.0):
+            why = " · ".join(t for _, t, _ in model[c]["top"][:3]) or "sin factores destacados"
+            out.append(f"   Por qué {c}: {why}")
+
+    out.append("📊 DIRECCIÓN Y FUERZA DE CADA PAR (antes → ahora):")
+    def pair_delta(r):
         o = old_p.get(r["pair"])
-        delta = r["total"] - o["total"] if o else 0.0
-        favor = "COMPRA" if delta > 0 else "VENTA" if delta < 0 else "—"
-        antes = f"{DIR_TXT[o['d']]} {o['total']:+.1f}" if o else "—"
-        rows.append((abs(delta), f"   {r['pair']}: {antes} → {DIR_TXT[r['d']]} {r['total']:+.1f} "
-                                 f"({delta:+.1f}) {r['fuerza']} · el dato favorece {favor}"))
-    if rows:
-        out.append("📊 PARES con " + cur + " (antes → ahora):")
-        out += [t for _, t in sorted(rows, reverse=True)]
+        return r["total"] - o["total"] if o else 0.0
+    for r in sorted(results, key=lambda r: -abs(pair_delta(r))):
+        o = old_p.get(r["pair"])
+        d = pair_delta(r)
+        antes = f"{DIR_TXT[o['d']]} {o['total']:+.1f} → " if o else ""
+        favor = f" · favorece {'COMPRA' if d > 0 else 'VENTA'}" if abs(d) >= 0.5 else ""
+        out.append(f"   {r['pair']}: {antes}{DIR_TXT[r['d']]} {r['total']:+.1f} ({r['fuerza']}){favor}")
+
+    q = m["q"]
+    mk = []
+    if q.get("VIX"):
+        mk.append(f"VIX {q['VIX']['last']:.1f} ({q['VIX']['p1'] * 100:+.1f}%)")
+    y = to_yield(q.get("US10Y"))
+    if y:
+        mk.append(f"US10A {y['lvl']:.2f}% ({y['d1bp']:+.0f} pb)")
+    if q.get("DXY"):
+        mk.append(f"DXY {q['DXY']['last']:.2f} ({q['DXY']['p1'] * 100:+.2f}%)")
+    if q.get("WTI"):
+        mk.append(f"WTI {q['WTI']['last']:.1f} ({q['WTI']['p1'] * 100:+.1f}%)")
+    if mk:
+        out.append("📈 Mercado ahora: " + " · ".join(mk))
 
     setups = live.get("setups", [])
-    sl = setup_lines(e2, setups, higher) if higher is not None else ""
-    if sl:
-        out.append("Tus setups:" + sl)
+    rows = []
+    for e, actual, _ in items:
+        a, f = num(actual), num(e.get("forecast"))
+        if a is not None and f is not None and a != f:
+            rows.append(setup_lines(dict(e, actual=str(actual)), setups, a > f))
+    rows = [r for r in rows if r]
     by_pair = {r["pair"]: r for r in results}
+    warn = []
     for st in setups:
         r = by_pair.get(st["pair"])
-        if r and cur in (st["pair"][:3], st["pair"][3:]) and r["d"] != st["d"]:
-            out.append(f"   ⚠️ {st['pair']}: tu setup de {'COMPRA' if st['d'] > 0 else 'VENTA'} ya no tiene respaldo "
-                       f"fundamental (ahora {DIR_TXT[r['d']]} {r['total']:+.1f}).")
-    out.append("   👉 Espera una vela de 5 min a favor antes de entrar; riesgo máximo 1%.")
+        if r and r["d"] != st["d"]:
+            warn.append(f"   ⚠️ {st['pair']}: tu setup de {'COMPRA' if st['d'] > 0 else 'VENTA'} ya no tiene "
+                        f"respaldo fundamental (ahora {DIR_TXT[r['d']]} {r['total']:+.1f}).")
+    if rows or warn:
+        out.append("Tus setups:" + "".join(rows))
+        out += warn
+    out.append("👉 Espera una vela de 5 min a favor antes de entrar; riesgo máximo 1%.")
 
     save_json(LIVE_FILE, make_state(model, results, "reaction", setups))
     return "\n".join(out)
@@ -1232,13 +1265,14 @@ def manual(cur, kw, val):
     sent = load_json(ALERTS_FILE, {})
     sent[f"{e['country']}|{e['title']}|{e['date']}|react"] = now.isoformat()
     save_json(ALERTS_FILE, sent)
-    return reaction_message(e, val, "manual", now)
+    return reaction_message([(e, val, "manual")], now)
 
 
 def alerts():
-    """Cada 5 min. ANTES: aviso 5-30 min antes de cada evento relevante. DESPUÉS: 4-45 min tras la
-    hora del evento, si hay dato real, dirección actualizada de la divisa y de sus pares.
-    Cada mensaje se envía una sola vez."""
+    """Se ejecuta cada 5 min, pero solo envía mensaje en dos casos:
+    ANTES: aviso 5-30 min antes de cada evento relevante.
+    DESPUÉS: ~5 min tras un dato de impacto ALTO, actualización de la fuerza de cada divisa y
+    el sesgo de cada par. Cada mensaje se envía una sola vez."""
     now = datetime.now(TZ)
     hist = load_json(HISTORY_FILE, {})
     if hist:  # filtro rápido sin red: ¿hay algún evento conocido entre -50 y +30 min?
@@ -1261,7 +1295,8 @@ def alerts():
     sent = {k: v for k, v in load_json(ALERTS_FILE, {}).items() if v >= cutoff}
     setups = (load_json(LIVE_FILE, None) or load_state() or {}).get("setups", [])
     has_source = bool(ACTUALS_URL and ACTUALS_KEY)
-    provs, msgs = None, []
+    react_all = os.getenv("REACT_IMPACT", "High") == "Medium"   # "Medium" incluye también datos clave de impacto medio
+    provs, msgs, due = None, [], defaultdict(list)
     for e in events:
         key = f"{e['country']}|{e['title']}|{e['date']}"
         mins = (e["_dt"] - now).total_seconds() / 60
@@ -1269,20 +1304,21 @@ def alerts():
             msgs.append(f"⏰ EN {mins:.0f} MIN\n{event_block(e)}{setup_lines(e, setups)}\n"
                         f"   👉 No abras operaciones; define stop/objetivo antes del dato.")
             sent[key + "|pre"] = now.isoformat()
-        if -45 <= mins <= -4 and key + "|react" not in sent:
-            if provs is None:
-                provs = provider_actuals(now)
+        if -45 <= mins <= -4 and key + "|react" not in sent and (e["impact"] == "High" or react_all):
+            due[e["date"]].append(e)
+    for date, evs in due.items():
+        mins = (evs[0]["_dt"] - now).total_seconds() / 60
+        if provs is None:
+            provs = provider_actuals(now)
+        items = []
+        for e in evs:
             actual, src = find_actual(e, provs)
-            if actual:
-                msgs.append(reaction_message(e, actual, src, now))
-                sent[key + "|react"] = now.isoformat()
-            elif (not has_source and e["impact"] == "High" and key + "|prompt" not in sent
-                  and os.getenv("REACTION_PROMPT", "1") == "1"):
-                msgs.append(f"⌛ Ya salió {e['country']} {ev_name(e)}, pero el calendario gratuito no trae el "
-                            f"valor real.\n   Para recibir la dirección actualizada: Actions → Sistema FX → "
-                            f"Run workflow → modo «dato», divisa {e['country']}, evento «{e['title']}» y el "
-                            f"valor real.")
-                sent[key + "|prompt"] = now.isoformat()
+            items.append((e, actual, src))
+        if has_source and mins > -10 and any(not a for _, a, _ in items):
+            continue   # da unos minutos más a la fuente del dato real
+        msgs.append(reaction_message(items, now))
+        for e in evs:
+            sent[f"{e['country']}|{e['title']}|{e['date']}|react"] = now.isoformat()
     if msgs:
         save_json(ALERTS_FILE, sent)
     return "\n\n".join(msgs)
