@@ -1,0 +1,99 @@
+📆 PLAN SEMANAL — 19/10 al 23/10/2026 (America/Bogota)
+
+━━━ 📌 RESUMEN ━━━
+🎯 Ningún par tiene hoy una dirección clara (datos, mercado y geopolítica alineados). Conviene esperar o reducir el riesgo.
+💪 Más fuerte: CAD (+1.6) · más débil: NZD (-0.8)
+🌍 Geopolítica: tensión alta.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Es el primer plan guardado; desde el próximo verás cómo cambió cada divisa y cada par, y por qué.
+
+━━━ 💪 FUERZA FUNDAMENTAL DE CADA DIVISA (de más fuerte a más débil) ━━━
+1. CAD +1.6 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +2.6 · geo -1.0]
+   Por qué: petróleo +2.0 · titulares de riesgo -1.0 · aversión al riesgo (VIX) +0.5
+2. CHF +1.2 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.8 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · aversión al riesgo (VIX) -1.0 · rendimientos EE. UU. +0.4
+3. JPY +0.6 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -1.4 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · petróleo -1.0 · aversión al riesgo (VIX) -1.0
+4. USD +0.0 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -1.0 · geo +1.0]
+   Por qué: titulares de riesgo +1.0 · rendimientos EE. UU. -0.8 · petróleo +0.5
+5. AUD -0.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +1.7 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · aversión al riesgo (VIX) +1.0 · petróleo +0.5
+6. EUR -0.5 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.0 · geo -0.5]
+   Por qué: titulares de riesgo -0.5 · petróleo -0.5
+7. GBP -0.6 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.4 · geo -1.0]
+   Por qué: titulares de riesgo -1.0 · aversión al riesgo (VIX) +0.5
+8. NZD -0.8 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +1.2 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · aversión al riesgo (VIX) +1.0
+
+Datos publicados: historial en construcción (el calendario gratuito no trae el dato real; se infiere del 'previo' del siguiente lanzamiento y se llena con los días).
+⚡ = dato de hoy/mañana, con peso x2.5.
+
+━━━ 🎯 ESCENARIOS ━━━
+Hoy no hay pares con dirección clara: no se generan escenarios.
+
+━━━ 🧭 DIRECCIÓN Y FUERZA DE TODOS LOS PARES ━━━
+USDCHF  ↔️ SIN DIRECCIÓN débil  -1.2  calidad -  [venir +0.0 · publ +0.0 · merc -0.2 · geo -1.0]
+USDCAD  ↔️ SIN DIRECCIÓN débil  -1.0  calidad -  [venir +0.0 · publ +0.0 · merc -3.0 · geo +2.0]
+AUDJPY  ↔️ SIN DIRECCIÓN débil  +1.0  calidad -  [venir +0.0 · publ +0.0 · merc +3.0 · geo -2.0]
+GBPUSD  ↔️ SIN DIRECCIÓN débil  -0.7  calidad -  [venir +0.0 · publ +0.0 · merc +1.3 · geo -2.0]
+AUDUSD  ↔️ SIN DIRECCIÓN débil  +0.7  calidad -  [venir +0.0 · publ +0.0 · merc +2.7 · geo -2.0]
+USDJPY  ↔️ SIN DIRECCIÓN débil  -0.6  calidad -  [venir +0.0 · publ +0.0 · merc +0.4 · geo -1.0]
+EURJPY  ↔️ SIN DIRECCIÓN débil  -0.6  calidad -  [venir +0.0 · publ +0.0 · merc +1.4 · geo -2.0]
+EURUSD  ↔️ SIN DIRECCIÓN débil  -0.5  calidad -  [venir +0.0 · publ +0.0 · merc +1.0 · geo -1.5]
+GBPAUD  ↔️ SIN DIRECCIÓN débil  -0.3  calidad -  [venir +0.0 · publ +0.0 · merc -1.3 · geo +1.0]
+NZDUSD  ↔️ SIN DIRECCIÓN débil  +0.2  calidad -  [venir +0.0 · publ +0.0 · merc +2.2 · geo -2.0]
+GBPJPY  ↔️ SIN DIRECCIÓN débil  -0.2  calidad -  [venir +0.0 · publ +0.0 · merc +1.8 · geo -2.0]
+EURGBP  ↔️ SIN DIRECCIÓN débil  +0.1  calidad -  [venir +0.0 · publ +0.0 · merc -0.4 · geo +0.5]
+
+━━━ 📈 MERCADO: VIX, BONOS, DÓLAR Y PETRÓLEO ━━━
+😨 VIX 15.3 (+0.4% hoy · +1.7% en 5 d) — calma: apetito por riesgo: favorece AUD, NZD y CAD frente a JPY y CHF.
+🏦 Bonos EE. UU.: 3M 4.06% (+1 pb) · 5A 5.01% (-1 pb) · 10A 5.22% (-2 pb) · 30A 5.56% (-3 pb)
+   Curva 10A–3M: +1.16 pp (normal).
+   10A: -5 pb en 5 días → rendimientos a la baja: resta apoyo al USD
+💵 Índice dólar DXY 102.12 (-0.05% hoy · -0.11% en 5 d).
+🛢 Petróleo WTI 95.08 (+1.0% hoy · +7.7% en 5 d) · Brent 106.71 (+1.0%) → sube: favorece al CAD y pesa sobre JPY y EUR.
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (por venir ⏭ y publicados ✔) ━━━
+Sin eventos fundamentales relevantes en el periodo.
+
+━━━ 🗓 AGENDA DE LA SEMANA ━━━
+Sin eventos relevantes en el periodo: baja volatilidad esperada.
+
+━━━ 📒 REGISTRO DE RESULTADOS ━━━
+Aún no hay setups cerrados (0 abiertos). Cada setup se evalúa a 24 h (plan diario) o 5 días (plan semanal): −1R = stop, +2R = objetivo, R = ½ rango diario medio.
+
+━━━ 🌍 GEOPOLÍTICA ━━━
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🔻 El jefe del MI5 advierte sobre las amenazas al Reino Unido por parte de Rusia, Irán y AI
+🔻 Misiles interceptados cerca de Riad después de que la coalición saudita atacara un depósito de combustible en Yemen
+🔻 Los ataques rusos alcanzaron una central eléctrica clave en Kyiv, dice Zelensky
+📰 Argentina apunta a Reino Unido en demanda legal por exploración petrolera en las Malvinas
+🔻 'Hablaría con la televisión': los acompañantes pagados que brindan calidez a los solitarios de China
+🔻 ¿Tiene razón Zelensky al decir que los ataques a centros de datos han acabado con los bots rusos?
+📰 Los clientes de gasóleo para calefacción se enfrentan a un duro invierno a pesar de la promesa de reestructuración
+🔻 El propietario de Phase Eight y Hobbs se ve afectado por un ciberataque, mientras H&M investiga un reclamo de piratería por separado
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
+
+━━━ ⚙️ ESTADO DE LAS FUENTES ━━━
+calendario: ✅ 13 eventos relevantes
+mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo)
+titulares: ✅ 100 titulares leídos
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
