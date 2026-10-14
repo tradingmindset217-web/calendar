@@ -6,7 +6,10 @@ on:
   schedule:
     - cron: "30 0 * * 1"         # DOMINGO 19:30 Colombia -> plan semanal
     - cron: "30 0 * * 2-5"       # LUNES a JUEVES 19:30 Colombia -> plan diario para mañana
-    - cron: "*/5 * * * 1-5"      # cada 5 min, lunes a viernes -> aviso antes del dato y reacción después
+    # Revisa EN SILENCIO cada 5 min (lunes a viernes). Solo envía mensaje en dos casos:
+    #   - 5 a 30 min ANTES de un evento relevante
+    #   - ~5 min DESPUÉS de un dato de impacto alto (actualización de divisas y pares)
+    - cron: "*/5 * * * 1-5"
   workflow_dispatch:
     inputs:
       mode:
