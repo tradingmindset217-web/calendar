@@ -1,0 +1,175 @@
+📋 PLAN DIARIO — para el Jue 15/10/2026 (America/Bogota)
+
+━━━ 📌 RESUMEN ━━━
+🎯 Pares con dirección fundamental más clara:
+   1. GBPJPY → VENTA · fuerte · calidad B · 2/4 factores · -5.2
+   2. USDCHF → VENTA · moderada · calidad B · 3/4 factores · -4.6
+   3. USDJPY → VENTA · moderada · calidad B · 2/4 factores · -4.1
+⚠️ Eventos clave:
+   Jue 01:00 GBP — PIB
+   Jue 07:30 USD — Ventas minoristas
+   Jue 07:30 USD — Ventas minoristas
+   Jue 07:30 USD — Precios al productor
+💪 Más fuerte: CHF (+2.9) · más débil: GBP (-3.8)
+🌍 Geopolítica: tensión alta.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Comparado con el plan del 14/10 16:56:
+💱 DIVISAS (fuerza y por qué):
+   USD: +1.1 → -1.8 (-2.8) ⚪ NEUTRAL — datos por venir -2.5 (Ventas minoristas Jue 07:30 ↓ ⚡)
+   GBP: -1.3 → -3.8 (-2.5) ⚪ NEUTRAL — datos por venir -2.5 (PIB Jue 01:00 ↓ ⚡)
+
+📊 PARES (sesgo y fuerza):
+   AUDUSD: SIN DIRECCIÓN -1.8 (débil, calidad -) → SIN DIRECCIÓN +1.1 (débil, calidad -) — AUD -0.0 y USD -2.8 en fuerza
+   NZDUSD: SIN DIRECCIÓN -2.3 (débil, calidad -) → SIN DIRECCIÓN +0.6 (débil, calidad -) — NZD -0.0 y USD -2.8 en fuerza
+   USDCAD: SIN DIRECCIÓN +0.2 (débil, calidad -) → BAJISTA -2.6 (moderada, calidad -) — USD -2.8 y CAD +0.0 en fuerza
+   USDJPY: SIN DIRECCIÓN -1.3 (débil, calidad -) → BAJISTA -4.1 (moderada, calidad B) — USD -2.8 y JPY -0.0 en fuerza
+   USDCHF: SIN DIRECCIÓN -1.8 (débil, calidad -) → BAJISTA -4.6 (moderada, calidad B) — USD -2.8 y CHF -0.0 en fuerza
+   EURUSD: SIN DIRECCIÓN -1.8 (débil, calidad -) → SIN DIRECCIÓN +1.0 (débil, calidad -) — EUR +0.0 y USD -2.8 en fuerza
+   GBPJPY: BAJISTA -2.7 (moderada, calidad -) → BAJISTA -5.2 (fuerte, calidad B) — GBP -2.5 y JPY -0.0 en fuerza
+   GBPAUD: SIN DIRECCIÓN +0.4 (débil, calidad -) → SIN DIRECCIÓN -2.1 (débil, calidad -) — GBP -2.5 y AUD -0.0 en fuerza
+   EURGBP: SIN DIRECCIÓN +0.5 (débil, calidad -) → ALCISTA +3.0 (moderada, calidad -) — EUR +0.0 y GBP -2.5 en fuerza
+
+━━━ 💪 FUERZA FUNDAMENTAL DE CADA DIVISA (de más fuerte a más débil) ━━━
+1. CHF +2.9 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.9 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · rendimientos EE. UU. +0.6 · aversión al riesgo (VIX) +0.5
+2. JPY +2.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.3 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · petróleo -1.0 · rendimientos EE. UU. +0.8
+3. CAD +0.9 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +1.9 · geo -1.0]
+   Por qué: petróleo +2.0 · titulares de riesgo -1.0
+4. EUR -0.8 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.3 · geo -0.5]
+   Por qué: titulares de riesgo -0.5 · petróleo -0.5
+5. AUD -1.7 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.3 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · petróleo +0.5 · aversión al riesgo (VIX) -0.5
+6. USD -1.8 ⚪ NEUTRAL
+   [por venir -2.5 · publicados +0.0 · mercado -0.3 · geo +1.0]
+   Por qué: Ventas minoristas Jue 07:30 ↓ ⚡ · Ventas minoristas Jue 07:30 ↓ ⚡ · Precios al productor Jue 07:30 ↑ ⚡
+7. NZD -2.2 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado -0.2 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · aversión al riesgo (VIX) -0.5
+8. GBP -3.8 ⚪ NEUTRAL
+   [por venir -2.5 · publicados +0.0 · mercado -0.3 · geo -1.0]
+   Por qué: PIB Jue 01:00 ↓ ⚡ · titulares de riesgo -1.0 · Discurso de banco central Jue 21:00 → ⚡
+
+Datos publicados: historial en construcción (el calendario gratuito no trae el dato real; se infiere del 'previo' del siguiente lanzamiento y se llena con los días).
+⚡ = dato de hoy/mañana, con peso x2.5.
+
+━━━ 🎯 ESCENARIOS (pares más claros) ━━━
+▪️ GBPJPY → VENTA · dirección fuerte · calidad B · 2/4 factores alineados · puntaje -5.2
+   [por venir -2.5 · publicados +0.0 · mercado -0.7 · geopolítica -2.0]
+   Por qué: GBP (-3.8): PIB Jue 01:00 ↓ ⚡ · titulares de riesgo -1.0
+   Por qué: JPY (+2.3): titulares de riesgo +2.0 · petróleo -1.0
+   ⏳ DATO CLAVE Jue 01:00 — GBP PIB: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 21:00 — GBP Discurso de banco central: no entres antes; puede confirmar o invalidar el sesgo.
+   Vigila: VIX 16.9 · US10A 5.19% · WTI 94.5 (si se mueven contra el sesgo, reduce o espera).
+   Confirma o invalida con el dato:
+   01:00 GDP m/m (GBP): dato mayor que el pronóstico → COMPRA GBPJPY | dato menor → VENTA GBPJPY
+   21:00 BOE Gov Bailey Speaks (GBP): dato mayor que el pronóstico → COMPRA GBPJPY | dato menor → VENTA GBPJPY
+
+▪️ USDCHF → VENTA · dirección moderada · calidad B · 3/4 factores alineados · puntaje -4.6
+   [por venir -2.5 · publicados +0.0 · mercado -1.1 · geopolítica -1.0]
+   Por qué: USD (-1.8): Ventas minoristas Jue 07:30 ↓ ⚡ · Ventas minoristas Jue 07:30 ↓ ⚡
+   Por qué: CHF (+2.9): titulares de riesgo +2.0 · rendimientos EE. UU. +0.6
+   ⏳ DATO CLAVE Jue 07:30 — USD Precios al productor: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 07:30 — USD Ventas minoristas: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 07:30 — USD Precios al productor: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 07:30 — USD Ventas minoristas: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 22:30 — USD Discurso de banco central: no entres antes; puede confirmar o invalidar el sesgo.
+   Vigila: VIX 16.9 · US10A 5.19% · WTI 94.5 (si se mueven contra el sesgo, reduce o espera).
+   Confirma o invalida con el dato:
+   07:30 Core Retail Sales m/m (USD): dato mayor que el pronóstico → COMPRA USDCHF | dato menor → VENTA USDCHF
+   07:30 Retail Sales m/m (USD): dato mayor que el pronóstico → COMPRA USDCHF | dato menor → VENTA USDCHF
+   07:30 Core PPI m/m (USD): dato mayor que el pronóstico → COMPRA USDCHF | dato menor → VENTA USDCHF
+
+▪️ USDJPY → VENTA · dirección moderada · calidad B · 2/4 factores alineados · puntaje -4.1
+   [por venir -2.5 · publicados +0.0 · mercado -0.6 · geopolítica -1.0]
+   Por qué: USD (-1.8): Ventas minoristas Jue 07:30 ↓ ⚡ · Ventas minoristas Jue 07:30 ↓ ⚡
+   Por qué: JPY (+2.3): titulares de riesgo +2.0 · petróleo -1.0
+   ⏳ DATO CLAVE Jue 07:30 — USD Precios al productor: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 07:30 — USD Ventas minoristas: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 07:30 — USD Precios al productor: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 07:30 — USD Ventas minoristas: no entres antes; puede confirmar o invalidar el sesgo.
+   ⏳ DATO CLAVE Jue 22:30 — USD Discurso de banco central: no entres antes; puede confirmar o invalidar el sesgo.
+   Vigila: VIX 16.9 · US10A 5.19% · WTI 94.5 (si se mueven contra el sesgo, reduce o espera).
+   Confirma o invalida con el dato:
+   07:30 Core Retail Sales m/m (USD): dato mayor que el pronóstico → COMPRA USDJPY | dato menor → VENTA USDJPY
+   07:30 Retail Sales m/m (USD): dato mayor que el pronóstico → COMPRA USDJPY | dato menor → VENTA USDJPY
+   07:30 Core PPI m/m (USD): dato mayor que el pronóstico → COMPRA USDJPY | dato menor → VENTA USDJPY
+
+━━━ 🧭 DIRECCIÓN Y FUERZA DE TODOS LOS PARES ━━━
+GBPJPY  📉 BAJISTA fuerte  -5.2  calidad B  [venir -2.5 · publ +0.0 · merc -0.7 · geo -2.0]
+USDCHF  📉 BAJISTA moderada  -4.6  calidad B  [venir -2.5 · publ +0.0 · merc -1.1 · geo -1.0]
+USDJPY  📉 BAJISTA moderada  -4.1  calidad B  [venir -2.5 · publ +0.0 · merc -0.6 · geo -1.0]
+EURGBP  📈 ALCISTA moderada  +3.0  calidad -  [venir +2.5 · publ +0.0 · merc +0.0 · geo +0.5]
+USDCAD  📉 BAJISTA moderada  -2.6  calidad -  [venir -2.5 · publ +0.0 · merc -2.1 · geo +2.0]
+EURJPY  📉 BAJISTA moderada  -2.6  calidad -  [venir +0.0 · publ +0.0 · merc -0.6 · geo -2.0]
+GBPUSD  ↔️ SIN DIRECCIÓN débil  -2.1  calidad -  [venir +0.0 · publ +0.0 · merc -0.1 · geo -2.0]
+GBPAUD  ↔️ SIN DIRECCIÓN débil  -2.1  calidad -  [venir -2.5 · publ +0.0 · merc -0.6 · geo +1.0]
+AUDJPY  ↔️ SIN DIRECCIÓN débil  -2.1  calidad -  [venir +0.0 · publ +0.0 · merc -0.1 · geo -2.0]
+AUDUSD  ↔️ SIN DIRECCIÓN débil  +1.1  calidad -  [venir +2.5 · publ +0.0 · merc +0.6 · geo -2.0]
+EURUSD  ↔️ SIN DIRECCIÓN débil  +1.0  calidad -  [venir +2.5 · publ +0.0 · merc -0.0 · geo -1.5]
+NZDUSD  ↔️ SIN DIRECCIÓN débil  +0.6  calidad -  [venir +2.5 · publ +0.0 · merc +0.1 · geo -2.0]
+
+━━━ 📈 MERCADO: VIX, BONOS, DÓLAR Y PETRÓLEO ━━━
+😨 VIX 16.9 (+10.5% hoy · +11.9% en 5 d) — normal: sin señal clara de riesgo.
+🏦 Bonos EE. UU.: 3M 4.09% (+3 pb) · 5A 4.99% (-2 pb) · 10A 5.19% (-3 pb) · 30A 5.53% (-4 pb)
+   Curva 10A–3M: +1.11 pp (normal).
+   10A: -9 pb en 5 días → rendimientos a la baja: resta apoyo al USD
+💵 Índice dólar DXY 102.20 (-0.34% hoy · +0.06% en 5 d).
+🛢 Petróleo WTI 94.48 (+0.4% hoy · +7.0% en 5 d) · Brent 105.27 (-0.4%) → sube: favorece al CAD y pesa sobre JPY y EUR.
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (por venir ⏭ y publicados ✔) ━━━
+💱 GBP
+   ⏭ Crecimiento: PIB (Jue 01:00) prev 0.4% → pron -0.1% · ↓ deterioro
+   ⏭ Tasas de interés: Discurso de banco central (Jue 21:00) prev - → pron - · → sin cambio
+
+💱 USD
+   ⏭ Consumo: Ventas minoristas (Jue 07:30) prev 1.4% → pron 0.6% · ↓ deterioro
+   ⏭ Consumo: Ventas minoristas (Jue 07:30) prev 1.2% → pron 0.3% · ↓ deterioro
+   ⏭ Inflación: Precios al productor (Jue 07:30) prev 0.2% → pron 0.3% · ↑ mejora
+   ⏭ Inflación: Precios al productor (Jue 07:30) prev 0.4% → pron 0.6% · ↑ mejora
+
+━━━ 🗓 PRÓXIMAS HORAS (hasta el cierre de mañana) ━━━
+Jue 15/10
+   01:00 🔴 GBP GDP m/m (prev 0.4% | pron -0.1%)
+   07:30 🔴 USD Core Retail Sales m/m (prev 1.4% | pron 0.6%)
+   07:30 🔴 USD Retail Sales m/m (prev 1.2% | pron 0.3%)
+   07:30 🔴 USD Core PPI m/m (prev 0.2% | pron 0.3%)
+   07:30 🔴 USD PPI m/m (prev 0.4% | pron 0.6%)
+   21:00 🔴 GBP BOE Gov Bailey Speaks (prev - | pron -)
+   22:30 🔴 USD Fed Chairman Warsh Speaks (prev - | pron -)
+
+━━━ 📒 REGISTRO DE RESULTADOS ━━━
+Aún no hay setups cerrados (0 abiertos). Cada setup se evalúa a 24 h (plan diario) o 5 días (plan semanal): −1R = stop, +2R = objetivo, R = ½ rango diario medio.
+
+━━━ 🌍 GEOPOLÍTICA ━━━
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🔻 Musk dice que el gobierno de EE.UU. puede estar detrás de la desaceleración de la velocidad de los drones en Ucrania
+🔻 Manifestantes estudiantiles atacan edificios gubernamentales en Albania
+📰 La inflación estadounidense aumenta más de lo esperado: esto es lo que está sucediendo con los precios
+🔻 Cientos de miles de trabajadores en huelga en toda la República de Irlanda
+🔻 'Hablaría con la televisión': los acompañantes pagados que brindan calidez a los solitarios de China
+🔻 Ver: Bloque de viviendas destruido en los ataques rusos a Ucrania
+📰 Cómo la reacción contra los centros de datos podría influir en las elecciones de mitad de período en EE. UU.
+🔻 No construir una tercera pista sería una "gran oportunidad perdida", advierte el jefe de Heathrow
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
+
+━━━ ⚙️ ESTADO DE LAS FUENTES ━━━
+calendario: ✅ 13 eventos relevantes
+mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo)
+titulares: ✅ 80 titulares leídos
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
