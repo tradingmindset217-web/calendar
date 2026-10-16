@@ -24,9 +24,11 @@ import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 from collections import defaultdict
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -48,6 +50,14 @@ ACTUALS_KEY = os.getenv("ACTUALS_KEY", "").strip()
 CTRY2CUR = {"US": "USD", "EU": "EUR", "EMU": "EUR", "DE": "EUR", "FR": "EUR", "IT": "EUR", "ES": "EUR",
             "GB": "GBP", "UK": "GBP", "JP": "JPY", "AU": "AUD", "NZ": "NZD", "CA": "CAD", "CH": "CHF"}
 UA = {"User-Agent": "Mozilla/5.0"}
+FF_BASE = "https://www.forexfactory.com/calendar"
+UA_FULL = {"User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                          "Chrome/124.0 Safari/537.36"),
+           "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+           "Accept-Language": "en-US,en;q=0.9", "Accept-Encoding": "identity",
+           "Referer": "https://www.forexfactory.com/"}
+FF_KEY = "ForexFactory (dato real)"
+MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
 FORCE = os.getenv("FORCE") == "1"
 
 PAIRS = [p.strip().upper() for p in os.getenv(
@@ -281,6 +291,227 @@ def load_events(which=("this",), required=True):
     return sorted(out, key=lambda e: e["_dt"])
 
 
+# ---------- ForexFactory (página web): dato real publicado ----------
+def ff_fetch(query):
+    """Descarga una página del calendario de ForexFactory. Si Cloudflare la bloquea, reintenta con
+    'cloudscraper' (si está instalado). Devuelve el HTML o None."""
+    url = f"{FF_BASE}?{query}"
+    reason = ""
+    try:
+        req = urllib.request.Request(url, headers=UA_FULL)
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        reason = f"HTTP {e.code}"
+    except Exception as e:
+        reason = str(e)[:80]
+    try:
+        import cloudscraper
+        r = cloudscraper.create_scraper().get(url, timeout=40)
+        if r.status_code == 200:
+            return r.text
+        reason += f" / cloudscraper HTTP {r.status_code}"
+    except ImportError:
+        reason += " (cloudscraper no instalado)"
+    except Exception as e:
+        reason += f" / cloudscraper: {str(e)[:60]}"
+    STATUS[FF_KEY] = f"❌ bloqueado o sin acceso ({reason.strip()})"
+    return None
+
+
+def _walk(o, out):
+    if isinstance(o, dict):
+        if "currency" in o and "actual" in o and (o.get("name") or o.get("prefixedName")):
+            out.append(o)
+        for v in o.values():
+            _walk(v, out)
+    elif isinstance(o, list):
+        for v in o:
+            _walk(v, out)
+
+
+def _json_blocks(html):
+    """Objetos JSON que la página incrusta como 'calendarComponentStates[n] = {...}'."""
+    blocks = []
+    for m in re.finditer(r"calendarComponentStates\[\d+\]\s*=\s*", html):
+        i = m.end()
+        if i >= len(html) or html[i] != "{":
+            continue
+        depth, in_str, esc = 0, False, False
+        for j in range(i, len(html)):
+            ch = html[j]
+            if in_str:
+                if esc:
+                    esc = False
+                elif ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+            elif ch == '"':
+                in_str = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        blocks.append(json.loads(html[i:j + 1]))
+                    except Exception:
+                        pass
+                    break
+    return blocks
+
+
+class _FFRows(HTMLParser):
+    """Plan B: lee las filas de la tabla HTML (clases calendar__*)."""
+
+    def __init__(self):
+        super().__init__()
+        self.rows, self.row, self.cell, self.date_txt = [], None, None, ""
+
+    def handle_starttag(self, tag, attrs):
+        cls = dict(attrs).get("class") or ""
+        if tag == "tr" and "calendar__row" in cls:
+            self.row = {"cells": {}, "impact": None}
+        elif self.row is not None and tag == "td":
+            for k in ("date", "currency", "event", "actual", "forecast", "previous"):
+                if f"calendar__{k}" in cls:
+                    self.cell = k
+                    self.row["cells"].setdefault(k, "")
+                    break
+        elif self.row is not None and tag == "span":
+            if "impact-red" in cls:
+                self.row["impact"] = "High"
+            elif "impact-ora" in cls:
+                self.row["impact"] = "Medium"
+            elif "impact-yel" in cls:
+                self.row["impact"] = "Low"
+
+    def handle_data(self, data):
+        if self.row is not None and self.cell:
+            self.row["cells"][self.cell] += data
+
+    def handle_endtag(self, tag):
+        if tag == "td":
+            self.cell = None
+        elif tag == "tr" and self.row is not None:
+            self.rows.append(self.row)
+            self.row = None
+
+
+def ff_parse(html, now):
+    """Eventos de una página de ForexFactory: [{cur, title, dt|None, day|None, actual, forecast, previous, impact}]."""
+    out = []
+    raw = []
+    for blk in _json_blocks(html):
+        _walk(blk, raw)
+    for o in raw:
+        try:
+            dl = o.get("dateline")
+            dt = datetime.fromtimestamp(int(dl), TZ) if dl else None
+            imp = {"high": "High", "medium": "Medium", "low": "Low"}.get(str(o.get("impactName", "")).lower())
+            out.append({"cur": str(o.get("currency", "")).upper(),
+                        "title": (o.get("name") or o.get("prefixedName") or "").strip(), "dt": dt,
+                        "day": dt.date() if dt else None, "impact": imp,
+                        "actual": str(o.get("actual") or "").strip(),
+                        "forecast": str(o.get("forecast") or "").strip(),
+                        "previous": str(o.get("previous") or "").strip()})
+        except Exception:
+            continue
+    if out:
+        return out
+    p = _FFRows()
+    try:
+        p.feed(html)
+    except Exception:
+        return []
+    day = None
+    for r in p.rows:
+        c = {k: re.sub(r"\s+", " ", v).strip() for k, v in r["cells"].items()}
+        m = re.search(r"([A-Za-z]{3})\s*(\d{1,2})\s*$", c.get("date", ""))
+        if m and m.group(1).lower() in MONTHS:
+            mo, dd = MONTHS.index(m.group(1).lower()) + 1, int(m.group(2))
+            yr = now.year - (1 if mo > now.month + 6 else 0)
+            try:
+                day = datetime(yr, mo, dd).date()
+            except ValueError:
+                pass
+        if c.get("currency") and c.get("event"):
+            out.append({"cur": c["currency"].upper(), "title": c["event"], "dt": None, "day": day,
+                        "impact": r["impact"], "actual": c.get("actual", ""),
+                        "forecast": c.get("forecast", ""), "previous": c.get("previous", "")})
+    return out
+
+
+def ff_items(queries, now):
+    """Prueba varias URL equivalentes hasta que una devuelva eventos."""
+    for q in queries:
+        html = ff_fetch(q)
+        if not html:
+            continue
+        items = ff_parse(html, now)
+        if items:
+            return items
+        os.makedirs(OUT_DIR, exist_ok=True)
+        with open(os.path.join(OUT_DIR, "ff_debug.txt"), "w", encoding="utf-8") as f:
+            f.write(f"consulta={q} longitud={len(html)}\n{html[:3000]}")
+        STATUS[FF_KEY] = "⚠️ página recibida pero no se pudo leer (revisa reports/ff_debug.txt)"
+    return []
+
+
+def ff_week_queries(now):
+    mon = now - timedelta(days=(now.weekday() + 1) % 7)   # la semana de ForexFactory empieza el domingo
+    return ["week=this", f"week={MONTHS[mon.month - 1]}{mon.day}.{mon.year}"]
+
+
+def norm_title(t):
+    return re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()
+
+
+def web_actuals(now):
+    """Datos reales de esta semana según la página de ForexFactory."""
+    items = ff_items(ff_week_queries(now), now)
+    got = sum(1 for i in items if i["actual"])
+    if items:
+        STATUS[FF_KEY] = f"✅ {got} datos con valor real de {len(items)} eventos"
+    return items
+
+
+def ff_backfill(hist, now):
+    """Completa el historial con los datos reales de las últimas semanas (páginas mensuales).
+    Así la fuerza de cada divisa incluye lo que ya salió desde el primer día."""
+    prev_m = (now.replace(day=1) - timedelta(days=1))
+    items = []
+    for q in (f"month={MONTHS[prev_m.month - 1]}.{prev_m.year}", f"month={MONTHS[now.month - 1]}.{now.year}"):
+        items += ff_items([q], now)
+    fmt_d = "%Y-%m-%dT%H:%M"
+    added = 0
+    for w in items:
+        if w["cur"] not in CURS or not w["title"]:
+            continue
+        rule = match_rule(w["title"])
+        imp = w["impact"] or ("Medium" if rule and rule[4] else None)
+        ev = {"title": w["title"], "country": w["cur"], "impact": imp or "Low", "_rule": rule}
+        if not imp or not relevant(ev):
+            continue
+        rel = hist.setdefault(f"{w['cur']}|{w['title']}", {})
+        if w["dt"]:
+            ent = rel.setdefault(w["dt"].strftime(fmt_d), {"f": w["forecast"], "p": w["previous"], "a": "", "i": imp})
+        else:   # sin hora exacta: se une a un lanzamiento ya guardado del mismo día
+            ent = next((v for d, v in rel.items() if w["day"] and d.startswith(w["day"].isoformat())), None)
+            if ent is None:
+                continue
+        if w["forecast"] and not ent.get("f"):
+            ent["f"] = w["forecast"]
+        if w["actual"]:
+            if ent.get("a") != w["actual"]:
+                added += 1
+            ent["a"] = w["actual"]
+    if items:
+        STATUS[FF_KEY] = f"✅ historial: {sum(1 for i in items if i['actual'])} datos reales leídos ({added} nuevos)"
+    return hist
+
+
 # ---------- historial de lanzamientos y sorpresas ----------
 def update_history(events):
     """Guarda cada lanzamiento (pronóstico, previo y, si existe, el dato real)."""
@@ -304,9 +535,9 @@ def update_history(events):
 
 
 def history_surprises(hist, now):
-    """Sorpresas de datos ya publicados (últimos 60 días): real vs pronóstico.
-    El calendario gratuito NO trae el dato real, así que se infiere del 'previo'
-    del lanzamiento siguiente (el previo de hoy = el real de la vez anterior)."""
+    """Datos ya publicados (últimos 60 días). Cada uno aporta dos señales:
+    - sorpresa: real vs pronóstico; - tendencia: real vs dato previo (mejora o deterioro).
+    Si el dato real no está guardado, se infiere del 'previo' del lanzamiento siguiente."""
     out = []
     for key, rel in hist.items():
         country, title = key.split("|", 1)
@@ -316,19 +547,21 @@ def history_surprises(hist, now):
             r = rel[d]
             dt = datetime.strptime(d, "%Y-%m-%dT%H:%M").replace(tzinfo=TZ)
             age = (now - dt).total_seconds() / 86400
-            if age < 0 or age > 60 or not r.get("f"):
+            if age < 0 or age > 60:
                 continue
             actual, how = r.get("a"), "real"
             if not actual and i + 1 < len(dates):
                 actual, how = rel[dates[i + 1]].get("p"), "inferido"
-            a, f = num(actual), num(r["f"])
-            if a is None or f is None or a == f:
-                continue
+            a, f, p = num(actual), num(r.get("f")), num(r.get("p"))
             ev = {"title": title, "country": country, "impact": r.get("i", "High"), "_rule": rule}
-            out.append({"cur": country, "title": rule[1] if rule else title, "w": weight(ev),
-                        "sur": 1 if (a > f) != inv(ev) else -1, "age": age,
-                        "decay": 0.5 ** (age / HALF_LIFE_DAYS), "actual": actual,
-                        "forecast": r["f"], "how": how, "dt": dt})
+            sur = 0 if (a is None or f is None or a == f) else (1 if (a > f) != inv(ev) else -1)
+            trend = 0 if (a is None or p is None or a == p) else (1 if (a > p) != inv(ev) else -1)
+            if not sur and not trend:
+                continue
+            out.append({"cur": country, "title": rule[1] if rule else title, "w": weight(ev), "sur": sur,
+                        "trend": trend, "age": age, "decay": 0.5 ** (age / HALF_LIFE_DAYS),
+                        "actual": actual, "forecast": r.get("f") or "", "previous": r.get("p") or "",
+                        "how": how, "dt": dt})
     return out
 
 
@@ -530,10 +763,10 @@ def currency_model(scope, first_day, hs, m, geo_int):
         c = s["cur"]
         if c not in CURS:
             continue
-        v = 1.5 * s["w"] * s["sur"] * s["decay"]
+        v = s["w"] * s["decay"] * (1.5 * s["sur"] + 0.75 * s.get("trend", 0))
         P[c] += v
-        past_w[c].append((abs(v) / 4, f"{s['title']} {s['actual']} vs pron {s['forecast']} "
-                          + ("✅" if s["sur"] > 0 else "❌")))
+        ref = f"vs pron {s['forecast']}" if s["sur"] else f"vs prev {s.get('previous') or '-'}"
+        past_w[c].append((abs(v) / 4, f"{s['title']} {s['actual']} {ref} " + ("✅" if v > 0 else "❌")))
     mk, mk_w = market_scores(m)
     model = {}
     for c in CURS:
@@ -963,6 +1196,8 @@ def build_plan(kind):
     hist, changed = update_history(allev)
     if changed:
         save_json(HISTORY_FILE, hist)
+    hist = ff_backfill(hist, now)       # datos reales de las últimas semanas desde ForexFactory
+    save_json(HISTORY_FILE, hist)
     hs = history_surprises(hist, now)
     monday = (now - timedelta(days=now.weekday())).date()
 
@@ -998,6 +1233,9 @@ def build_plan(kind):
     # --- resumen ---
     setups = [r for r in chosen if r["grade"]]
     res = []
+    if not str(STATUS.get(FF_KEY, "")).startswith("✅"):
+        res.append(f"⚠️ No pude leer los datos reales de ForexFactory: {STATUS.get(FF_KEY, 'sin respuesta')}. "
+                   "La fuerza usa solo pronósticos y lo inferido del historial.")
     if setups:
         res.append("🎯 Pares con dirección fundamental más clara:")
         for i, r in enumerate(setups, 1):
@@ -1117,12 +1355,17 @@ def provider_actuals(now):
     return out
 
 
-def find_actual(e, provs):
-    """Dato real de un evento: del calendario, o de la API (se empareja por divisa, hora ±10 min
-    y coincidencia del pronóstico para no confundir indicadores que salen a la misma hora)."""
+def find_actual(e, web, api):
+    """Dato real de un evento: del calendario, de la página de ForexFactory o de la API opcional."""
     if e.get("actual"):
         return e["actual"], "calendario"
-    for p in provs:
+    for w in web:
+        if w["cur"] != e["country"] or norm_title(w["title"]) != norm_title(e["title"]) or not w["actual"]:
+            continue
+        if (w["dt"] and abs((w["dt"] - e["_dt"]).total_seconds()) <= 5400) or \
+                (not w["dt"] and w["day"] == e["_dt"].date()):
+            return w["actual"], "ForexFactory"
+    for p in api:
         if p["cur"] != e["country"] or abs((p["dt"] - e["_dt"]).total_seconds()) > 600:
             continue
         fe = approx_eq(num(p["est"]), num(e.get("forecast")))
@@ -1161,19 +1404,23 @@ def reaction_message(items, now):
             line += " → en línea con el pronóstico"
         out.append(line)
     if missing:
-        out.append("ℹ️ Sin el valor real (el calendario gratuito no lo incluye) se asume que el dato salió como "
-                   "se esperaba; la actualización recoge la reacción del mercado. Para añadirlo: Actions → "
-                   "Sistema FX → Run workflow → modo «dato».")
+        out.append(f"ℹ️ No pude leer el valor real en ForexFactory ({STATUS.get(FF_KEY, 'sin respuesta')}). "
+                   "Se asume que salió como se esperaba y la actualización recoge la reacción del mercado. "
+                   "Para escribirlo a mano: Actions → Sistema FX → Run workflow → modo «dato».")
 
     # --- recalcular el modelo con lo publicado hasta ahora ---
     allev = load_events(("this", "next"), required=False)
     hs = history_surprises(hist, now)
     for e, actual, _ in items:   # dato escrito a mano antes de la hora oficial: cuenta igualmente
-        sur = surprise(dict(e, actual=str(actual))) if actual else 0
-        if e["_dt"] > now and sur:
-            hs.append({"cur": e["country"], "title": ev_name(e), "w": weight(e), "sur": sur, "age": 0.0,
-                       "decay": 1.0, "actual": str(actual), "forecast": e.get("forecast") or "",
-                       "how": "real", "dt": now})
+        if not actual or e["_dt"] <= now:
+            continue
+        a, f, p = num(actual), num(e.get("forecast")), num(e.get("previous"))
+        sur = 0 if (a is None or f is None or a == f) else (1 if (a > f) != inv(e) else -1)
+        tr = 0 if (a is None or p is None or a == p) else (1 if (a > p) != inv(e) else -1)
+        if sur or tr:
+            hs.append({"cur": e["country"], "title": ev_name(e), "w": weight(e), "sur": sur, "trend": tr,
+                       "age": 0.0, "decay": 1.0, "actual": str(actual), "forecast": e.get("forecast") or "",
+                       "previous": e.get("previous") or "", "how": "real", "dt": now})
     first_day = next_trading_day(now)
     monday = (now - timedelta(days=now.weekday())).date()
     week_end = max(monday + timedelta(days=4), first_day)
@@ -1182,7 +1429,9 @@ def reaction_message(items, now):
         if x["country"] not in CURS or not (now.date() <= x["_dt"].date() <= week_end):
             continue
         known = hist.get(f"{x['country']}|{x['title']}", {}).get(x["_dt"].strftime(fmt_d), {}).get("a")
-        scope.append(dict(x, forecast=known) if known else x)
+        if known:   # ya publicado: lo cuenta el historial (sorpresa + tendencia), no se duplica
+            continue
+        scope.append(x)
     m = market_snapshot()
     intensity, _ = geopolitics(translate=False)
     model = currency_model(scope, first_day, hs, m, intensity)
@@ -1296,7 +1545,7 @@ def alerts():
     setups = (load_json(LIVE_FILE, None) or load_state() or {}).get("setups", [])
     has_source = bool(ACTUALS_URL and ACTUALS_KEY)
     react_all = os.getenv("REACT_IMPACT", "High") == "Medium"   # "Medium" incluye también datos clave de impacto medio
-    provs, msgs, due = None, [], defaultdict(list)
+    web, api, msgs, due = None, None, [], defaultdict(list)
     for e in events:
         key = f"{e['country']}|{e['title']}|{e['date']}"
         mins = (e["_dt"] - now).total_seconds() / 60
@@ -1308,14 +1557,14 @@ def alerts():
             due[e["date"]].append(e)
     for date, evs in due.items():
         mins = (evs[0]["_dt"] - now).total_seconds() / 60
-        if provs is None:
-            provs = provider_actuals(now)
+        if web is None:
+            web, api = web_actuals(now), provider_actuals(now)
         items = []
         for e in evs:
-            actual, src = find_actual(e, provs)
+            actual, src = find_actual(e, web, api)
             items.append((e, actual, src))
-        if has_source and mins > -10 and any(not a for _, a, _ in items):
-            continue   # da unos minutos más a la fuente del dato real
+        if mins > -12 and any(not a for _, a, _ in items):
+            continue   # da unos minutos más: ForexFactory puede tardar en mostrar el valor
         msgs.append(reaction_message(items, now))
         for e in evs:
             sent[f"{e['country']}|{e['title']}|{e['date']}|react"] = now.isoformat()
