@@ -1,0 +1,180 @@
+📆 PLAN SEMANAL — 19/10 al 23/10/2026 (America/Bogota)
+
+━━━ 📌 RESUMEN ━━━
+🎯 Pares con dirección fundamental más clara:
+   1. AUDJPY → VENTA · fuerte · calidad A · 3/4 factores · -6.8
+   2. NZDUSD → VENTA · fuerte · calidad B · 3/4 factores · -5.3
+   3. GBPAUD → COMPRA · fuerte · calidad B · 2/4 factores · +5.2
+⚠️ Eventos clave:
+   Lun 07:30 CAD — Inflación (IPC)
+   Lun 07:30 CAD — Inflación (IPC)
+   Lun 07:30 CAD — Inflación (IPC)
+   Mié 01:00 GBP — Inflación (IPC)
+💪 Más fuerte: JPY (+3.3) · más débil: AUD (-5.4)
+🌍 Geopolítica: tensión alta.
+📒 Registro: 4 setups cerrados · acierto 0% · -1.00R promedio.
+ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad estadística ni está validada con datos históricos.
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Comparado con el plan del 15/10 20:14:
+💱 DIVISAS (fuerza y por qué):
+   NZD: -1.5 → -4.0 (-2.5) ⚪ NEUTRAL — datos por venir -1.7 (Inflación (IPC) Mié 16:45 ↓); mercado (VIX/bonos/petróleo) -0.8 (aversión al riesgo (VIX) -0.5)
+   AUD: -4.0 → -5.4 (-1.4) 🔴 DÉBIL — mercado (VIX/bonos/petróleo) -1.4 (aversión al riesgo (VIX) -0.5)
+   CAD: +1.2 → +2.3 (+1.1) ⚪ NEUTRAL — datos por venir +4.0 (Inflación (IPC) Lun 07:30 ↑ ⚡); mercado (VIX/bonos/petróleo) -2.9 (petróleo -0.5)
+
+📊 PARES (sesgo y fuerza):
+   NZDUSD: BAJISTA -2.8 (moderada, calidad -) → BAJISTA -5.3 (fuerte, calidad B) — NZD -2.5 y USD +0.1 en fuerza
+   AUDJPY: BAJISTA -4.5 (moderada, calidad B) → BAJISTA -6.8 (fuerte, calidad A) — AUD -1.4 y JPY +0.8 en fuerza
+   GBPAUD: ALCISTA +3.0 (moderada, calidad -) → ALCISTA +5.2 (fuerte, calidad B) — GBP +0.7 y AUD -1.4 en fuerza
+   USDCAD: SIN DIRECCIÓN +2.0 (débil, calidad -) → SIN DIRECCIÓN -0.0 (débil, calidad -) — USD +0.1 y CAD +1.1 en fuerza
+   AUDUSD: SIN DIRECCIÓN -2.3 (débil, calidad -) → BAJISTA -3.8 (moderada, calidad B) — AUD -1.4 y USD +0.1 en fuerza
+   EURJPY: SIN DIRECCIÓN -2.4 (débil, calidad -) → BAJISTA -3.1 (moderada, calidad -) — EUR +0.1 y JPY +0.8 en fuerza
+
+━━━ 💪 FUERZA FUNDAMENTAL DE CADA DIVISA (de más fuerte a más débil) ━━━
+1. JPY +3.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +1.3 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · rendimientos EE. UU. +0.6 · aversión al riesgo (VIX) +0.5
+2. CHF +2.9 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.9 · geo +2.0]
+   Por qué: titulares de riesgo +2.0 · aversión al riesgo (VIX) +0.5
+3. CAD +2.3 ⚪ NEUTRAL
+   [por venir +4.0 · publicados +0.0 · mercado -0.7 · geo -1.0]
+   Por qué: Inflación (IPC) Lun 07:30 ↑ ⚡ · titulares de riesgo -1.0 · petróleo -0.5
+4. USD +2.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +3.0 · mercado -1.7 · geo +1.0]
+   Por qué: Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅ · Inflación subyacente (IPC core) 0.3% vs pron 0.2% ✅
+5. GBP +0.8 ⚪ NEUTRAL
+   [por venir +0.9 · publicados +1.0 · mercado -0.1 · geo -1.0]
+   Por qué: Inflación (IPC) Mié 01:00 ↑ · titulares de riesgo -1.0 · PIB 0.1% vs pron -0.1% ✅
+6. EUR -0.3 ⚪ NEUTRAL
+   [por venir +0.0 · publicados +0.0 · mercado +0.2 · geo -0.5]
+   Por qué: titulares de riesgo -0.5
+7. NZD -4.0 ⚪ NEUTRAL
+   [por venir -1.7 · publicados +0.0 · mercado -0.3 · geo -2.0]
+   Por qué: titulares de riesgo -2.0 · Inflación (IPC) Mié 16:45 ↓ · aversión al riesgo (VIX) -0.5
+8. AUD -5.4 🔴 DÉBIL
+   [por venir +0.0 · publicados -3.0 · mercado -0.4 · geo -2.0]
+   Por qué: Tasa de desempleo 4.7% vs pron 4.6% ❌ · Cambio en empleo -39.3K vs pron 19.6K ❌ · titulares de riesgo -2.0
+
+Historial: 11 datos publicados con resultado (✅ sorpresa positiva, ❌ negativa).
+⚡ = dato de hoy/mañana, con peso x2.5.
+
+━━━ 🎯 ESCENARIOS (pares más claros) ━━━
+▪️ AUDJPY → VENTA · dirección fuerte · calidad A · 3/4 factores alineados · puntaje -6.8
+   [por venir +0.0 · publicados -3.0 · mercado -1.8 · geopolítica -2.0]
+   Por qué: AUD (-5.4): Tasa de desempleo 4.7% vs pron 4.6% ❌ · Cambio en empleo -39.3K vs pron 19.6K ❌
+   Por qué: JPY (+3.3): titulares de riesgo +2.0 · rendimientos EE. UU. +0.6
+   Vigila: VIX 20.0 · US10A 5.10% · WTI 97.6 (si se mueven contra el sesgo, reduce o espera).
+
+▪️ NZDUSD → VENTA · dirección fuerte · calidad B · 3/4 factores alineados · puntaje -5.3
+   [por venir -1.7 · publicados -3.0 · mercado +1.4 · geopolítica -2.0]
+   Por qué: NZD (-4.0): titulares de riesgo -2.0 · Inflación (IPC) Mié 16:45 ↓
+   Por qué: USD (+2.3): Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅
+   Vigila: VIX 20.0 · US10A 5.10% · WTI 97.6 (si se mueven contra el sesgo, reduce o espera).
+   Confirma o invalida con el dato:
+   Mié 16:45 CPI q/q (NZD): dato mayor que el pronóstico → COMPRA NZDUSD | dato menor → VENTA NZDUSD
+
+▪️ GBPAUD → COMPRA · dirección fuerte · calidad B · 2/4 factores alineados · puntaje +5.2
+   [por venir +0.9 · publicados +3.0 · mercado +0.3 · geopolítica +1.0]
+   Por qué: GBP (+0.8): Inflación (IPC) Mié 01:00 ↑ · titulares de riesgo -1.0
+   Por qué: AUD (-5.4): Tasa de desempleo 4.7% vs pron 4.6% ❌ · Cambio en empleo -39.3K vs pron 19.6K ❌
+   Vigila: VIX 20.0 · US10A 5.10% · WTI 97.6 (si se mueven contra el sesgo, reduce o espera).
+   Confirma o invalida con el dato:
+   Mié 01:00 CPI y/y (GBP): dato mayor que el pronóstico → COMPRA GBPAUD | dato menor → VENTA GBPAUD
+   Vie 01:00 Retail Sales m/m (GBP): dato mayor que el pronóstico → COMPRA GBPAUD | dato menor → VENTA GBPAUD
+
+━━━ 🧭 DIRECCIÓN Y FUERZA DE TODOS LOS PARES ━━━
+AUDJPY  📉 BAJISTA fuerte  -6.8  calidad A  [venir +0.0 · publ -3.0 · merc -1.8 · geo -2.0]
+NZDUSD  📉 BAJISTA fuerte  -5.3  calidad B  [venir -1.7 · publ -3.0 · merc +1.4 · geo -2.0]
+GBPAUD  📈 ALCISTA fuerte  +5.2  calidad B  [venir +0.9 · publ +3.0 · merc +0.3 · geo +1.0]
+AUDUSD  📉 BAJISTA moderada  -3.8  calidad B  [venir +0.0 · publ -3.0 · merc +1.2 · geo -2.0]
+EURJPY  📉 BAJISTA moderada  -3.1  calidad -  [venir +0.0 · publ +0.0 · merc -1.1 · geo -2.0]
+EURUSD  📉 BAJISTA moderada  -2.6  calidad -  [venir +0.0 · publ -3.0 · merc +1.9 · geo -1.5]
+GBPJPY  ↔️ SIN DIRECCIÓN débil  -1.6  calidad -  [venir +0.9 · publ +1.0 · merc -1.5 · geo -2.0]
+GBPUSD  ↔️ SIN DIRECCIÓN débil  -1.5  calidad -  [venir +0.9 · publ -2.0 · merc +1.5 · geo -2.0]
+EURGBP  ↔️ SIN DIRECCIÓN débil  -1.1  calidad -  [venir -0.9 · publ -1.0 · merc +0.4 · geo +0.5]
+USDJPY  ↔️ SIN DIRECCIÓN débil  -1.0  calidad -  [venir +0.0 · publ +3.0 · merc -3.0 · geo -1.0]
+USDCHF  ↔️ SIN DIRECCIÓN débil  -0.6  calidad -  [venir +0.0 · publ +3.0 · merc -2.6 · geo -1.0]
+USDCAD  ↔️ SIN DIRECCIÓN débil  -0.0  calidad -  [venir -4.0 · publ +3.0 · merc -1.0 · geo +2.0]
+
+━━━ 📈 MERCADO: VIX, BONOS, DÓLAR Y PETRÓLEO ━━━
+😨 VIX 20.0 (+21.4% hoy · +34.7% en 5 d) — normal: sin señal clara de riesgo.
+🏦 Bonos EE. UU.: 3M 4.07% (-2 pb) · 5A 4.90% (+0 pb) · 10A 5.10% (+1 pb) · 30A 5.44% (+1 pb)
+   Curva 10A–3M: +1.03 pp (normal).
+   10A: -15 pb en 5 días → rendimientos a la baja: resta apoyo al USD
+💵 Índice dólar DXY 101.84 (+0.00% hoy · -0.72% en 5 d).
+🛢 Petróleo WTI 97.62 (-3.7% hoy · +4.1% en 5 d) · Brent 108.01 (-1.7%) → sin cambio relevante.
+
+━━━ 💱 FUNDAMENTALES POR DIVISA (por venir ⏭ y publicados ✔) ━━━
+💱 AUD
+   ✔ Publicado: Cambio en empleo -39.3K vs pron 19.6K ❌ peor (real)
+   ✔ Publicado: Tasa de desempleo 4.7% vs pron 4.6% ❌ peor (real)
+
+💱 CAD
+   ⏭ Inflación: Inflación (IPC) (Lun 07:30) prev -0.1% → pron 0.2% · ↑ mejora
+   ⏭ Inflación: Inflación (IPC) (Lun 07:30) prev 2.0% → pron 2.0% · → sin cambio
+   ⏭ Inflación: Inflación (IPC) (Lun 07:30) prev 1.9% → pron 1.9% · → sin cambio
+   ⏭ Inflación: Inflación (IPC) (Lun 07:30) prev 2.6% → pron 2.6% · → sin cambio
+
+💱 GBP
+   ⏭ Inflación: Inflación (IPC) (Mié 01:00) prev 3.1% → pron 3.4% · ↑ mejora
+   ⏭ Consumo: Ventas minoristas (Vie 01:00) prev 0.5% → pron -0.2% · ↓ deterioro
+   ✔ Publicado: PIB 0.1% vs pron -0.1% ✅ mejor (real)
+
+💱 NZD
+   ⏭ Inflación: Inflación (IPC) (Mié 16:45) prev 1.5% → pron 0.8% · ↓ deterioro
+
+💱 USD
+   ✔ Publicado: Precios al productor 0.7% vs pron 0.3% ✅ mejor (real)
+   ✔ Publicado: Ventas minoristas 0.9% vs pron 0.6% ✅ mejor (real)
+   ✔ Publicado: Precios al productor 1.3% vs pron 0.6% ✅ mejor (real)
+
+━━━ 🗓 AGENDA DE LA SEMANA ━━━
+Lun 19/10
+   07:30 🔴 CAD CPI m/m (prev -0.1% | pron 0.2%)
+   07:30 🔴 CAD Median CPI y/y (prev 2.0% | pron 2.0%)
+   07:30 🔴 CAD Trimmed CPI y/y (prev 1.9% | pron 1.9%)
+   07:30 🟠 CAD Common CPI y/y (prev 2.6% | pron 2.6%)
+
+Mié 21/10
+   01:00 🔴 GBP CPI y/y (prev 3.1% | pron 3.4%)
+   16:45 🔴 NZD CPI q/q (prev 1.5% | pron 0.8%)
+
+Vie 23/10
+   01:00 🟠 GBP Retail Sales m/m (prev 0.5% | pron -0.2%)
+
+━━━ 📒 REGISTRO DE RESULTADOS ━━━
+4 cerrados · 0 abiertos · acierto 0% · -1.00R por setup
+Calidad A: 0 setups, acierto 0%, +0.00R | Calidad B: 4 setups, acierto 0%, -1.00R
+14/10 20:06 GBPJPY VENTA (B): stop ❌ -1.00R
+14/10 20:06 USDCHF VENTA (B): stop ❌ -1.00R
+14/10 20:06 USDJPY VENTA (B): stop ❌ -1.00R
+15/10 20:13 AUDJPY VENTA (B): stop ❌ -1.00R
+Archivo completo: reports/resultados.csv en tu repositorio.
+
+━━━ 🌍 GEOPOLÍTICA ━━━
+Aversión al riesgo ALTA: refugios (JPY, CHF, USD) con ventaja; AUD y NZD vulnerables.
+Titulares (🔻 riesgo, 🟢 distensión, 📰 tema de mercado):
+🔻 Trump says suspension of Russia sanctions is to keep peace negotiations going
+🔻 EU tariffs aimed at China hitting Ukraine, steel boss says
+🔻 Oil facilities hit in deadly overnight attack on St Petersburg
+🔻 European diplomats attacked by Israeli settlers in West Bank
+🔻 Teacher fought US school attacker before armed dad shot suspect 'multiple times'
+📰 Brazil sees record fall in Amazon deforestation as key election looms
+🔻 Watch: Will Ukraine get the support needed as tensions with US rise?
+🔻 Ship attack reports near Hormuz reach record high as oil exports slow
+Lectura por palabras clave: revisa tú mismo las noticias antes de operar.
+
+━━━ ⚙️ ESTADO DE LAS FUENTES ━━━
+calendario: ✅ 7 eventos relevantes
+ForexFactory (dato real): ✅ historial: 488 datos reales leídos (0 nuevos)
+mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo)
+titulares: ✅ 72 titulares leídos
+
+⚠️ REGLAS DE EJECUCIÓN
+1. No abras operaciones 15 min antes de un evento 🔴.
+2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.
+3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.
+4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.
+5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.
+Esto es información, no asesoría financiera.
