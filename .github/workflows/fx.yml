@@ -1,32 +1,76 @@
-# Guardar en: .github/workflows/daily-report.yml
-name: Reporte económico diario
+# Guardar en: .github/workflows/fx.yml
+# Las horas de GitHub están en UTC. Colombia = UTC-5, así que 19:30 Colombia = 00:30 UTC del día siguiente.
+name: Sistema FX
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # 05:00 UTC = 00:00 Colombia (UTC-5)
-  workflow_dispatch:       # permite ejecutarlo manualmente para probar
+    - cron: "30 0 * * 1"         # DOMINGO 19:30 Colombia -> plan semanal
+    - cron: "30 0 * * 2-5"       # LUNES a JUEVES 19:30 Colombia -> plan diario para mañana
+    # Revisa EN SILENCIO cada 5 min (lunes a viernes). Solo envía mensaje en dos casos:
+    #   - 5 a 30 min ANTES de un evento relevante
+    #   - ~5 min DESPUÉS de un dato de impacto alto (actualización de divisas y pares)
+    - cron: "*/5 * * * 1-5"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "outlook (plan diario), weekly (plan semanal), alerts o dato (dato real a mano)"
+        default: "outlook"
+      currency:
+        description: "Solo para el modo dato: divisa (ej. AUD)"
+        default: ""
+      event:
+        description: "Solo para el modo dato: nombre del evento tal como sale en el calendario (ej. Cash Rate)"
+        default: ""
+      actual:
+        description: "Solo para el modo dato: valor real publicado (ej. 4.60)"
+        default: ""
 
 permissions:
   contents: write
 
+# Evita que dos ejecuciones escriban a la vez en reports/
+concurrency:
+  group: fx-system
+  cancel-in-progress: false
+
 jobs:
-  report:
+  run:
     runs-on: ubuntu-latest
+    env:
+      MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 0 * * 1' && 'weekly' || (github.event.schedule == '*/5 * * * 1-5' && 'alerts' || 'outlook')) }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Generar reporte
+      - name: Instalar lector de ForexFactory (cloudscraper)
+        continue-on-error: true
+        run: pip install cloudscraper
+      - name: Ejecutar
         env:
           REPORT_TZ: America/Bogota
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python daily_calendar.py
-      - name: Guardar reporte en el repositorio
+          # Fuente OPCIONAL del dato real. Si no creas estos secretos, no se usa.
+          ACTUALS_URL: ${{ secrets.ACTUALS_URL }}
+          ACTUALS_KEY: ${{ secrets.ACTUALS_KEY }}
+          # WhatsApp (opcional, no oficial)
+          GREENAPI_ID: ${{ secrets.GREENAPI_ID }}
+          GREENAPI_TOKEN: ${{ secrets.GREENAPI_TOKEN }}
+          GREENAPI_URL: ${{ secrets.GREENAPI_URL }}
+          WHATSAPP_CHAT_ID: ${{ secrets.WHATSAPP_CHAT_ID }}
+          MAX_SETUPS: "3"
+          IN_CUR: ${{ github.event.inputs.currency }}
+          IN_EVT: ${{ github.event.inputs.event }}
+          IN_ACT: ${{ github.event.inputs.actual }}
+        run: python fx_system.py "$MODE" "$IN_CUR" "$IN_EVT" "$IN_ACT"
+      - name: Guardar estado, historial y registro de resultados
         run: |
-          git config user.name "calendar-bot"
+          git config user.name "fx-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add reports/
-          git diff --staged --quiet || git commit -m "Reporte $(date -u +%F)"
-          git push
+          git add reports/ || true
+          if ! git diff --staged --quiet; then
+            git commit -m "FX $MODE $(date -u +%F-%H%M)"
+            git pull --rebase || true
+            git push
+          fi
