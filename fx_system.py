@@ -744,7 +744,7 @@ def market_scores(m):
     return sc, why
 
 
-def currency_model(scope, first_day, hs, m, geo_int):
+def currency_model(scope, cutoff, hs, m, geo_int):
     """Fuerza de cada divisa = datos por venir + datos publicados + mercado + geopolítica."""
     U, P = defaultdict(float), defaultdict(float)
     up_w, past_w = defaultdict(list), defaultdict(list)
@@ -752,7 +752,7 @@ def currency_model(scope, first_day, hs, m, geo_int):
         c = e["country"]
         if c not in CURS:
             continue
-        mult = TIME_MULT if e["_dt"].date() <= first_day else 1.0
+        mult = TIME_MULT if e["_dt"] <= cutoff else 1.0
         b = expected_bias(e)
         v = weight(e) * mult * b
         U[c] += v
@@ -840,24 +840,71 @@ def choose_pairs(results):
     return chosen
 
 
-# ---------- bloques de texto ----------
-def event_block(ev):
-    rule = ev["_rule"]
-    lines = [
-        f"🕐 {ev['_dt']:%H:%M} | {ES[ev['impact']]} | {ev['country']} — {ev_name(ev)}",
-        f"   ({ev['title']})",
-        f"   Previo: {ev.get('previous') or '-'} | Pronóstico: {ev.get('forecast') or '-'}",
-    ]
-    if rule:
-        lines.append(f"   Qué es: {rule[2]}")
-    lines.append(f"   ▲ Si sale MAYOR que el pronóstico → {phrase(ev, True)}")
-    lines.append(f"   ▼ Si sale MENOR que el pronóstico → {phrase(ev, False)}")
-    if rule and rule[5]:
-        lines.append(f"   Nota: {rule[5]}")
+# ---------- presentación simple: semáforo, pares y tarjetas por sesión ----------
+UTC = ZoneInfo("UTC")
+DIAS_LARGO = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"]
+SESIONES = [("ASIÁTICA", "19:00–01:00 COL"), ("EUROPEA", "01:00–07:30 COL"),
+            ("NUEVA YORK", "07:30–16:00 COL"), ("CIERRE ESTADOUNIDENSE Y TRANSICIÓN A ASIA", "16:00–19:00 COL")]
+RULES = ("⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · "
+         "stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. "
+         "Es información, no asesoría financiera.")
+SHORT_TEXT = ""  # versión corta para WhatsApp
+
+
+def gmt(dt):
+    return dt.astimezone(UTC)
+
+
+def tiempo(dt):
+    return f"{dt:%H:%M} COL ({gmt(dt):%H:%M} GMT)"
+
+
+def gmt_cutoff(now):
+    """Fin del día GMT en curso (si ya son las 20:00 GMT o más, el del día siguiente)."""
+    u = gmt(now)
+    d = u.date() if u.hour < 20 else u.date() + timedelta(days=1)
+    return datetime(d.year, d.month, d.day, 23, 59, 59, tzinfo=UTC).astimezone(TZ)
+
+
+def sesion_idx(dt):
+    g = gmt(dt)
+    h = g.hour + g.minute / 60
+    return 0 if h < 6 else 1 if h < 12.5 else 2 if h < 21 else 3
+
+
+def luz(s):
+    return "🟢" if s >= 3 else "🟡" if s >= 0 else "🟠" if s > -3 else "🔴"
+
+
+def prio(e, top_ids=()):
+    if weight(e) >= 8 or (id(e) in top_ids and e["impact"] == "High"):
+        return "⭐", "PRIORIDAD MÁXIMA"
+    if e["impact"] == "High":
+        return "🔶", "PRIORIDAD ALTA"
+    return "🔹", "PRIORIDAD MEDIA"
+
+
+def top_ids_by_currency(events):
+    best = {}
+    for e in events:
+        if e["impact"] == "High" and (e["country"] not in best or weight(e) > weight(best[e["country"]])):
+            best[e["country"]] = e
+    return {id(e) for e in best.values()}
+
+
+def event_card(e, top_ids=()):
+    icon, label = prio(e, top_ids)
+    rule = e["_rule"]
+    lines = [f"{icon} {label} — {e['country']}: {ev_name(e)}",
+             f"   🕐 {tiempo(e['_dt'])} · Consenso {e.get('forecast') or '-'} · Previo {e.get('previous') or '-'}"]
+    vig = (rule[2] + (" " + rule[5] if rule[5] else "")) if rule else ""
+    if vig:
+        lines.append(f"   Vigilar: {vig}")
+    lines.append(f"   ▲ Mayor que el consenso → {phrase(e, True)} · ▼ Menor → {phrase(e, False)}")
     return "\n".join(lines)
 
 
-def trigger_lines(pair, events, limit=3, with_day=False):
+def trigger_lines(pair, events, limit=2):
     """Qué hacer con el par según el resultado de cada evento clave."""
     b, q = pair[:3], pair[3:]
     evs = sorted([e for e in events if e["country"] in (b, q)],
@@ -865,58 +912,202 @@ def trigger_lines(pair, events, limit=3, with_day=False):
     lines = []
     for e in sorted(evs, key=lambda e: e["_dt"]):
         cur = e["country"]
-        good = "menor" if inv(e) else "mayor"
-        bad = "mayor" if inv(e) else "menor"
+        good, bad = ("menor", "mayor") if inv(e) else ("mayor", "menor")
         act_good, act_bad = ("COMPRA", "VENTA") if cur == b else ("VENTA", "COMPRA")
-        when = f"{DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M}" if with_day else f"{e['_dt']:%H:%M}"
-        lines.append(f"   {when} {e['title']} ({cur}): dato {good} que el pronóstico "
-                     f"→ {act_good} {pair} | dato {bad} → {act_bad} {pair}")
+        lines.append(f"   {gmt(e['_dt']):%H:%M} GMT {cur} {ev_name(e)}: {good} que el consenso → {act_good} · "
+                     f"{bad} → {act_bad}")
     return lines
 
 
-RULES = (
-    "⚠️ REGLAS DE EJECUCIÓN\n"
-    "1. No abras operaciones 15 min antes de un evento 🔴.\n"
-    "2. Espera el dato y una vela de 5 min cerrada a favor de la dirección.\n"
-    "3. Si el dato sale en línea con el pronóstico, la reacción suele ser débil: no fuerces.\n"
-    "4. Stop más allá del extremo de la vela del dato; objetivo mínimo 1:2.\n"
-    "5. Riesgo máximo 1% por operación. Evita varios pares de la misma divisa a la vez.\n"
-    "Esto es información, no asesoría financiera."
-)
-
-
-def scenario_block(r, model, events, with_day, near, m):
-    p = r["pair"]
-    act = "COMPRA" if r["d"] > 0 else "VENTA" if r["d"] < 0 else "SIN DIRECCIÓN"
-    calidad = f"calidad {r['grade']} · {r['aligned']}/4 factores alineados" if r["grade"] else "seguimiento"
-    c = r["comps"]
-    lines = [f"▪️ {p} → {act} · dirección {r['fuerza']} · {calidad} · puntaje {r['total']:+.1f}",
-             f"   [por venir {c['up']:+.1f} · publicados {c['past']:+.1f} · mercado {c['mkt']:+.1f} "
-             f"· geopolítica {c['geo']:+.1f}]"]
-    lines += [f"   Por qué: {w}" for w in r["why"]]
-    for e in (near or []):
-        if e["country"] in (p[:3], p[3:]) and e["impact"] == "High":
-            lines.append(f"   ⏳ DATO CLAVE {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} — {e['country']} "
-                         f"{ev_name(e)}: no entres antes; puede confirmar o invalidar el sesgo.")
-    q = m["q"]
-    watch = []
-    if q.get("VIX"):
-        watch.append(f"VIX {q['VIX']['last']:.1f}")
-    y = to_yield(q.get("US10Y"))
-    if y:
-        watch.append(f"US10A {y['lvl']:.2f}%")
-    if q.get("WTI"):
-        watch.append(f"WTI {q['WTI']['last']:.1f}")
-    if watch:
-        lines.append(f"   Vigila: {' · '.join(watch)} (si se mueven contra el sesgo, reduce o espera).")
-    trig = trigger_lines(p, events, limit=3, with_day=with_day)
-    if trig:
-        lines.append("   Confirma o invalida con el dato:")
-        lines += trig
+def semaforo_text(model):
+    groups = {"🟢": [], "🟡": [], "🟠": [], "🔴": []}
+    for c in sorted(model, key=lambda c: -model[c]["strength"]):
+        groups[luz(model[c]["strength"])].append(f"{c} {model[c]['strength']:+.1f}")
+    lines = [f"{k} " + " · ".join(v) for k, v in groups.items() if v]
+    lines.append("(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)")
     return "\n".join(lines)
 
 
-# ---------- estado y cambios entre planes ----------
+def porque_text(model):
+    order = sorted(model, key=lambda c: -model[c]["strength"])
+    pick = []
+    for c in order[:2] + order[-2:]:
+        if c not in pick:
+            pick.append(c)
+    rows = []
+    for c in pick:
+        why = " · ".join(t for _, t, _ in model[c]["top"][:2]) or "sin factores destacados"
+        rows.append(f"   {c}: {why}")
+    return "Por qué:\n" + "\n".join(rows)
+
+
+def pares_text(results, model, events, limit=6):
+    dirs = [r for r in sorted(results, key=lambda r: -abs(r["total"])) if r["d"]]
+    lines = []
+    for i, r in enumerate(dirs[:limit], 1):
+        b, q = r["pair"][:3], r["pair"][3:]
+        act = "COMPRA" if r["d"] > 0 else "VENTA"
+        cal = f" · calidad {r['grade']}" if r["grade"] else ""
+        lines.append(f"{i}. {r['pair']} → {act} · {r['fuerza']}{cal}")
+        lines.append(f"   {luz(model[b]['strength'])} {b} {model[b]['strength']:+.1f} vs "
+                     f"{luz(model[q]['strength'])} {q} {model[q]['strength']:+.1f}")
+        if r["grade"]:
+            lines += trigger_lines(r["pair"], events)
+    if not dirs:
+        lines.append("Ningún par tiene hoy una dirección fundamental clara: conviene esperar.")
+    sin = [r["pair"] for r in results if not r["d"]]
+    if sin:
+        lines.append("Sin dirección clara: " + ", ".join(sin))
+    return "\n".join(lines)
+
+
+def contexto_text(m, intensity, heads):
+    q, L = m["q"], []
+    v = q.get("VIX")
+    if v:
+        lvl = v["last"]
+        zona = ("calma" if lvl < 16 else "normal" if lvl < 20 else "nerviosismo" if lvl < 25
+                else "miedo alto" if lvl < 30 else "pánico")
+        ef = (" → favorece USD, JPY y CHF" if m["riskoff"] > 0.5 else
+              " → favorece AUD, NZD y CAD" if m["riskoff"] < -0.5 else "")
+        L.append(f"😨 VIX {lvl:.1f} ({v['p1'] * 100:+.1f}%) — {zona}{ef}")
+    y10, y3 = to_yield(q.get("US10Y")), to_yield(q.get("US3M"))
+    if y10:
+        s = f"🏦 Bono EE. UU. 10A {y10['lvl']:.2f}% ({y10['d1bp']:+.0f} pb hoy · {y10['d5bp']:+.0f} en 5 d)"
+        if y3:
+            s += f" · curva 10A–3M {y10['lvl'] - y3['lvl']:+.2f}"
+        s += " → " + ("apoya al USD" if m["yscore"] > 0.5 else "resta apoyo al USD" if m["yscore"] < -0.5
+                      else "sin cambio relevante")
+        L.append(s)
+        y5, y30 = to_yield(q.get("US5Y")), to_yield(q.get("US30Y"))
+        if y5 and y30:
+            L.append(f"   5A {y5['lvl']:.2f}% ({y5['d1bp']:+.0f} pb) · 30A {y30['lvl']:.2f}% ({y30['d1bp']:+.0f} pb)")
+    d = q.get("DXY")
+    if d:
+        L.append(f"💵 Índice dólar DXY {d['last']:.2f} ({d['p1'] * 100:+.2f}%)")
+    w, b = q.get("WTI"), q.get("BRENT")
+    if w:
+        s = f"🛢 Petróleo WTI {w['last']:.1f} ({w['p1'] * 100:+.1f}%)"
+        if b:
+            s += f" · Brent {b['last']:.1f} ({b['p1'] * 100:+.1f}%)"
+        s += " → " + ("favorece al CAD" if m["oscore"] > 0.5 else "resta apoyo al CAD" if m["oscore"] < -0.5
+                      else "sin cambio relevante")
+        L.append(s)
+    if not L:
+        L.append("Sin datos de mercado disponibles.")
+    L.append(f"🌍 Tensión geopolítica {['baja', 'moderada', 'alta'][intensity]}"
+             + (":" if heads else "."))
+    L += [f"   {ic} {t}" for ic, t in heads[:4]]
+    return "\n".join(L)
+
+
+def publicado_text(hs, now):
+    start = datetime(gmt(now).year, gmt(now).month, gmt(now).day, tzinfo=UTC)
+    rows = []
+    for s in sorted(hs, key=lambda s: s["dt"]):
+        if s["how"] != "real" or not (start <= s["dt"].astimezone(UTC) <= now.astimezone(UTC)):
+            continue
+        res = "mejor de lo esperado" if s["sur"] > 0 else "peor de lo esperado" if s["sur"] < 0 else "en línea"
+        rows.append(f"✅ {s['cur']}: {s['title']} → real {s['actual']} · consenso {s['forecast'] or '-'} · "
+                    f"previo {s['previous'] or '-'} → {res}")
+    return "\n".join(rows)
+
+
+def cambios_text(model, results, prev):
+    if not prev or "currencies" not in prev:
+        return "Es el primer plan guardado; en el próximo verás qué cambió y por qué."
+    cl, pl = [], []
+    for c, v in model.items():
+        old = prev["currencies"].get(c)
+        if not old:
+            continue
+        dl = v["strength"] - old["strength"]
+        if abs(dl) < 1.0:
+            continue
+        dc = {k: v["comps"][k] - old["comps"].get(k, 0) for k in COMP_NAME}
+        drv = sorted([k for k in dc if abs(dc[k]) >= 0.5], key=lambda k: -abs(dc[k]))[:2]
+        why = "; ".join(f"{COMP_NAME[k]} {dc[k]:+.1f}" for k in drv)
+        cl.append((abs(dl), f"   {luz(old['strength'])}→{luz(v['strength'])} {c} {old['strength']:+.1f} → "
+                            f"{v['strength']:+.1f}" + (f" ({why})" if why else "")))
+    for r in results:
+        old = prev.get("pairs", {}).get(r["pair"])
+        if not old:
+            continue
+        dt_ = r["total"] - old["total"]
+        if old["d"] != r["d"] or abs(dt_) >= 1.5:
+            pl.append((abs(dt_), f"   {r['pair']}: {DIR_TXT[old['d']]} {old['total']:+.1f} → "
+                                 f"{DIR_TXT[r['d']]} {r['total']:+.1f} ({r['fuerza']})"))
+    out = [f"Frente al plan del {prev.get('when', '?')}:"]
+    out.append("Divisas:\n" + ("\n".join(t for _, t in sorted(cl, reverse=True)) if cl else "   Sin cambios relevantes."))
+    out.append("Pares:\n" + ("\n".join(t for _, t in sorted(pl, reverse=True)) if pl else "   Sin cambios relevantes."))
+    return "\n".join(out)
+
+
+def section(title, paras):
+    paras = [p for p in paras if p]
+    if not paras:
+        return []
+    paras[0] = f"━━━ {title} ━━━\n{paras[0]}"
+    return paras
+
+
+def temas_text(events, m):
+    """Resumen de la semana: CPIs, tasas, empleo, bonos, crudo y VIX."""
+    grupos = {"CPIs": lambda e: cat_of(e)[0] == "Inflación" and e["impact"] == "High",
+              "Tasas": lambda e: cat_of(e)[0] == "Tasas de interés" and ev_name(e) != "Discurso de banco central",
+              "Empleo": lambda e: cat_of(e)[0] in ("Empleo / nóminas", "Empleo", "Desempleo") and e["impact"] == "High"}
+    lines = []
+    for nombre, f in grupos.items():
+        seen, items = set(), []
+        for e in sorted(events, key=lambda e: e["_dt"]):
+            k = (e["country"], DIAS[gmt(e["_dt"]).weekday()])
+            if f(e) and k not in seen:
+                seen.add(k)
+                items.append(f"{e['country']} ({k[1]})")
+        if items:
+            lines.append(f"   {nombre}: " + " · ".join(items))
+    q = m["q"]
+    y = to_yield(q.get("US10Y"))
+    if y:
+        lines.append(f"   Bonos: US10A {y['lvl']:.2f}% ({y['d5bp']:+.0f} pb en 5 d)")
+    if q.get("WTI"):
+        lines.append(f"   Crudo: WTI {q['WTI']['last']:.1f} ({q['WTI']['p5'] * 100:+.1f}% en 5 d) "
+                     f"{'↑' if q['WTI']['p5'] > 0 else '↓'}")
+    if q.get("VIX"):
+        lines.append(f"   VIX: {q['VIX']['last']:.1f} ({q['VIX']['p5'] * 100:+.1f}% en 5 d)")
+    return "\n".join(lines) or "Sin temas destacados."
+
+
+def semana_paras(events):
+    by = defaultdict(list)
+    for e in events:
+        by[gmt(e["_dt"]).date()].append(e)
+    paras = []
+    for d in sorted(by):
+        items = sorted(by[d], key=lambda e: (-weight(e), e["_dt"]))[:10]
+        rows = [f"{prio(e)[0]} {tiempo(e['_dt'])} · {e['country']} {ev_name(e)} "
+                f"(cons {e.get('forecast') or '-'} · prev {e.get('previous') or '-'})"
+                for e in sorted(items, key=lambda e: e["_dt"])]
+        paras.append(f"{DIAS_LARGO[d.weekday()]} {d:%d/%m}\n" + "\n".join(rows))
+    return paras or ["Sin eventos relevantes: semana de baja volatilidad esperada."]
+
+
+def sesiones_paras(window):
+    if not window:
+        return ["Sin eventos relevantes en este día: baja volatilidad esperada."]
+    top = top_ids_by_currency(window)
+    paras = []
+    for idx, (nombre, horas) in enumerate(SESIONES):
+        evs = sorted([e for e in window if sesion_idx(e["_dt"]) == idx], key=lambda e: e["_dt"])
+        if not evs:
+            continue
+        cards = [event_card(e, top) for e in evs]
+        cards[0] = f"━━━ SESIÓN {nombre} ({horas}) ━━━\n{cards[0]}"
+        paras += cards
+    return paras
+
+
+# ---------- estado ----------
 def load_state():
     return load_json(STATE_FILE, None)
 
@@ -924,8 +1115,7 @@ def load_state():
 def make_state(model, results, kind, setups):
     return {"when": datetime.now(TZ).strftime("%d/%m %H:%M"), "plan": kind,
             "currencies": {c: {"strength": round(v["strength"], 2),
-                               "comps": {k: round(x, 2) for k, x in v["comps"].items()},
-                               "top": {k: (v["why"][k][0][1] if v["why"][k] else "") for k in COMP_NAME}}
+                               "comps": {k: round(x, 2) for k, x in v["comps"].items()}}
                            for c, v in model.items()},
             "pairs": {r["pair"]: {"total": r["total"], "d": r["d"], "grade": r["grade"],
                                   "fuerza": r["fuerza"]} for r in results},
@@ -936,44 +1126,9 @@ def save_state(model, results, kind, chosen):
     data = make_state(model, results, kind,
                       [{"pair": r["pair"], "d": r["d"], "grade": r["grade"]} for r in chosen if r["grade"]])
     save_json(STATE_FILE, data)
-    save_json(LIVE_FILE, data)   # el estado en vivo parte del último plan
+    save_json(LIVE_FILE, data)
 
 
-def changes_paras(model, results, prev):
-    if not prev or "currencies" not in prev:
-        return ["Es el primer plan guardado; desde el próximo verás cómo cambió cada divisa y cada par, y por qué."]
-    head = f"Comparado con el plan del {prev.get('when', '?')}:"
-    cur_lines, deltas = [], {}
-    for c, v in model.items():
-        old = prev["currencies"].get(c)
-        if not old:
-            continue
-        deltas[c] = v["strength"] - old["strength"]
-        if abs(deltas[c]) < 1.0:
-            continue
-        dc = {k: v["comps"][k] - old["comps"].get(k, 0) for k in COMP_NAME}
-        drivers = sorted([k for k in dc if abs(dc[k]) >= 0.5], key=lambda k: -abs(dc[k]))[:2]
-        why = "; ".join(f"{COMP_NAME[k]} {dc[k]:+.1f}" + (f" ({v['why'][k][0][1]})" if v["why"][k] else "")
-                        for k in drivers) or "ajustes menores"
-        cur_lines.append((abs(deltas[c]),
-                          f"   {c}: {old['strength']:+.1f} → {v['strength']:+.1f} ({deltas[c]:+.1f}) "
-                          f"{strength_tag(v['strength'])} — {why}"))
-    pair_lines = []
-    for r in results:
-        old = prev.get("pairs", {}).get(r["pair"])
-        if not old:
-            continue
-        dtot = r["total"] - old["total"]
-        if old["d"] != r["d"] or abs(dtot) >= 1.5 or old["grade"] != r["grade"]:
-            b, q = r["pair"][:3], r["pair"][3:]
-            motivo = f"{b} {deltas.get(b, 0):+.1f} y {q} {deltas.get(q, 0):+.1f} en fuerza"
-            pair_lines.append((abs(dtot),
-                               f"   {r['pair']}: {DIR_TXT[old['d']]} {old['total']:+.1f} ({old.get('fuerza', '-')}, "
-                               f"calidad {old['grade'] or '-'}) → {DIR_TXT[r['d']]} {r['total']:+.1f} "
-                               f"({r['fuerza']}, calidad {r['grade'] or '-'}) — {motivo}"))
-    cur_txt = "\n".join(t for _, t in sorted(cur_lines, reverse=True)) or "   Sin cambios relevantes."
-    par_txt = "\n".join(t for _, t in sorted(pair_lines, reverse=True)) or "   Sin cambios relevantes."
-    return [f"{head}\n💱 DIVISAS (fuerza y por qué):\n{cur_txt}", f"📊 PARES (sesgo y fuerza):\n{par_txt}"]
 
 
 # ---------- registro automático de resultados ----------
@@ -1115,178 +1270,74 @@ def results_text(data):
     return "\n".join(lines)
 
 
-# ---------- secciones del plan ----------
-def section(title, paras):
-    paras = [p for p in paras if p]
-    if not paras:
-        return []
-    paras[0] = f"━━━ {title} ━━━\n{paras[0]}"
-    return paras
-
-
-def strength_paras(model, n_hist):
-    lines = []
-    for i, c in enumerate(sorted(model, key=lambda c: -model[c]["strength"]), 1):
-        v = model[c]
-        k = v["comps"]
-        why = " · ".join(t for _, t, _ in v["top"][:3]) or "sin factores destacados"
-        lines.append(f"{i}. {c} {v['strength']:+.1f} {strength_tag(v['strength'])}\n"
-                     f"   [por venir {k['up']:+.1f} · publicados {k['past']:+.1f} · mercado {k['mkt']:+.1f} "
-                     f"· geo {k['geo']:+.1f}]\n   Por qué: {why}")
-    note = (f"Historial: {n_hist} datos publicados con resultado (✅ sorpresa positiva, ❌ negativa)."
-            if n_hist else "Datos publicados: historial en construcción (el calendario gratuito no trae el "
-                           "dato real; se infiere del 'previo' del siguiente lanzamiento y se llena con los días).")
-    return ["\n".join(lines), note + "\n⚡ = dato de hoy/mañana, con peso x2.5."]
-
-
-def fundamentals_paras(scope, hs):
-    by = defaultdict(list)
-    for e in scope:
-        if e["country"] in CURS:
-            by[e["country"]].append(e)
-    pubs = defaultdict(list)
-    for s in sorted(hs, key=lambda s: s["age"]):
-        pubs[s["cur"]].append(s)
-    paras = []
-    for cur in sorted(set(by) | set(pubs), key=lambda c: c):
-        rows = [f"💱 {cur}"]
-        for e in sorted(by[cur], key=lambda e: (-weight(e), e["_dt"]))[:4]:
-            b = expected_bias(e)
-            arrow = "↑ mejora" if b > 0 else "↓ deterioro" if b < 0 else "→ sin cambio"
-            rows.append(f"   ⏭ {cat_of(e)[0]}: {ev_name(e)} ({DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M}) "
-                        f"prev {e.get('previous') or '-'} → pron {e.get('forecast') or '-'} · {arrow}")
-        for s in pubs[cur][:3]:
-            rows.append(f"   ✔ Publicado: {s['title']} {s['actual']} vs pron {s['forecast']} "
-                        f"{'✅ mejor' if s['sur'] > 0 else '❌ peor'} ({s['how']})")
-        paras.append("\n".join(rows))
-    return paras or ["Sin eventos fundamentales relevantes en el periodo."]
-
-
-def agenda_paras(events):
-    events = [e for e in events if e["country"] in CURS]
-    if not events:
-        return ["Sin eventos relevantes en el periodo: baja volatilidad esperada."]
-    by_day = defaultdict(list)
-    for e in events:
-        by_day[e["_dt"].date()].append(e)
-    paras = []
-    for d in sorted(by_day):
-        top = sorted(by_day[d], key=lambda e: (-weight(e), e["_dt"]))[:8]
-        rows = [f"   {e['_dt']:%H:%M} {'🔴' if e['impact'] == 'High' else '🟠'} {e['country']} "
-                f"{e['title']} (prev {e.get('previous') or '-'} | pron {e.get('forecast') or '-'})"
-                for e in sorted(top, key=lambda e: e["_dt"])]
-        paras.append(f"{DIAS[d.weekday()]} {d:%d/%m}\n" + "\n".join(rows))
-    return paras
-
-
-def next_trading_day(now):
-    d = now.date() + timedelta(days=1)
-    while d.weekday() >= 5:
-        d += timedelta(days=1)
-    return d
-
-
-SHORT_TEXT = ""  # versión corta para WhatsApp
-
-
+# ---------- planes: semanal (domingo) y diario ----------
 def build_plan(kind):
     global SHORT_TEXT
     now = datetime.now(TZ)
+    u = gmt(now)
     allev = load_events(("this", "next"))
-    hist, changed = update_history(allev)
-    if changed:
-        save_json(HISTORY_FILE, hist)
-    hist = ff_backfill(hist, now)       # datos reales de las últimas semanas desde ForexFactory
+    hist, _ = update_history(allev)
+    hist = ff_backfill(hist, now)          # datos reales de las últimas semanas desde ForexFactory
     save_json(HISTORY_FILE, hist)
     hs = history_surprises(hist, now)
-    monday = (now - timedelta(days=now.weekday())).date()
 
     if kind == "weekly":
-        start = ((now + timedelta(days=1)) if now.weekday() == 6
-                 else (now + timedelta(days=7 - now.weekday()))).date()
+        start = u.date() if u.weekday() == 0 else u.date() + timedelta(days=(7 - u.weekday()) % 7 or 7)
         end = start + timedelta(days=4)
-        scope = [e for e in allev if start <= e["_dt"].date() <= end]
-        agenda_ev, trig_ev, with_day, first_day = scope, scope, True, start
-        near = [e for e in scope if e["_dt"].date() <= start]
-        title = f"📆 PLAN SEMANAL — {start:%d/%m} al {end:%d/%m/%Y} ({TZ.key})"
-        agenda_title = "🗓 AGENDA DE LA SEMANA"
+        cutoff = datetime(start.year, start.month, start.day, 23, 59, 59, tzinfo=UTC).astimezone(TZ)
+        scope = [e for e in allev if e["_dt"] > now and e["country"] in CURS
+                 and start <= gmt(e["_dt"]).date() <= end]
+        window = scope
+        title = f"📆 PLAN SEMANAL — semana del {start:%d/%m} al {end:%d/%m}"
     else:
-        nd = next_trading_day(now)
-        week_end = max(monday + timedelta(days=4), nd)
-        scope = [e for e in allev if e["_dt"] > now and e["_dt"].date() <= week_end]
-        agenda_ev = [e for e in scope if e["_dt"].date() <= nd]
-        trig_ev, near, with_day, first_day = agenda_ev, agenda_ev, False, nd
-        title = f"📋 PLAN DIARIO — para el {DIAS[nd.weekday()]} {nd:%d/%m/%Y} ({TZ.key})"
-        agenda_title = "🗓 PRÓXIMAS HORAS (hasta el cierre de mañana)"
+        cutoff = gmt_cutoff(now)
+        day = cutoff.astimezone(UTC).date()
+        fri = max(u.date() + timedelta(days=(4 - u.weekday()) % 7), day)
+        scope = [e for e in allev if e["_dt"] > now and e["country"] in CURS and gmt(e["_dt"]).date() <= fri]
+        window = [e for e in scope if e["_dt"] <= cutoff]
+        title = f"📋 PLAN DEL DÍA — {DIAS_LARGO[day.weekday()]} {day:%d/%m}"
 
     m = market_snapshot()
     intensity, heads = geopolitics()
-    model = currency_model(scope, first_day, hs, m, intensity)
+    model = currency_model(scope, cutoff, hs, m, intensity)
     results = [evaluate_pair(p, model) for p in PAIRS if p[:3] in model and p[3:] in model]
     results.sort(key=rank_key)
     chosen = choose_pairs(results)
     prev = load_state()
-
     data = evaluate_signals(now)
     log_signals(chosen, kind, now)
 
-    # --- resumen ---
-    setups = [r for r in chosen if r["grade"]]
-    res = []
+    head = f"{title}\nHora de Colombia (GMT entre paréntesis) · actualizado {now:%d/%m %H:%M}"
+    warn = []
     if not str(STATUS.get(FF_KEY, "")).startswith("✅"):
-        res.append(f"⚠️ No pude leer los datos reales de ForexFactory: {STATUS.get(FF_KEY, 'sin respuesta')}. "
-                   "La fuerza usa solo pronósticos y lo inferido del historial.")
-    if setups:
-        res.append("🎯 Pares con dirección fundamental más clara:")
-        for i, r in enumerate(setups, 1):
-            res.append(f"   {i}. {r['pair']} → {'COMPRA' if r['d'] > 0 else 'VENTA'} · {r['fuerza']} · "
-                       f"calidad {r['grade']} · {r['aligned']}/4 factores · {r['total']:+.1f}")
+        warn = [f"⚠️ No pude leer los datos reales de ForexFactory: {STATUS.get(FF_KEY, 'sin respuesta')}. "
+                "La fuerza usa solo consensos y el historial."]
+    parts = [head] + warn
+    parts += section("🚦 FUERZA DE LAS DIVISAS", [semaforo_text(model), porque_text(model)])
+    parts += section("🎯 PARES — DIRECCIÓN FUNDAMENTAL", [pares_text(results, model, window)])
+    SHORT_TEXT = "\n\n".join(parts)
+    parts += section("🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR", [cambios_text(model, results, prev)])
+    parts += section("🌍 CONTEXTO DE MERCADO", [contexto_text(m, intensity, heads)])
+    if kind == "weekly":
+        parts += section("🧭 TEMAS DE LA SEMANA", [temas_text(window, m)])
+        parts += section("🗓 AGENDA POR DÍA (días en GMT)", semana_paras(window))
     else:
-        res.append("🎯 Ningún par tiene hoy una dirección clara (datos, mercado y geopolítica alineados). "
-                   "Conviene esperar o reducir el riesgo.")
-    key_events = sorted(sorted([e for e in agenda_ev if e["country"] in CURS],
-                               key=lambda e: -weight(e))[:4], key=lambda e: e["_dt"])
-    if key_events:
-        res.append("⚠️ Eventos clave:")
-        res += [f"   {DIAS[e['_dt'].weekday()]} {e['_dt']:%H:%M} {e['country']} — {ev_name(e)}"
-                for e in key_events]
-    ranked = sorted(model, key=lambda c: -model[c]["strength"])
-    res.append(f"💪 Más fuerte: {ranked[0]} ({model[ranked[0]]['strength']:+.1f}) · "
-               f"más débil: {ranked[-1]} ({model[ranked[-1]]['strength']:+.1f})")
-    res.append(f"🌍 Geopolítica: tensión {['baja', 'moderada', 'alta'][intensity]}.")
+        pub = publicado_text(hs, now)
+        if pub:
+            parts += section("✅ YA PUBLICADO HOY", [pub])
+        parts += sesiones_paras(window)
+
     closed = [x for x in data if x["status"] in ("win", "loss", "expired")]
     if closed:
         wr = sum(1 for x in closed if x["res"] > 0) / len(closed) * 100
-        res.append(f"📒 Registro: {len(closed)} setups cerrados · acierto {wr:.0f}% · "
-                   f"{sum(x['res'] for x in closed) / len(closed):+.2f}R promedio.")
-    res.append("ℹ️ La calidad (A/B) mide cuántos factores coinciden; no es una probabilidad "
-               "estadística ni está validada con datos históricos.")
-
-    resumen = section("📌 RESUMEN", ["\n".join(res)])
-    cambios = section("🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR", changes_paras(model, results, prev))
-    fuerza = section("💪 FUERZA FUNDAMENTAL DE CADA DIVISA (de más fuerte a más débil)",
-                     strength_paras(model, len(hs)))
-    if chosen:
-        esc = section("🎯 ESCENARIOS (pares más claros)",
-                      [scenario_block(r, model, trig_ev, with_day, near, m) for r in chosen])
+        reg = (f"📒 Registro: {len(closed)} setups cerrados · acierto {wr:.0f}% · "
+               f"{sum(x['res'] for x in closed) / len(closed):+.2f}R promedio.")
     else:
-        esc = section("🎯 ESCENARIOS", ["Hoy no hay pares con dirección clara: no se generan escenarios."])
-    tabla = section("🧭 DIRECCIÓN Y FUERZA DE TODOS LOS PARES", [
-        "\n".join(f"{r['pair']}  {r['label']} {r['fuerza']}  {r['total']:+.1f}  calidad {r['grade'] or '-'}  "
-                  f"[venir {r['comps']['up']:+.1f} · publ {r['comps']['past']:+.1f} · "
-                  f"merc {r['comps']['mkt']:+.1f} · geo {r['comps']['geo']:+.1f}]" for r in results)])
-    mercado = section("📈 MERCADO: VIX, BONOS, DÓLAR Y PETRÓLEO", ["\n".join(m["lines"])])
-    fund = section("💱 FUNDAMENTALES POR DIVISA (por venir ⏭ y publicados ✔)", fundamentals_paras(scope, hs))
-    agenda = section(agenda_title, agenda_paras(agenda_ev))
-    registro = section("📒 REGISTRO DE RESULTADOS", [results_text(data)])
-    geo = section("🌍 GEOPOLÍTICA", [geo_text(intensity, heads)])
-    estado = section("⚙️ ESTADO DE LAS FUENTES", ["\n".join(f"{k}: {v}" for k, v in STATUS.items())])
-
-    parts_out = [title] + resumen + cambios + fuerza + esc
-    SHORT_TEXT = "\n\n".join(parts_out)
-    parts_out += tabla + mercado + fund + agenda + registro + geo + estado + [RULES]
+        reg = "📒 Registro: aún sin setups cerrados (se evalúan a 24 h / 5 días)."
+    fuentes = "⚙️ Fuentes: " + " | ".join(f"{k}: {v}" for k, v in STATUS.items())
+    parts += [reg + "\n" + fuentes, RULES]
     save_state(model, results, kind, chosen)
-    return "\n\n".join(parts_out)
+    return "\n\n".join(parts)
 
 
 def weekly():
@@ -1297,7 +1348,7 @@ def outlook():
     return build_plan("outlook")
 
 
-# ---------- alertas antes del dato y reacción después del dato ----------
+# ---------- alertas antes del dato y actualización después del dato ----------
 def setup_lines(e, setups, higher=None):
     """Cómo afecta el dato a los setups activos del último plan."""
     cur, rows = e["country"], []
@@ -1376,8 +1427,8 @@ def find_actual(e, web, api):
 
 
 def reaction_message(items, now):
-    """Actualización completa ~5 min después de un dato relevante: fuerza de CADA divisa y sesgo
-    de CADA par, antes → ahora. items = lista de (evento, dato real o None, fuente) de la misma hora."""
+    """Actualización ~5 min después de un dato relevante: cómo quedan TODAS las divisas y TODOS los pares.
+    items = lista de (evento, dato real o None, fuente) de la misma hora."""
     fmt_d = "%Y-%m-%dT%H:%M"
     hist = load_json(HISTORY_FILE, {})
     for e, actual, _ in items:
@@ -1388,27 +1439,26 @@ def reaction_message(items, now):
     save_json(HISTORY_FILE, hist)
 
     curs = sorted({e["country"] for e, _, _ in items})
-    out = [f"📊 DATO PUBLICADO — {', '.join(curs)} ({now:%H:%M})"]
+    out = [f"✅ PUBLICADO — {', '.join(curs)} ({now:%H:%M} COL)"]
     missing = False
     for e, actual, src in items:
-        base = f"   • {e['country']} {ev_name(e)} ({e['title']})"
+        base = f"• {e['country']} · {ev_name(e)}:"
         if not actual:
-            out.append(f"{base}: valor real no disponible")
+            out.append(f"{base} valor real no disponible")
             missing = True
             continue
         a, f = num(actual), num(e.get("forecast"))
-        line = f"{base}: real {actual} vs pron {e.get('forecast') or '-'} (previo {e.get('previous') or '-'}) [{src}]"
+        out.append(f"{base} real {actual} · consenso {e.get('forecast') or '-'} · previo {e.get('previous') or '-'}"
+                   f" [{src}]")
         if a is not None and f is not None and a != f:
-            line += f" → {'MAYOR' if a > f else 'MENOR'}: {phrase(e, a > f)}"
+            out.append(f"   → {'MAYOR' if a > f else 'MENOR'} que el consenso: {phrase(e, a > f)}")
         elif a is not None and f is not None:
-            line += " → en línea con el pronóstico"
-        out.append(line)
+            out.append("   → en línea con el consenso")
     if missing:
         out.append(f"ℹ️ No pude leer el valor real en ForexFactory ({STATUS.get(FF_KEY, 'sin respuesta')}). "
-                   "Se asume que salió como se esperaba y la actualización recoge la reacción del mercado. "
-                   "Para escribirlo a mano: Actions → Sistema FX → Run workflow → modo «dato».")
+                   "Se asume que salió como se esperaba. Para escribirlo: Actions → Sistema FX → Run workflow "
+                   "→ modo «dato».")
 
-    # --- recalcular el modelo con lo publicado hasta ahora ---
     allev = load_events(("this", "next"), required=False)
     hs = history_surprises(hist, now)
     for e, actual, _ in items:   # dato escrito a mano antes de la hora oficial: cuenta igualmente
@@ -1421,45 +1471,44 @@ def reaction_message(items, now):
             hs.append({"cur": e["country"], "title": ev_name(e), "w": weight(e), "sur": sur, "trend": tr,
                        "age": 0.0, "decay": 1.0, "actual": str(actual), "forecast": e.get("forecast") or "",
                        "previous": e.get("previous") or "", "how": "real", "dt": now})
-    first_day = next_trading_day(now)
-    monday = (now - timedelta(days=now.weekday())).date()
-    week_end = max(monday + timedelta(days=4), first_day)
+    u = gmt(now)
+    fri = max(u.date() + timedelta(days=(4 - u.weekday()) % 7), u.date())
     scope = []
-    for x in allev:   # eventos de hoy (ya publicados o no) y siguientes; el real sustituye al pronóstico
-        if x["country"] not in CURS or not (now.date() <= x["_dt"].date() <= week_end):
+    for x in allev:
+        if x["country"] not in CURS or not (u.date() <= gmt(x["_dt"]).date() <= fri):
             continue
-        known = hist.get(f"{x['country']}|{x['title']}", {}).get(x["_dt"].strftime(fmt_d), {}).get("a")
-        if known:   # ya publicado: lo cuenta el historial (sorpresa + tendencia), no se duplica
-            continue
+        if hist.get(f"{x['country']}|{x['title']}", {}).get(x["_dt"].strftime(fmt_d), {}).get("a"):
+            continue   # ya publicado: lo cuenta el historial (sorpresa + tendencia)
         scope.append(x)
     m = market_snapshot()
     intensity, _ = geopolitics(translate=False)
-    model = currency_model(scope, first_day, hs, m, intensity)
+    model = currency_model(scope, gmt_cutoff(now), hs, m, intensity)
     results = [evaluate_pair(p, model) for p in PAIRS if p[:3] in model and p[3:] in model]
     results.sort(key=rank_key)
 
     live = load_json(LIVE_FILE, None) or load_state() or {}
     old_c, old_p = live.get("currencies", {}), live.get("pairs", {})
 
-    out.append("💪 FUERZA DE CADA DIVISA (antes → ahora):")
-    for i, c in enumerate(sorted(model, key=lambda c: -model[c]["strength"]), 1):
+    out.append("🚦 CÓMO QUEDAN LAS DIVISAS (antes → ahora)")
+    for c in sorted(model, key=lambda c: -model[c]["strength"]):
         n = model[c]["strength"]
         o = old_c.get(c, {}).get("strength")
         mark = "" if o is None or abs(n - o) < 0.5 else (" ▲" if n > o else " ▼")
-        out.append(f"   {i}. {c} {f'{o:+.1f} → ' if o is not None else ''}{n:+.1f} {strength_tag(n)}{mark}")
-    for c in sorted(model, key=lambda c: -abs(model[c]["strength"] - old_c.get(c, {}).get("strength", 0))):
-        o = old_c.get(c, {}).get("strength")
-        if c in curs or (o is not None and abs(model[c]["strength"] - o) >= 1.0):
+        out.append(f"   {luz(n)} {c} {f'{o:+.1f} → ' if o is not None else ''}{n:+.1f}{mark}")
+    for c in curs:
+        if c in model:
             why = " · ".join(t for _, t, _ in model[c]["top"][:3]) or "sin factores destacados"
             out.append(f"   Por qué {c}: {why}")
 
-    out.append("📊 DIRECCIÓN Y FUERZA DE CADA PAR (antes → ahora):")
-    def pair_delta(r):
+    out.append("🎯 CÓMO QUEDAN LOS PARES (antes → ahora)")
+
+    def delta(r):
         o = old_p.get(r["pair"])
         return r["total"] - o["total"] if o else 0.0
-    for r in sorted(results, key=lambda r: -abs(pair_delta(r))):
+
+    for r in sorted(results, key=lambda r: -abs(delta(r))):
         o = old_p.get(r["pair"])
-        d = pair_delta(r)
+        d = delta(r)
         antes = f"{DIR_TXT[o['d']]} {o['total']:+.1f} → " if o else ""
         favor = f" · favorece {'COMPRA' if d > 0 else 'VENTA'}" if abs(d) >= 0.5 else ""
         out.append(f"   {r['pair']}: {antes}{DIR_TXT[r['d']]} {r['total']:+.1f} ({r['fuerza']}){favor}")
@@ -1486,12 +1535,9 @@ def reaction_message(items, now):
             rows.append(setup_lines(dict(e, actual=str(actual)), setups, a > f))
     rows = [r for r in rows if r]
     by_pair = {r["pair"]: r for r in results}
-    warn = []
-    for st in setups:
-        r = by_pair.get(st["pair"])
-        if r and r["d"] != st["d"]:
-            warn.append(f"   ⚠️ {st['pair']}: tu setup de {'COMPRA' if st['d'] > 0 else 'VENTA'} ya no tiene "
-                        f"respaldo fundamental (ahora {DIR_TXT[r['d']]} {r['total']:+.1f}).")
+    warn = [f"   ⚠️ {st['pair']}: tu setup de {'COMPRA' if st['d'] > 0 else 'VENTA'} ya no tiene respaldo "
+            f"fundamental (ahora {DIR_TXT[by_pair[st['pair']]['d']]} {by_pair[st['pair']]['total']:+.1f})."
+            for st in setups if st["pair"] in by_pair and by_pair[st["pair"]]["d"] != st["d"]]
     if rows or warn:
         out.append("Tus setups:" + "".join(rows))
         out += warn
@@ -1520,8 +1566,8 @@ def manual(cur, kw, val):
 def alerts():
     """Se ejecuta cada 5 min, pero solo envía mensaje en dos casos:
     ANTES: aviso 5-30 min antes de cada evento relevante.
-    DESPUÉS: ~5 min tras un dato de impacto ALTO, actualización de la fuerza de cada divisa y
-    el sesgo de cada par. Cada mensaje se envía una sola vez."""
+    DESPUÉS: ~5 min tras un dato de impacto ALTO, cómo quedan todas las divisas y todos los pares.
+    Cada mensaje se envía una sola vez."""
     now = datetime.now(TZ)
     hist = load_json(HISTORY_FILE, {})
     if hist:  # filtro rápido sin red: ¿hay algún evento conocido entre -50 y +30 min?
@@ -1543,15 +1589,14 @@ def alerts():
     cutoff = (now - timedelta(days=3)).isoformat()
     sent = {k: v for k, v in load_json(ALERTS_FILE, {}).items() if v >= cutoff}
     setups = (load_json(LIVE_FILE, None) or load_state() or {}).get("setups", [])
-    has_source = bool(ACTUALS_URL and ACTUALS_KEY)
-    react_all = os.getenv("REACT_IMPACT", "High") == "Medium"   # "Medium" incluye también datos clave de impacto medio
+    react_all = os.getenv("REACT_IMPACT", "High") == "Medium"
     web, api, msgs, due = None, None, [], defaultdict(list)
     for e in events:
         key = f"{e['country']}|{e['title']}|{e['date']}"
         mins = (e["_dt"] - now).total_seconds() / 60
         if 5 < mins <= 30 and key + "|pre" not in sent:
-            msgs.append(f"⏰ EN {mins:.0f} MIN\n{event_block(e)}{setup_lines(e, setups)}\n"
-                        f"   👉 No abras operaciones; define stop/objetivo antes del dato.")
+            msgs.append(f"⏰ EN {mins:.0f} MIN\n{event_card(e, top_ids_by_currency(events))}"
+                        f"{setup_lines(e, setups)}\n   👉 No abras operaciones; define stop y objetivo antes del dato.")
             sent[key + "|pre"] = now.isoformat()
         if -45 <= mins <= -4 and key + "|react" not in sent and (e["impact"] == "High" or react_all):
             due[e["date"]].append(e)
@@ -1559,10 +1604,7 @@ def alerts():
         mins = (evs[0]["_dt"] - now).total_seconds() / 60
         if web is None:
             web, api = web_actuals(now), provider_actuals(now)
-        items = []
-        for e in evs:
-            actual, src = find_actual(e, web, api)
-            items.append((e, actual, src))
+        items = [(e,) + find_actual(e, web, api) for e in evs]
         if mins > -12 and any(not a for _, a, _ in items):
             continue   # da unos minutos más: ForexFactory puede tardar en mostrar el valor
         msgs.append(reaction_message(items, now))
@@ -1571,6 +1613,8 @@ def alerts():
     if msgs:
         save_json(ALERTS_FILE, sent)
     return "\n\n".join(msgs)
+
+
 
 
 # ---------- envío ----------
