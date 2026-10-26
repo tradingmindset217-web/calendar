@@ -1,0 +1,109 @@
+📆 PLAN SEMANAL — semana del 26/10 al 30/10
+Hora de Colombia (GMT entre paréntesis) · actualizado 25/10 20:20
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 USD +4.0
+🟡 CHF +2.2 · GBP +2.2 · JPY +1.6
+🟠 AUD -1.4 · EUR -2.1 · NZD -3.0
+🔴 CAD -4.4
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   USD: Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅
+   CHF: titulares de riesgo +2.0
+   NZD: Inflación (IPC) 0.7% vs pron 0.8% ❌ · titulares de riesgo -2.0
+   CAD: Inflación (IPC) 1.9% vs pron 2.0% ❌ · Inflación (IPC) 1.8% vs pron 1.9% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. EURUSD → VENTA · fuerte · calidad A
+   🟠 EUR -2.1 vs 🟢 USD +4.0
+   18:00 GMT USD Decisión de la Fed: mayor que el consenso → VENTA · menor → COMPRA
+   18:00 GMT USD Decisión de la Fed: mayor que el consenso → VENTA · menor → COMPRA
+2. USDCAD → COMPRA · fuerte · calidad B
+   🟢 USD +4.0 vs 🔴 CAD -4.4
+   13:45 GMT CAD Decisión de tasas: mayor que el consenso → VENTA · menor → COMPRA
+   18:00 GMT USD Decisión de la Fed: mayor que el consenso → COMPRA · menor → VENTA
+3. EURGBP → VENTA · moderada · calidad B
+   🟠 EUR -2.1 vs 🟡 GBP +2.2
+   13:15 GMT EUR Decisión de tasas: mayor que el consenso → COMPRA · menor → VENTA
+   13:15 GMT EUR Decisión de tasas: mayor que el consenso → COMPRA · menor → VENTA
+4. EURJPY → VENTA · moderada
+   🟠 EUR -2.1 vs 🟡 JPY +1.6
+5. NZDUSD → VENTA · moderada
+   🟠 NZD -3.0 vs 🟢 USD +4.0
+Sin dirección clara: USDJPY, AUDJPY, GBPUSD, USDCHF, GBPJPY, AUDUSD, GBPAUD
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 24/10 19:04:
+Divisas:
+   🔴→🟠 AUD -4.5 → -1.4 (datos por venir +4.0; mercado (VIX/bonos/petróleo) -0.9)
+   🟠→🔴 CAD -2.0 → -4.4 (mercado (VIX/bonos/petróleo) -3.6; datos por venir +1.2)
+   🔴→🟠 NZD -5.0 → -3.0 (datos por venir +2.0)
+   🟠→🟠 EUR -1.0 → -2.1 (datos por venir -2.0; mercado (VIX/bonos/petróleo) +0.9)
+Pares:
+   AUDUSD: BAJISTA -4.9 → SIN DIRECCIÓN -1.4 (débil)
+   GBPAUD: ALCISTA +3.3 → SIN DIRECCIÓN +0.6 (débil)
+   NZDUSD: BAJISTA -5.4 → BAJISTA -3.0 (moderada)
+   USDCAD: ALCISTA +3.4 → ALCISTA +5.4 (fuerte)
+   EURJPY: SIN DIRECCIÓN -1.5 → BAJISTA -3.2 (moderada)
+   EURGBP: BAJISTA -2.8 → BAJISTA -4.3 (moderada)
+   AUDJPY: BAJISTA -3.5 → SIN DIRECCIÓN -2.2 (débil)
+   USDJPY: ALCISTA +3.4 → SIN DIRECCIÓN +2.4 (débil)
+   USDCHF: ALCISTA +2.6 → SIN DIRECCIÓN +1.8 (débil)
+   GBPUSD: BAJISTA -2.6 → SIN DIRECCIÓN -1.9 (débil)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 19.5 (+2.2%) — normal
+🏦 Bono EE. UU. 10A 4.99% (+3 pb hoy · -11 en 5 d) · curva 10A–3M +0.96 → sin cambio relevante
+   5A 4.80% (+4 pb) · 30A 5.32% (+3 pb)
+💵 Índice dólar DXY 101.65 (-0.16%)
+🛢 Petróleo WTI 101.4 (-1.8%) · Brent 110.0 (-5.8%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   📰 Israel, profundamente dividido, se prepara para unas elecciones cruciales
+   🔻 Israel cerrará los cruces de Cisjordania el día de las elecciones a medida que se intensifica la represión
+   🔻 Obama ataca a Trump mientras hace campaña por los demócratas antes de las elecciones de mitad de período
+   🔻 El estado de salud del diputado australiano mejora tras un presunto ataque con coche
+
+━━━ 🧭 TEMAS DE LA SEMANA ━━━
+   CPIs: AUD (Mié) · USD (Jue)
+   Tasas: NZD (Mié) · CAD (Mié) · USD (Mié) · EUR (Jue) · JPY (Vie)
+   Bonos: US10A 4.99% (-11 pb en 5 d)
+   Crudo: WTI 101.4 (-2.2% en 5 d) ↓
+   VIX: 19.5 (-2.7% en 5 d)
+
+━━━ 🗓 AGENDA POR DÍA (días en GMT) ━━━
+MIÉRCOLES 28/10
+⭐ 19:30 COL (00:30 GMT) · AUD Inflación (IPC) (cons 0.7% · prev 0.4%)
+⭐ 19:30 COL (00:30 GMT) · AUD Inflación (IPC) (cons 4.2% · prev 4.0%)
+⭐ 19:30 COL (00:30 GMT) · AUD Inflación subyacente (media recortada) (cons 0.3% · prev 0.2%)
+⭐ 20:00 COL (01:00 GMT) · NZD Decisión de tasas (cons 3.00% · prev 2.75%)
+⭐ 20:00 COL (01:00 GMT) · NZD Decisión de tasas (cons - · prev -)
+🔶 21:00 COL (02:00 GMT) · NZD Discurso de banco central (cons - · prev -)
+⭐ 08:45 COL (13:45 GMT) · CAD Decisión de tasas (cons - · prev -)
+⭐ 13:00 COL (18:00 GMT) · USD Decisión de la Fed (cons 4.00% · prev 4.00%)
+⭐ 13:00 COL (18:00 GMT) · USD Decisión de la Fed (cons - · prev -)
+⭐ 13:30 COL (18:30 GMT) · USD Decisión de la Fed (cons - · prev -)
+
+JUEVES 29/10
+⭐ 07:30 COL (12:30 GMT) · USD Inflación PCE (cons 0.3% · prev 0.2%)
+🔶 07:30 COL (12:30 GMT) · USD PIB (cons 3.2% · prev 1.5%)
+🔹 07:30 COL (12:30 GMT) · USD PIB (cons 3.5% · prev 6.2%)
+⭐ 08:15 COL (13:15 GMT) · EUR Decisión de tasas (cons 2.65% · prev 2.65%)
+⭐ 08:15 COL (13:15 GMT) · EUR Decisión de tasas (cons - · prev -)
+🔶 08:45 COL (13:45 GMT) · EUR Discurso de banco central (cons - · prev -)
+🔹 18:30 COL (23:30 GMT) · JPY Inflación subyacente (IPC core) (cons 2.6% · prev 2.7%)
+
+VIERNES 30/10
+⭐ 21:30 COL (02:30 GMT) · JPY Decisión de tasas (cons <1.25% · prev <1.25%)
+⭐ 21:30 COL (02:30 GMT) · JPY Decisión de tasas (cons - · prev -)
+🔶 21:31 COL (02:31 GMT) · JPY BOJ Outlook Report (cons - · prev -)
+🔶 00:30 COL (05:30 GMT) · JPY Discurso de banco central (cons - · prev -)
+🔹 01:29 COL (06:29 GMT) · EUR Inflación (IPC) (cons 0.1% · prev 0.6%)
+🔹 04:00 COL (09:00 GMT) · EUR PIB (cons 0.1% · prev 0.2%)
+🔹 07:30 COL (12:30 GMT) · USD Cambio en empleo (cons 0.8% · prev 0.9%)
+🔹 07:30 COL (12:30 GMT) · CAD PIB (cons 0.2% · prev 0.0%)
+
+📒 Registro: 17 setups cerrados · acierto 18% · -0.64R promedio.
+⚙️ Fuentes: calendario: ✅ 29 eventos relevantes | ForexFactory (dato real): ✅ historial: 552 datos reales leídos (0 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 88 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
