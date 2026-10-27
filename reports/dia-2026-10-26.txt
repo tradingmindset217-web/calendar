@@ -1,0 +1,55 @@
+📋 PLAN DEL DÍA — MARTES 27/10
+Hora de Colombia (GMT entre paréntesis) · actualizado 26/10 20:17
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 USD +3.6
+🟡 CHF +2.7 · JPY +2.5 · GBP +2.3
+🟠 AUD -1.2 · EUR -1.7 · NZD -2.7
+🔴 CAD -4.6
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   USD: Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅
+   CHF: titulares de riesgo +2.0 · rendimientos EE. UU. +0.5
+   NZD: Inflación (IPC) 0.7% vs pron 0.8% ❌ · titulares de riesgo -2.0
+   CAD: Inflación (IPC) 1.9% vs pron 2.0% ❌ · Inflación (IPC) 1.8% vs pron 1.9% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. EURUSD → VENTA · fuerte
+   🟠 EUR -1.7 vs 🟢 USD +3.6
+2. USDCAD → COMPRA · fuerte · calidad B
+   🟢 USD +3.6 vs 🔴 CAD -4.6
+3. EURGBP → VENTA · moderada · calidad B
+   🟠 EUR -1.7 vs 🟡 GBP +2.3
+4. EURJPY → VENTA · moderada
+   🟠 EUR -1.7 vs 🟡 JPY +2.5
+5. AUDJPY → VENTA · moderada
+   🟠 AUD -1.2 vs 🟡 JPY +2.5
+Sin dirección clara: NZDUSD, GBPUSD, USDJPY, USDCHF, AUDUSD, GBPJPY, GBPAUD
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 25/10 20:21:
+Divisas:
+   Sin cambios relevantes.
+Pares:
+   AUDJPY: SIN DIRECCIÓN -2.2 → BAJISTA -3.0 (moderada)
+   NZDUSD: BAJISTA -3.0 → SIN DIRECCIÓN -2.3 (débil)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 18.4 (-5.4%) — normal
+🏦 Bono EE. UU. 10A 4.99% (-0 pb hoy · -15 en 5 d) · curva 10A–3M +0.96 → resta apoyo al USD
+   5A 4.82% (+2 pb) · 30A 5.30% (-1 pb)
+💵 Índice dólar DXY 102.11 (+0.30%)
+🛢 Petróleo WTI 101.0 (-2.2%) · Brent 109.8 (-5.9%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   📰 Lula gana su cuarto mandato en espectacular remontada electoral en Brasil
+   📰 Celebraciones en Serbia después de que el veterano gobernante Vučić perdiera las elecciones ante un movimiento de protesta liderado por estudiantes
+   🔻 Anthropic advierte sobre un 'riesgo catastrófico' para la humanidad antes de la exitosa cotización de acciones
+   🔻 Enfermera muerta en ataque mientras respondía a alerta de ébola en República Democrática del Congo
+
+Sin eventos relevantes en este día: baja volatilidad esperada.
+
+📒 Registro: 19 setups cerrados · acierto 21% · -0.52R promedio.
+⚙️ Fuentes: calendario: ✅ 29 eventos relevantes | ForexFactory (dato real): ✅ historial: 561 datos reales leídos (0 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 84 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
