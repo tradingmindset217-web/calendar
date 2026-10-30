@@ -1,0 +1,107 @@
+📋 PLAN DEL DÍA — VIERNES 30/10
+Hora de Colombia (GMT entre paréntesis) · actualizado 29/10 20:33
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟡 CHF +2.3 · GBP +1.9 · AUD +1.5 · JPY +0.7 · USD +0.6
+🟠 CAD -1.0
+🔴 EUR -4.5 · NZD -4.8
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   CHF: titulares de riesgo +2.0 · rendimientos EE. UU. +0.4
+   GBP: Inflación (IPC) 3.5% vs pron 3.4% ✅ · Ventas minoristas -0.4% vs pron -0.1% ❌
+   EUR: Inflación (IPC) Vie 02:29 ↓ ⚡ · PIB Vie 04:00 ↓ ⚡
+   NZD: Inflación (IPC) 0.7% vs pron 0.8% ❌ · Decisión de tasas 2.75% vs pron 3.00% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. EURGBP → VENTA · fuerte · calidad B
+   🔴 EUR -4.5 vs 🟡 GBP +1.9
+   07:29 GMT EUR Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+   09:00 GMT EUR PIB: mayor que el consenso → COMPRA · menor → VENTA
+2. EURUSD → VENTA · fuerte · calidad B
+   🔴 EUR -4.5 vs 🟡 USD +0.6
+   07:29 GMT EUR Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+   12:30 GMT USD Cambio en empleo: mayor que el consenso → VENTA · menor → COMPRA
+3. EURJPY → VENTA · moderada · calidad B
+   🔴 EUR -4.5 vs 🟡 JPY +0.7
+   02:30 GMT JPY Decisión de tasas: mayor que el consenso → VENTA · menor → COMPRA
+   02:30 GMT JPY Decisión de tasas: mayor que el consenso → VENTA · menor → COMPRA
+Sin dirección clara: AUDUSD, USDCHF, USDJPY, NZDUSD, AUDJPY, GBPUSD, USDCAD, GBPJPY, GBPAUD
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 28/10 20:31:
+Divisas:
+   🟢→🟡 USD +9.2 → +0.6 (datos por venir -6.3; mercado (VIX/bonos/petróleo) -2.3)
+   🟠→🟡 JPY -2.4 → +0.7 (datos por venir +3.1; mercado (VIX/bonos/petróleo) +1.4)
+   🔴→🔴 EUR -3.1 → -4.5 (datos por venir -2.0; mercado (VIX/bonos/petróleo) +0.6)
+Pares:
+   USDJPY: ALCISTA +8.7 → SIN DIRECCIÓN -1.5 (débil)
+   USDCHF: ALCISTA +7.6 → SIN DIRECCIÓN -1.7 (débil)
+   NZDUSD: BAJISTA -10.3 → SIN DIRECCIÓN -1.4 (débil)
+   GBPUSD: BAJISTA -7.5 → SIN DIRECCIÓN +1.2 (débil)
+   AUDUSD: BAJISTA -6.8 → SIN DIRECCIÓN +1.8 (débil)
+   USDCAD: ALCISTA +7.5 → SIN DIRECCIÓN -1.0 (débil)
+   EURUSD: BAJISTA -10.5 → BAJISTA -5.1 (fuerte)
+   EURJPY: SIN DIRECCIÓN -0.2 → BAJISTA -4.7 (moderada)
+   AUDJPY: ALCISTA +5.8 → SIN DIRECCIÓN +1.4 (débil)
+   GBPJPY: ALCISTA +5.1 → SIN DIRECCIÓN +0.9 (débil)
+   EURGBP: BAJISTA -4.8 → BAJISTA -6.4 (fuerte)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 17.2 (+1.7%) — normal
+🏦 Bono EE. UU. 10A 4.99% (-6 pb hoy · +4 en 5 d) · curva 10A–3M +0.99 → resta apoyo al USD
+   5A 4.80% (-7 pb) · 30A 5.33% (-3 pb)
+💵 Índice dólar DXY 101.64 (-0.39%)
+🛢 Petróleo WTI 102.7 (-0.1%) · Brent 111.5 (-3.3%) → favorece al CAD
+🌍 Tensión geopolítica alta:
+   📰 La oposición israelí acusa a Netanyahu de intentar "deslegitimar" las elecciones
+   🟢 'La ciudad está viva': una breve paz en Kherson, pero los residentes temen lo que viene después
+   🔻 Ataque con aviones no tripulados rusos a una estación de tren ucraniana mata al menos a 14 personas, dicen las autoridades
+   📰 Flávio Bolsonaro se autodenomina "líder de Brasil" tras derrota electoral
+
+━━━ SESIÓN ASIÁTICA (19:00–01:00 COL) ━━━
+⭐ PRIORIDAD MÁXIMA — JPY: Decisión de tasas
+   🕐 21:30 COL (02:30 GMT) · Consenso <1.25% · Previo <1.25%
+   Vigilar: Define el rendimiento de la divisa. Si la decisión ya estaba descontada (>85%), manda el tono de la conferencia.
+   ▲ Mayor que el consenso → JPY se FORTALECE · ▼ Menor → JPY se DEBILITA
+
+⭐ PRIORIDAD MÁXIMA — JPY: Decisión de tasas
+   🕐 21:30 COL (02:30 GMT) · Consenso - · Previo -
+   Vigilar: Define el rendimiento de la divisa. Si la decisión ya estaba descontada (>85%), manda el tono de la conferencia.
+   ▲ Mayor que el consenso → JPY se FORTALECE · ▼ Menor → JPY se DEBILITA
+
+🔶 PRIORIDAD ALTA — JPY: BOJ Outlook Report
+   🕐 21:31 COL (02:31 GMT) · Consenso - · Previo -
+   ▲ Mayor que el consenso → JPY se FORTALECE · ▼ Menor → JPY se DEBILITA
+
+🔶 PRIORIDAD ALTA — JPY: Discurso de banco central
+   🕐 00:30 COL (05:30 GMT) · Consenso - · Previo -
+   Vigilar: Puede cambiar las expectativas de tasas. Busca pistas sobre próximas subidas o bajadas. Tono duro = divisa sube.
+   ▲ Mayor que el consenso → JPY se FORTALECE · ▼ Menor → JPY se DEBILITA
+
+━━━ SESIÓN EUROPEA (01:00–07:30 COL) ━━━
+🔹 PRIORIDAD MEDIA — EUR: Inflación (IPC)
+   🕐 02:29 COL (07:29 GMT) · Consenso 0.1% · Previo 0.6%
+   Vigilar: Inflación general. Mueve las expectativas de tasas. Si hay dato core/subyacente, ese pesa más que el general.
+   ▲ Mayor que el consenso → EUR se FORTALECE · ▼ Menor → EUR se DEBILITA
+
+🔹 PRIORIDAD MEDIA — EUR: PIB
+   🕐 04:00 COL (09:00 GMT) · Consenso 0.1% · Previo 0.2%
+   Vigilar: Crecimiento de la economía. Revisa si es preliminar o final.
+   ▲ Mayor que el consenso → EUR se FORTALECE · ▼ Menor → EUR se DEBILITA
+
+━━━ SESIÓN NUEVA YORK (07:30–16:00 COL) ━━━
+🔹 PRIORIDAD MEDIA — CAD: PIB
+   🕐 07:30 COL (12:30 GMT) · Consenso 0.2% · Previo 0.0%
+   Vigilar: Crecimiento de la economía. Revisa si es preliminar o final.
+   ▲ Mayor que el consenso → CAD se FORTALECE · ▼ Menor → CAD se DEBILITA
+
+🔹 PRIORIDAD MEDIA — USD: Cambio en empleo
+   🕐 07:30 COL (12:30 GMT) · Consenso 0.8% · Previo 0.9%
+   Vigilar: Empleos creados en el mes. Junto a la tasa de desempleo forma el cuadro completo.
+   ▲ Mayor que el consenso → USD se FORTALECE · ▼ Menor → USD se DEBILITA
+
+📒 Registro: 31 setups cerrados · acierto 32% · -0.21R promedio.
+⚙️ Fuentes: calendario: ✅ 29 eventos relevantes | ForexFactory (dato real): ✅ historial: 608 datos reales leídos (2 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 70 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
