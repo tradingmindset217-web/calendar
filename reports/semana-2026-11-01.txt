@@ -1,0 +1,112 @@
+📆 PLAN SEMANAL — semana del 02/11 al 06/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 01/11 20:38
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 GBP +5.6 · USD +4.5 · CHF +3.4 · JPY +3.0
+🟡 AUD +2.6
+🟠 EUR -0.9
+🔴 CAD -4.0 · NZD -5.1
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   GBP: Inflación (IPC) 3.5% vs pron 3.4% ✅ · Decisión de tasas Jue 07:00 ↑
+   USD: Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅
+   CAD: Inflación (IPC) 1.9% vs pron 2.0% ❌ · Inflación (IPC) 1.8% vs pron 1.9% ❌
+   NZD: Inflación (IPC) 0.7% vs pron 0.8% ❌ · Decisión de tasas 2.75% vs pron 3.00% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. NZDUSD → VENTA · fuerte · calidad B
+   🔴 NZD -5.1 vs 🟢 USD +4.5
+   21:45 GMT NZD Cambio en empleo: mayor que el consenso → COMPRA · menor → VENTA
+   13:30 GMT USD Empleo (NFP): mayor que el consenso → VENTA · menor → COMPRA
+2. USDCAD → COMPRA · fuerte · calidad B
+   🟢 USD +4.5 vs 🔴 CAD -4.0
+   13:30 GMT USD Empleo (NFP): mayor que el consenso → COMPRA · menor → VENTA
+   13:30 GMT CAD Cambio en empleo: mayor que el consenso → VENTA · menor → COMPRA
+3. EURGBP → VENTA · moderada · calidad B
+   🟠 EUR -0.9 vs 🟢 GBP +5.6
+   12:00 GMT GBP Decisión de tasas: mayor que el consenso → VENTA · menor → COMPRA
+   12:00 GMT GBP Decisión de tasas: mayor que el consenso → VENTA · menor → COMPRA
+4. EURJPY → VENTA · moderada
+   🟠 EUR -0.9 vs 🟢 JPY +3.0
+5. EURUSD → VENTA · moderada
+   🟠 EUR -0.9 vs 🟢 USD +4.5
+6. GBPAUD → COMPRA · moderada
+   🟢 GBP +5.6 vs 🟡 AUD +2.6
+Sin dirección clara: GBPUSD, USDJPY, USDCHF, AUDUSD, AUDJPY
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 29/10 20:34:
+Divisas:
+   🟡→🟢 USD +0.7 → +4.5 (datos por venir +4.7; mercado (VIX/bonos/petróleo) -0.8)
+   🟡→🟢 GBP +1.9 → +5.6 (datos por venir +4.0)
+   🔴→🟠 EUR -4.5 → -0.9 (datos por venir +5.2; datos publicados -2.3)
+   🟠→🔴 CAD -1.0 → -4.0 (mercado (VIX/bonos/petróleo) -2.4; datos por venir -0.5)
+   🟡→🟢 JPY +0.7 → +3.0 (mercado (VIX/bonos/petróleo) +2.2)
+   🟡→🟡 AUD +1.5 → +2.6 (datos por venir +2.0; mercado (VIX/bonos/petróleo) -0.9)
+   🟡→🟢 CHF +2.3 → +3.4 (mercado (VIX/bonos/petróleo) +1.1)
+Pares:
+   USDCAD: SIN DIRECCIÓN -1.0 → ALCISTA +5.4 (fuerte)
+   NZDUSD: SIN DIRECCIÓN -1.4 → BAJISTA -5.6 (fuerte)
+   USDCHF: SIN DIRECCIÓN -1.7 → SIN DIRECCIÓN +1.2 (débil)
+   USDJPY: SIN DIRECCIÓN -1.5 → SIN DIRECCIÓN +1.2 (débil)
+   AUDUSD: SIN DIRECCIÓN +1.8 → SIN DIRECCIÓN -0.9 (débil)
+   GBPAUD: SIN DIRECCIÓN +0.4 → ALCISTA +3.0 (moderada)
+   EURUSD: BAJISTA -5.1 → BAJISTA -3.1 (moderada)
+   EURGBP: BAJISTA -6.4 → BAJISTA -4.6 (moderada)
+   GBPJPY: SIN DIRECCIÓN +0.9 → ALCISTA +2.7 (moderada)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 19.4 (+12.9%) — normal
+🏦 Bono EE. UU. 10A 4.93% (-6 pb hoy · -6 en 5 d) · curva 10A–3M +0.96 → resta apoyo al USD
+   5A 4.72% (-8 pb) · 30A 5.31% (-2 pb)
+💵 Índice dólar DXY 101.92 (+0.04%)
+🛢 Petróleo WTI 101.7 (-2.3%) · Brent 111.1 (-5.6%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   🔻 La aplicación de ataque aéreo de Ucrania aparentemente fue pirateada porque los usuarios recibieron una falsa amenaza de radiación, dice la Fuerza Aérea
+   🔻 Los ataques rusos cortan el suministro eléctrico a miles de personas en Ucrania mientras termina el alto el fuego en Kherson
+   🔻 Ataques israelíes en Gaza matan a ocho personas, incluido un niño, dicen hospitales
+   🔻 Francia inicia una investigación por intento de asesinato tras lanzar una bomba molotov a la policía
+
+━━━ 🧭 TEMAS DE LA SEMANA ━━━
+   Tasas: AUD (Mar) · GBP (Jue)
+   Empleo: NZD (Mar) · CAD (Vie) · USD (Vie)
+   Bonos: US10A 4.93% (-6 pb en 5 d)
+   Crudo: WTI 101.7 (-0.1% en 5 d) ↓
+   VIX: 19.4 (-0.2% en 5 d)
+
+━━━ 🗓 AGENDA POR DÍA (días en GMT) ━━━
+MARTES 03/11
+⭐ 22:30 COL (03:30 GMT) · AUD Decisión de tasas (cons 4.85% · prev 4.60%)
+⭐ 22:30 COL (03:30 GMT) · AUD Decisión de tasas (cons - · prev -)
+⭐ 22:30 COL (03:30 GMT) · AUD Decisión de tasas (cons - · prev -)
+🔶 23:30 COL (04:30 GMT) · AUD Discurso de banco central (cons - · prev -)
+🔹 02:30 COL (07:30 GMT) · CHF Inflación (IPC) (cons 0.0% · prev 0.0%)
+🔶 10:16 COL (15:16 GMT) · USD Congressional Elections (cons - · prev -)
+⭐ 16:45 COL (21:45 GMT) · NZD Cambio en empleo (cons 0.4% · prev 0.5%)
+⭐ 16:45 COL (21:45 GMT) · NZD Tasa de desempleo (cons 5.5% · prev 5.6%)
+
+MIÉRCOLES 04/11
+🔹 05:00 COL (10:00 GMT) · EUR Inflación subyacente (IPC core) (cons 2.5% · prev 2.5%)
+🔹 05:00 COL (10:00 GMT) · EUR Inflación (IPC) (cons 4.0% · prev 3.8%)
+
+JUEVES 05/11
+⭐ 07:00 COL (12:00 GMT) · GBP Decisión de tasas (cons 7-0-2 · prev 3-0-6)
+⭐ 07:00 COL (12:00 GMT) · GBP Decisión de tasas (cons 4.00% · prev 3.75%)
+🔶 07:00 COL (12:00 GMT) · GBP BOE Monetary Policy Report (cons - · prev -)
+🔶 07:00 COL (12:00 GMT) · GBP Monetary Policy Summary (cons - · prev -)
+🔶 07:30 COL (12:30 GMT) · GBP Discurso de banco central (cons - · prev -)
+
+VIERNES 06/11
+⭐ 08:30 COL (13:30 GMT) · USD Empleo (NFP) (cons 63K · prev 29K)
+⭐ 08:30 COL (13:30 GMT) · CAD Cambio en empleo (cons 14.5K · prev -68.3K)
+⭐ 08:30 COL (13:30 GMT) · CAD Tasa de desempleo (cons 6.5% · prev 6.5%)
+⭐ 08:30 COL (13:30 GMT) · USD Tasa de desempleo (cons 4.2% · prev 4.2%)
+🔶 08:30 COL (13:30 GMT) · USD Average Hourly Earnings m/m (cons 0.3% · prev 0.1%)
+🔶 11:00 COL (16:00 GMT) · JPY Discurso de banco central (cons - · prev -)
+🔶 16:45 COL (21:45 GMT) · NZD Parliamentary Elections (cons - · prev -)
+
+📒 Registro: 33 setups cerrados · acierto 36% · -0.08R promedio.
+⚙️ Fuentes: calendario: ✅ 22 eventos relevantes | ForexFactory (dato real): ✅ historial: 306 datos reales leídos (5 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 76 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
