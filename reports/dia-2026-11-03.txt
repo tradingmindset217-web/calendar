@@ -1,0 +1,86 @@
+📋 PLAN DEL DÍA — MARTES 03/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 03/11 02:08
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 GBP +5.1 · USD +4.6 · CHF +3.6
+🟡 JPY +2.7 · AUD +0.4
+🟠 EUR -1.4 · CAD -2.9
+🔴 NZD -5.7
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   GBP: Inflación (IPC) 3.5% vs pron 3.4% ✅ · Decisión de tasas Jue 07:00 ↑
+   USD: Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅
+   CAD: Inflación (IPC) 1.9% vs pron 2.0% ❌ · Inflación (IPC) 1.8% vs pron 1.9% ❌
+   NZD: Inflación (IPC) 0.7% vs pron 0.8% ❌ · Decisión de tasas 2.75% vs pron 3.00% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. NZDUSD → VENTA · fuerte · calidad A
+   🔴 NZD -5.7 vs 🟢 USD +4.6
+   21:45 GMT NZD Cambio en empleo: mayor que el consenso → COMPRA · menor → VENTA
+   21:45 GMT NZD Tasa de desempleo: menor que el consenso → COMPRA · mayor → VENTA
+2. EURGBP → VENTA · moderada · calidad B
+   🟠 EUR -1.4 vs 🟢 GBP +5.1
+3. GBPAUD → COMPRA · moderada · calidad B
+   🟢 GBP +5.1 vs 🟡 AUD +0.4
+4. USDCAD → COMPRA · moderada · calidad B
+   🟢 USD +4.6 vs 🟠 CAD -2.9
+   15:16 GMT USD Congressional Elections: mayor que el consenso → COMPRA · menor → VENTA
+5. EURUSD → VENTA · moderada · calidad B
+   🟠 EUR -1.4 vs 🟢 USD +4.6
+   15:16 GMT USD Congressional Elections: mayor que el consenso → VENTA · menor → COMPRA
+6. EURJPY → VENTA · moderada
+   🟠 EUR -1.4 vs 🟡 JPY +2.7
+Sin dirección clara: AUDJPY, USDJPY, USDCHF, GBPUSD
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 01/11 20:39:
+Divisas:
+   🟡→🟡 AUD +2.6 → +0.4 (datos por venir -2.0)
+   🔴→🟠 CAD -4.0 → -2.9 (mercado (VIX/bonos/petróleo) +1.1)
+Pares:
+   AUDUSD: SIN DIRECCIÓN -0.9 → BAJISTA -3.2 (moderada)
+   AUDJPY: SIN DIRECCIÓN +0.3 → SIN DIRECCIÓN -1.5 (débil)
+   GBPAUD: ALCISTA +3.0 → ALCISTA +4.7 (moderada)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 21.1 (+8.9%) — nerviosismo → favorece USD, JPY y CHF
+🏦 Bono EE. UU. 10A 4.89% (-3 pb hoy · -9 en 5 d) · curva 10A–3M +0.91 → resta apoyo al USD
+   5A 4.69% (-3 pb) · 30A 5.27% (-4 pb)
+💵 Índice dólar DXY 101.75 (+0.00%)
+🛢 Petróleo WTI 98.0 (+1.6%) · Brent 106.5 (+1.7%) → sin cambio relevante
+🌍 Tensión geopolítica alta:
+   🔻 Estados Unidos ataca a Irán antes de las elecciones intermedias
+   🔻 Bombardeo ruso mata a 26 personas en centro de ayuda de Ucrania, dice Kiev
+   🟢 Miles de tropas europeas ensayarán el despliegue de Ucrania en caso de paz
+   🔻 Los congeladores de tiendas en siete países europeos afectados por un ciberataque
+
+━━━ ✅ YA PUBLICADO HOY ━━━
+✅ AUD: Decisión de tasas → real 4.85% · consenso 4.85% · previo 4.60% → en línea
+
+━━━ SESIÓN EUROPEA (01:00–07:30 COL) ━━━
+🔹 PRIORIDAD MEDIA — CHF: Inflación (IPC)
+   🕐 02:30 COL (07:30 GMT) · Consenso 0.0% · Previo 0.0%
+   Vigilar: Inflación general. Mueve las expectativas de tasas. Si hay dato core/subyacente, ese pesa más que el general.
+   ▲ Mayor que el consenso → CHF se FORTALECE · ▼ Menor → CHF se DEBILITA
+
+━━━ SESIÓN NUEVA YORK (07:30–16:00 COL) ━━━
+⭐ PRIORIDAD MÁXIMA — USD: Congressional Elections
+   🕐 10:16 COL (15:16 GMT) · Consenso - · Previo -
+   ▲ Mayor que el consenso → USD se FORTALECE · ▼ Menor → USD se DEBILITA
+
+━━━ SESIÓN CIERRE ESTADOUNIDENSE Y TRANSICIÓN A ASIA (16:00–19:00 COL) ━━━
+⭐ PRIORIDAD MÁXIMA — NZD: Cambio en empleo
+   🕐 16:45 COL (21:45 GMT) · Consenso 0.4% · Previo 0.5%
+   Vigilar: Empleos creados en el mes. Junto a la tasa de desempleo forma el cuadro completo.
+   ▲ Mayor que el consenso → NZD se FORTALECE · ▼ Menor → NZD se DEBILITA
+
+⭐ PRIORIDAD MÁXIMA — NZD: Tasa de desempleo
+   🕐 16:45 COL (21:45 GMT) · Consenso 5.5% · Previo 5.6%
+   Vigilar: Salud del empleo. Más desempleo = divisa débil.
+   ▲ Mayor que el consenso → NZD se DEBILITA · ▼ Menor → NZD se FORTALECE
+
+📒 Registro: 35 setups cerrados · acierto 34% · -0.13R promedio.
+⚙️ Fuentes: calendario: ✅ 22 eventos relevantes | ForexFactory (dato real): ✅ historial: 324 datos reales leídos (1 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 79 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
