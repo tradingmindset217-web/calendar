@@ -1,0 +1,75 @@
+📋 PLAN DEL DÍA — MIÉRCOLES 04/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 04/11 01:54
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 USD +6.1 · CHF +5.8 · GBP +5.0
+🟡 JPY +2.1 · EUR +0.5
+🟠 AUD -0.7
+🔴 CAD -5.2 · NZD -6.2
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   USD: Inflación subyacente (IPC core) 2.6% vs pron 2.5% ✅ · Inflación (IPC) 3.7% vs pron 3.6% ✅
+   CHF: Inflación (IPC) 0.2% vs pron 0.0% ✅ · titulares de riesgo +2.0
+   CAD: Inflación (IPC) 1.9% vs pron 2.0% ❌ · Inflación (IPC) 1.8% vs pron 1.9% ❌
+   NZD: Tasa de desempleo 5.7% vs pron 5.5% ❌ · Cambio en empleo -0.1% vs pron 0.4% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. USDCAD → COMPRA · muy fuerte · calidad A
+   🟢 USD +6.1 vs 🔴 CAD -5.2
+2. NZDUSD → VENTA · muy fuerte · calidad A
+   🔴 NZD -6.2 vs 🟢 USD +6.1
+3. AUDUSD → VENTA · fuerte · calidad B
+   🟠 AUD -0.7 vs 🟢 USD +6.1
+4. GBPAUD → COMPRA · fuerte · calidad B
+   🟢 GBP +5.0 vs 🟠 AUD -0.7
+5. EURUSD → VENTA · moderada
+   🟡 EUR +0.5 vs 🟢 USD +6.1
+6. GBPJPY → COMPRA · moderada
+   🟢 GBP +5.0 vs 🟡 JPY +2.1
+Sin dirección clara: AUDJPY, EURJPY, GBPUSD, USDCHF
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 03/11 02:08:
+Divisas:
+   🟠→🔴 CAD -2.9 → -5.2 (mercado (VIX/bonos/petróleo) -2.4)
+   🟢→🟢 CHF +3.6 → +5.8 (datos publicados +3.0; mercado (VIX/bonos/petróleo) -0.9)
+   🟠→🟡 EUR -1.4 → +0.5 (datos por venir +1.9)
+   🟢→🟢 USD +4.6 → +6.1 (mercado (VIX/bonos/petróleo) +1.5)
+   🟡→🟠 AUD +0.4 → -0.7 (mercado (VIX/bonos/petróleo) -1.1)
+Pares:
+   USDCAD: ALCISTA +4.5 → ALCISTA +8.3 (muy fuerte)
+   AUDUSD: BAJISTA -3.2 → BAJISTA -5.8 (fuerte)
+   EURJPY: BAJISTA -3.5 → SIN DIRECCIÓN -1.2 (débil)
+   NZDUSD: BAJISTA -6.3 → BAJISTA -8.3 (muy fuerte)
+   EURGBP: BAJISTA -4.8 → BAJISTA -3.0 (moderada)
+   GBPUSD: SIN DIRECCIÓN +0.5 → SIN DIRECCIÓN -1.1 (débil)
+   USDJPY: SIN DIRECCIÓN +1.2 → ALCISTA +2.8 (moderada)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 20.8 (-1.5%) — nerviosismo → favorece USD, JPY y CHF
+🏦 Bono EE. UU. 10A 4.95% (+6 pb hoy · -4 en 5 d) · curva 10A–3M +0.93 → apoya al USD
+   5A 4.74% (+5 pb) · 30A 5.32% (+5 pb)
+💵 Índice dólar DXY 101.49 (-0.37%)
+🛢 Petróleo WTI 96.3 (+0.2%) · Brent 104.0 (+0.4%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   🔻 Siete vuelos en toda Europa son objeto de supuestas amenazas de bomba
+   🔻 "Toda esta comida ahora es inútil": montones de basura después de que los congeladores de las tiendas sufrieran un ciberataque
+   🔻 Cómo los eventos deportivos se ven afectados por el conflicto de Oriente Medio
+   🔻 Los congeladores de tiendas en siete países europeos afectados por un ciberataque
+
+━━━ SESIÓN EUROPEA (01:00–07:30 COL) ━━━
+🔹 PRIORIDAD MEDIA — EUR: Inflación subyacente (IPC core)
+   🕐 05:00 COL (10:00 GMT) · Consenso 2.5% · Previo 2.5%
+   Vigilar: Inflación sin alimentos ni energía. Alto = más alzas esperadas.
+   ▲ Mayor que el consenso → EUR se FORTALECE · ▼ Menor → EUR se DEBILITA
+
+🔹 PRIORIDAD MEDIA — EUR: Inflación (IPC)
+   🕐 05:00 COL (10:00 GMT) · Consenso 4.0% · Previo 3.8%
+   Vigilar: Inflación general. Mueve las expectativas de tasas. Si hay dato core/subyacente, ese pesa más que el general.
+   ▲ Mayor que el consenso → EUR se FORTALECE · ▼ Menor → EUR se DEBILITA
+
+📒 Registro: 39 setups cerrados · acierto 36% · -0.06R promedio.
+⚙️ Fuentes: calendario: ✅ 22 eventos relevantes | ForexFactory (dato real): ✅ historial: 339 datos reales leídos (3 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 69 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
