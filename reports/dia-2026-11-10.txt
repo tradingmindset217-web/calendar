@@ -1,0 +1,76 @@
+📋 PLAN DEL DÍA — MARTES 10/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 10/11 02:38
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 CHF +4.8
+🟡 GBP +2.2 · JPY +1.6 · AUD +1.0
+🟠 EUR -0.4 · USD -1.3
+🔴 NZD -4.5 · CAD -5.7
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   CHF: Inflación (IPC) 0.2% vs pron 0.0% ✅ · titulares de riesgo +2.0
+   GBP: Decisión de tasas 9-0-0 vs pron 7-0-2 ✅ · Inflación (IPC) 3.5% vs pron 3.4% ✅
+   NZD: Tasa de desempleo 5.7% vs pron 5.5% ❌ · Cambio en empleo -0.1% vs pron 0.4% ❌
+   CAD: Tasa de desempleo 6.7% vs pron 6.5% ❌ · Inflación (IPC) 1.9% vs pron 2.0% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. USDCHF → VENTA · fuerte · calidad A
+   🟠 USD -1.3 vs 🟢 CHF +4.8
+   13:30 GMT USD Inflación subyacente (IPC core): mayor que el consenso → COMPRA · menor → VENTA
+   13:30 GMT USD Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+2. USDJPY → VENTA · moderada
+   🟠 USD -1.3 vs 🟡 JPY +1.6
+3. GBPUSD → COMPRA · moderada
+   🟡 GBP +2.2 vs 🟠 USD -1.3
+4. AUDUSD → COMPRA · moderada
+   🟡 AUD +1.0 vs 🟠 USD -1.3
+Sin dirección clara: EURGBP, USDCAD, EURJPY, EURUSD, GBPAUD, NZDUSD, GBPJPY, AUDJPY
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 09/11 01:59:
+Divisas:
+   🟠→🟡 AUD -1.0 → +1.0 (mercado (VIX/bonos/petróleo) +2.0)
+   🔴→🔴 NZD -6.5 → -4.5 (mercado (VIX/bonos/petróleo) +2.0)
+   🟢→🟢 CHF +6.7 → +4.8 (mercado (VIX/bonos/petróleo) -2.0)
+   🟢→🟡 JPY +3.5 → +1.6 (mercado (VIX/bonos/petróleo) -1.9)
+   🟡→🟠 USD +0.7 → -1.3 (mercado (VIX/bonos/petróleo) -1.9)
+   🔴→🔴 CAD -6.8 → -5.7 (mercado (VIX/bonos/petróleo) +1.0)
+   🟡→🟡 GBP +1.2 → +2.2 (mercado (VIX/bonos/petróleo) +1.0)
+Pares:
+   NZDUSD: BAJISTA -3.2 → SIN DIRECCIÓN +0.8 (débil)
+   AUDUSD: SIN DIRECCIÓN -0.7 → ALCISTA +3.3 (moderada)
+   GBPUSD: SIN DIRECCIÓN +0.5 → ALCISTA +3.5 (moderada)
+   GBPJPY: SIN DIRECCIÓN -2.2 → SIN DIRECCIÓN +0.6 (débil)
+   USDCAD: ALCISTA +4.0 → SIN DIRECCIÓN +1.5 (débil)
+   EURJPY: BAJISTA -4.0 → SIN DIRECCIÓN -1.5 (débil)
+   EURUSD: SIN DIRECCIÓN -1.0 → SIN DIRECCIÓN +1.4 (débil)
+   AUDJPY: SIN DIRECCIÓN -2.0 → SIN DIRECCIÓN +0.4 (débil)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 19.9 (-22.3%) — normal
+🏦 Bono EE. UU. 10A 4.86% (+0 pb hoy · -3 en 5 d) · curva 10A–3M +0.83 → sin cambio relevante
+   5A 4.66% (+1 pb) · 30A 5.26% (-0 pb)
+💵 Índice dólar DXY 101.58 (-0.06%)
+🛢 Petróleo WTI 85.7 (-1.4%) · Brent 91.5 (-1.2%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   🔻 Las conversaciones de paz en Ucrania se reanudan con "cierta flexibilidad" por parte de las partes en conflicto, dicen funcionarios estadounidenses
+   🔻 Trump dice que más ataques de Estados Unidos contra Irán son "altamente improbables"
+   📰 Trump cuestiona la integridad de las elecciones de mitad de período después de aceptar previamente los resultados
+   🔻 'Un zumbido molesto': la búsqueda de drones más sigilosos
+
+━━━ SESIÓN NUEVA YORK (07:30–16:00 COL) ━━━
+⭐ PRIORIDAD MÁXIMA — USD: Inflación subyacente (IPC core)
+   🕐 08:30 COL (13:30 GMT) · Consenso 0.2% · Previo 0.3%
+   Vigilar: Inflación sin alimentos ni energía. Alto = más alzas esperadas.
+   ▲ Mayor que el consenso → USD se FORTALECE · ▼ Menor → USD se DEBILITA
+
+⭐ PRIORIDAD MÁXIMA — USD: Inflación (IPC)
+   🕐 08:30 COL (13:30 GMT) · Consenso 0.3% · Previo 0.6%
+   Vigilar: Inflación general. Mueve las expectativas de tasas. Si hay dato core/subyacente, ese pesa más que el general.
+   ▲ Mayor que el consenso → USD se FORTALECE · ▼ Menor → USD se DEBILITA
+
+📒 Registro: 46 setups cerrados · acierto 37% · -0.05R promedio.
+⚙️ Fuentes: calendario: ✅ 6 eventos relevantes | ForexFactory (dato real): ✅ historial: 403 datos reales leídos (0 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 77 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
