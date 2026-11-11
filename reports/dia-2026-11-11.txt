@@ -1,0 +1,67 @@
+📋 PLAN DEL DÍA — MIÉRCOLES 11/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 11/11 01:57
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 USD +5.9 · CHF +4.0
+🟡 GBP +1.6 · AUD +0.4
+🟠 JPY -0.3 · EUR -1.6
+🔴 CAD -4.5 · NZD -5.5
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   USD: Empleo (NFP) 165K vs pron 65K ✅ · Tasa de desempleo 4.1% vs pron 4.2% ✅
+   CHF: Inflación (IPC) 0.2% vs pron 0.0% ✅ · titulares de riesgo +2.0
+   CAD: Tasa de desempleo 6.7% vs pron 6.5% ❌ · Inflación (IPC) 1.9% vs pron 2.0% ❌
+   NZD: Tasa de desempleo 5.7% vs pron 5.5% ❌ · Cambio en empleo -0.1% vs pron 0.4% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. USDCAD → COMPRA · muy fuerte · calidad A
+   🟢 USD +5.9 vs 🔴 CAD -4.5
+2. NZDUSD → VENTA · muy fuerte · calidad A
+   🔴 NZD -5.5 vs 🟢 USD +5.9
+3. EURUSD → VENTA · fuerte · calidad A
+   🟠 EUR -1.6 vs 🟢 USD +5.9
+4. GBPUSD → VENTA · moderada
+   🟡 GBP +1.6 vs 🟢 USD +5.9
+5. USDJPY → COMPRA · moderada · calidad B
+   🟢 USD +5.9 vs 🟠 JPY -0.3
+6. AUDUSD → VENTA · moderada
+   🟡 AUD +0.4 vs 🟢 USD +5.9
+Sin dirección clara: GBPJPY, AUDJPY, GBPAUD, USDCHF, EURJPY
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 10/11 02:39:
+Divisas:
+   🟠→🟢 USD -1.2 → +5.9 (mercado (VIX/bonos/petróleo) +4.2; datos por venir +3.0)
+   🟡→🟠 JPY +1.6 → -0.3 (mercado (VIX/bonos/petróleo) -1.9)
+   🔴→🔴 CAD -5.7 → -4.5 (mercado (VIX/bonos/petróleo) +1.3)
+   🟠→🟠 EUR -0.4 → -1.6 (mercado (VIX/bonos/petróleo) -1.2)
+   🔴→🔴 NZD -4.5 → -5.5 (mercado (VIX/bonos/petróleo) -1.0)
+Pares:
+   EURUSD: SIN DIRECCIÓN +1.4 → BAJISTA -6.5 (fuerte)
+   USDJPY: BAJISTA -3.8 → ALCISTA +4.0 (moderada)
+   NZDUSD: SIN DIRECCIÓN +0.8 → BAJISTA -7.0 (muy fuerte)
+   GBPUSD: ALCISTA +3.5 → BAJISTA -4.2 (moderada)
+   AUDUSD: ALCISTA +3.3 → BAJISTA -4.0 (moderada)
+   USDCHF: BAJISTA -6.0 → SIN DIRECCIÓN +1.0 (débil)
+   USDCAD: SIN DIRECCIÓN +1.5 → ALCISTA +7.0 (muy fuerte)
+   EURGBP: SIN DIRECCIÓN -2.1 → BAJISTA -2.6 (moderada)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 19.5 (-2.3%) — normal
+🏦 Bono EE. UU. 10A 4.98% (+12 pb hoy · +3 en 5 d) · curva 10A–3M +0.87 → apoya al USD
+   5A 4.81% (+15 pb) · 30A 5.35% (+9 pb)
+💵 Índice dólar DXY 102.35 (+0.11%)
+🛢 Petróleo WTI 86.6 (+0.6%) · Brent 92.4 (+1.0%) → sin cambio relevante
+🌍 Tensión geopolítica alta:
+   🔻 Three Iran-backed suspects plotted attacks including RAF Fairford incident, US says
+   🟢 Board of Peace says Israel's aid response after Gaza floods 'insufficent'
+   🟢 First day of Ukraine peace talks constructive, Zelensky says
+   🔻 French wartime resistance heroine Solange Alexandre dies aged 104
+
+Sin eventos relevantes en este día: baja volatilidad esperada.
+
+📒 Registro: 47 setups cerrados · acierto 36% · -0.07R promedio.
+⚙️ Fuentes: calendario: ✅ 6 eventos relevantes | ForexFactory (dato real): ✅ historial: 412 datos reales leídos (2 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 89 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
