@@ -1,0 +1,61 @@
+📋 PLAN DEL DÍA — JUEVES 12/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 12/11 02:33
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 USD +4.5 · CHF +4.1
+🟡 GBP +2.3 · AUD +1.0 · JPY +0.4
+🟠 EUR -0.9
+🔴 NZD -4.7 · CAD -5.0
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   USD: Empleo (NFP) 165K vs pron 65K ✅ · Tasa de desempleo 4.1% vs pron 4.2% ✅
+   CHF: Inflación (IPC) 0.2% vs pron 0.0% ✅ · titulares de riesgo +2.0
+   NZD: Tasa de desempleo 5.7% vs pron 5.5% ❌ · Cambio en empleo -0.1% vs pron 0.4% ❌
+   CAD: Tasa de desempleo 6.7% vs pron 6.5% ❌ · Inflación (IPC) 1.9% vs pron 2.0% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. USDCAD → COMPRA · fuerte · calidad A
+   🟢 USD +4.5 vs 🔴 CAD -5.0
+2. NZDUSD → VENTA · fuerte · calidad B
+   🔴 NZD -4.7 vs 🟢 USD +4.5
+3. EURUSD → VENTA · moderada · calidad B
+   🟠 EUR -0.9 vs 🟢 USD +4.5
+4. USDJPY → COMPRA · moderada
+   🟢 USD +4.5 vs 🟡 JPY +0.4
+5. EURGBP → VENTA · moderada
+   🟠 EUR -0.9 vs 🟡 GBP +2.3
+Sin dirección clara: AUDUSD, GBPUSD, GBPJPY, AUDJPY, GBPAUD, EURJPY, USDCHF
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 11/11 01:58:
+Divisas:
+   🟢→🟢 USD +5.9 → +4.5 (mercado (VIX/bonos/petróleo) -1.5)
+Pares:
+   GBPUSD: BAJISTA -4.2 → SIN DIRECCIÓN -2.2 (débil)
+   NZDUSD: BAJISTA -7.0 → BAJISTA -5.2 (fuerte)
+   EURUSD: BAJISTA -6.5 → BAJISTA -4.8 (moderada)
+   AUDUSD: BAJISTA -4.0 → SIN DIRECCIÓN -2.5 (débil)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 17.5 (-10.1%) — normal
+🏦 Bono EE. UU. 10A 5.00% (+2 pb hoy · +10 en 5 d) · curva 10A–3M +0.88 → apoya al USD
+   5A 4.83% (+2 pb) · 30A 5.36% (+1 pb)
+💵 Índice dólar DXY 103.03 (+0.12%)
+🛢 Petróleo WTI 86.9 (+0.4%) · Brent 93.3 (+0.6%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   🔻 El suministro eléctrico de Ucrania es casi crítico mientras los ataques rusos traen oscuridad y frío
+   🔻 Un ataque israelí contra un hospital mata al menos a cinco palestinos, dice la agencia de defensa civil de Gaza
+   🔻 Estallan enfrentamientos en Barcelona después de que miles de personas se unieran a la huelga general en España
+   🔻 Las conversaciones entre Rusia y Ucrania giran en torno a la seguridad de posguerra pero terminan sin avances
+
+━━━ ✅ YA PUBLICADO HOY ━━━
+✅ GBP: PIB → real 0.2% · consenso 0.0% · previo 0.1% → mejor de lo esperado
+✅ GBP: PIB → real 0.7% · consenso 0.7% · previo 0.5% → en línea
+
+Sin eventos relevantes en este día: baja volatilidad esperada.
+
+📒 Registro: 49 setups cerrados · acierto 39% · +0.02R promedio.
+⚙️ Fuentes: calendario: ✅ 6 eventos relevantes | ForexFactory (dato real): ✅ historial: 427 datos reales leídos (2 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 86 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
