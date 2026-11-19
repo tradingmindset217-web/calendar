@@ -1,0 +1,67 @@
+📋 PLAN DEL DÍA — JUEVES 19/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 19/11 02:47
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 CHF +5.8 · USD +4.6 · JPY +3.5
+🟡 GBP +2.5
+🟠 EUR -0.6
+🔴 NZD -5.9 · AUD -6.4 · CAD -6.5
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   CHF: Inflación (IPC) 0.2% vs pron 0.0% ✅ · titulares de riesgo +2.0
+   USD: Empleo (NFP) 165K vs pron 65K ✅ · Tasa de desempleo 4.1% vs pron 4.2% ✅
+   AUD: Tasa de desempleo 4.9% vs pron 4.7% ❌ · Cambio en empleo -43.5K vs pron 25.5K ❌
+   CAD: Inflación (IPC) 1.8% vs pron 1.9% ❌ · Tasa de desempleo 6.7% vs pron 6.5% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. USDCAD → COMPRA · muy fuerte · calidad A
+   🟢 USD +4.6 vs 🔴 CAD -6.5
+2. AUDJPY → VENTA · muy fuerte · calidad A
+   🔴 AUD -6.4 vs 🟢 JPY +3.5
+3. AUDUSD → VENTA · muy fuerte · calidad A
+   🔴 AUD -6.4 vs 🟢 USD +4.6
+4. NZDUSD → VENTA · fuerte · calidad A
+   🔴 NZD -5.9 vs 🟢 USD +4.6
+5. GBPAUD → COMPRA · fuerte · calidad B
+   🟡 GBP +2.5 vs 🔴 AUD -6.4
+6. EURUSD → VENTA · moderada · calidad B
+   🟠 EUR -0.6 vs 🟢 USD +4.6
+Sin dirección clara: GBPUSD, USDCHF, GBPJPY, USDJPY
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 18/11 02:52:
+Divisas:
+   🟠→🔴 AUD -0.3 → -6.4 (datos publicados -6.0; datos por venir -1.3)
+   🟢→🟢 USD +5.9 → +4.6 (mercado (VIX/bonos/petróleo) -1.3)
+   🔴→🔴 NZD -7.1 → -5.9 (mercado (VIX/bonos/petróleo) +1.2)
+Pares:
+   AUDJPY: SIN DIRECCIÓN -0.7 → BAJISTA -7.3 (muy fuerte)
+   GBPAUD: SIN DIRECCIÓN +2.2 → ALCISTA +5.9 (fuerte)
+   AUDUSD: BAJISTA -3.7 → BAJISTA -7.0 (muy fuerte)
+   GBPUSD: BAJISTA -4.0 → SIN DIRECCIÓN -2.1 (débil)
+   EURUSD: BAJISTA -6.6 → BAJISTA -4.8 (moderada)
+   NZDUSD: BAJISTA -8.0 → BAJISTA -6.5 (fuerte)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 24.6 (-3.5%) — nerviosismo → favorece USD, JPY y CHF
+🏦 Bono EE. UU. 10A 5.07% (-4 pb hoy · +7 en 5 d) · curva 10A–3M +0.92 → sin cambio relevante
+   5A 4.88% (-2 pb) · 30A 5.41% (-5 pb)
+💵 Índice dólar DXY 103.82 (-0.04%)
+🛢 Petróleo WTI 82.4 (-1.0%) · Brent 89.5 (-2.7%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   🔻 Inside the old gas pipeline where Ukraine is fighting an underground war with Russia
+   🔻 Crimean Bridge attacked again, Russia says
+   🔻 Kuwait says it repelled first Iranian attack in two months after US strikes island
+   🔻 Rubio says US not 'under systemic attack' after series of tech outages
+
+━━━ ✅ YA PUBLICADO HOY ━━━
+✅ AUD: Cambio en empleo → real -43.5K · consenso 25.5K · previo -39.3K → peor de lo esperado
+✅ AUD: Tasa de desempleo → real 4.9% · consenso 4.7% · previo 4.7% → peor de lo esperado
+
+Sin eventos relevantes en este día: baja volatilidad esperada.
+
+📒 Registro: 53 setups cerrados · acierto 42% · +0.08R promedio.
+⚙️ Fuentes: calendario: ✅ 15 eventos relevantes | ForexFactory (dato real): ✅ historial: 510 datos reales leídos (2 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 82 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
