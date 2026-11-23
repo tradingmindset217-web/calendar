@@ -1,0 +1,87 @@
+📆 PLAN SEMANAL — semana del 23/11 al 27/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 23/11 02:57
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 CHF +7.2 · JPY +5.6 · USD +3.7
+🟡 GBP +1.4
+🟠 EUR -0.4
+🔴 CAD -6.5 · NZD -6.5 · AUD -6.9
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   CHF: Inflación (IPC) 0.2% vs pron 0.0% ✅ · titulares de riesgo +2.0
+   JPY: titulares de riesgo +2.0 · aversión al riesgo (VIX) +2.0
+   NZD: Tasa de desempleo 5.7% vs pron 5.5% ❌ · Cambio en empleo -0.1% vs pron 0.4% ❌
+   AUD: Tasa de desempleo 4.9% vs pron 4.7% ❌ · Cambio en empleo -43.5K vs pron 25.5K ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. AUDJPY → VENTA · muy fuerte · calidad A
+   🔴 AUD -6.9 vs 🟢 JPY +5.6
+   00:30 GMT AUD Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+   00:30 GMT AUD Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+2. USDCAD → COMPRA · muy fuerte · calidad A
+   🟢 USD +3.7 vs 🔴 CAD -6.5
+   13:30 GMT USD Inflación PCE: mayor que el consenso → COMPRA · menor → VENTA
+   13:30 GMT USD PIB: mayor que el consenso → COMPRA · menor → VENTA
+3. AUDUSD → VENTA · fuerte · calidad A
+   🔴 AUD -6.9 vs 🟢 USD +3.7
+   00:30 GMT AUD Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+   00:30 GMT AUD Inflación (IPC): mayor que el consenso → COMPRA · menor → VENTA
+4. NZDUSD → VENTA · fuerte · calidad A
+   🔴 NZD -6.5 vs 🟢 USD +3.7
+   13:30 GMT USD Inflación PCE: mayor que el consenso → VENTA · menor → COMPRA
+   13:30 GMT USD PIB: mayor que el consenso → VENTA · menor → COMPRA
+5. EURJPY → VENTA · fuerte
+   🟠 EUR -0.4 vs 🟢 JPY +5.6
+6. GBPAUD → COMPRA · fuerte · calidad B
+   🟡 GBP +1.4 vs 🔴 AUD -6.9
+   00:30 GMT AUD Inflación (IPC): mayor que el consenso → VENTA · menor → COMPRA
+   00:30 GMT AUD Inflación (IPC): mayor que el consenso → VENTA · menor → COMPRA
+Sin dirección clara: GBPUSD, USDCHF, EURGBP, USDJPY
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 19/11 02:47:
+Divisas:
+   🟢→🟢 JPY +3.5 → +5.6 (datos por venir +1.2; mercado (VIX/bonos/petróleo) +0.8)
+   🟢→🟢 CHF +5.8 → +7.2 (mercado (VIX/bonos/petróleo) +1.7)
+   🟡→🟡 GBP +2.5 → +1.4 (datos por venir -0.8)
+Pares:
+   GBPJPY: SIN DIRECCIÓN -0.7 → BAJISTA -3.2 (moderada)
+   EURJPY: BAJISTA -3.6 → BAJISTA -5.5 (fuerte)
+   USDJPY: SIN DIRECCIÓN +0.4 → SIN DIRECCIÓN -1.2 (débil)
+   EURGBP: BAJISTA -2.6 → SIN DIRECCIÓN -1.4 (débil)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 35.9 (+26.2%) — pánico → favorece USD, JPY y CHF
+🏦 Bono EE. UU. 10A 4.91% (-14 pb hoy · -24 en 5 d) · curva 10A–3M +0.79 → resta apoyo al USD
+   5A 4.70% (-16 pb) · 30A 5.30% (-10 pb)
+💵 Índice dólar DXY 103.61 (-0.19%)
+🛢 Petróleo WTI 83.0 (-1.2%) · Brent 89.5 (-3.3%) → resta apoyo al CAD
+🌍 Tensión geopolítica alta:
+   🔻 Boy, 7, pulled alive from rubble hours after Russian strike on Ukraine, rescuers say
+   🔻 Russia-bound ship towed away after it was attacked in Gulf of Finland
+   🔻 Explosion on Russian ship at Libya port caused by suspected drone attack, officials say
+   🔻 'Danger seems greater all the time': Ukrainians search for missing after Russian strikes
+
+━━━ 🧭 TEMAS DE LA SEMANA ━━━
+   CPIs: AUD (Mié) · USD (Mié)
+   Bonos: US10A 4.91% (-24 pb en 5 d)
+   Crudo: WTI 83.0 (-3.2% en 5 d) ↓
+   VIX: 35.9 (+86.0% en 5 d)
+
+━━━ 🗓 AGENDA POR DÍA (días en GMT) ━━━
+MIÉRCOLES 25/11
+⭐ 19:30 COL (00:30 GMT) · AUD Inflación (IPC) (cons 0.4% · prev 0.8%)
+⭐ 19:30 COL (00:30 GMT) · AUD Inflación (IPC) (cons 4.8% · prev 4.3%)
+⭐ 19:30 COL (00:30 GMT) · AUD Inflación subyacente (media recortada) (cons 0.3% · prev 0.3%)
+⭐ 08:30 COL (13:30 GMT) · USD Inflación PCE (cons 0.3% · prev 0.3%)
+🔶 08:30 COL (13:30 GMT) · USD PIB (cons 3.5% · prev 3.4%)
+🔹 08:30 COL (13:30 GMT) · USD PIB (cons 2.3% · prev 2.3%)
+
+JUEVES 26/11
+🔹 18:30 COL (23:30 GMT) · JPY Inflación subyacente (IPC core) (cons 2.9% · prev 2.6%)
+
+📒 Registro: 58 setups cerrados · acierto 41% · +0.06R promedio.
+⚙️ Fuentes: calendario: ✅ 7 eventos relevantes | ForexFactory (dato real): ✅ historial: 538 datos reales leídos (1 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 84 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
