@@ -1,0 +1,72 @@
+📋 PLAN DEL DÍA — JUEVES 26/11
+Hora de Colombia (GMT entre paréntesis) · actualizado 26/11 03:45
+
+━━━ 🚦 FUERZA DE LAS DIVISAS ━━━
+🟢 JPY +7.4 · CHF +6.4
+🟡 USD +2.6 · GBP +1.4 · AUD +0.1
+🟠 EUR -0.7
+🔴 CAD -4.2 · NZD -6.0
+(🟢 fuerte · 🟡 algo fuerte · 🟠 algo débil · 🔴 débil)
+
+Por qué:
+   JPY: Inflación subyacente (IPC core) Jue 18:30 ↑ ⚡ · titulares de riesgo +2.0
+   CHF: titulares de riesgo +2.0 · Inflación (IPC) 0.2% vs pron 0.0% ✅
+   CAD: Inflación (IPC) 1.8% vs pron 1.9% ❌ · Tasa de desempleo 6.7% vs pron 6.5% ❌
+   NZD: Tasa de desempleo 5.7% vs pron 5.5% ❌ · Cambio en empleo -0.1% vs pron 0.4% ❌
+
+━━━ 🎯 PARES — DIRECCIÓN FUNDAMENTAL ━━━
+1. EURJPY → VENTA · muy fuerte · calidad A
+   🟠 EUR -0.7 vs 🟢 JPY +7.4
+   23:30 GMT JPY Inflación subyacente (IPC core): mayor que el consenso → VENTA · menor → COMPRA
+2. GBPJPY → VENTA · fuerte
+   🟡 GBP +1.4 vs 🟢 JPY +7.4
+3. AUDJPY → VENTA · fuerte
+   🟡 AUD +0.1 vs 🟢 JPY +7.4
+4. NZDUSD → VENTA · moderada · calidad B
+   🔴 NZD -6.0 vs 🟡 USD +2.6
+5. USDJPY → VENTA · moderada
+   🟡 USD +2.6 vs 🟢 JPY +7.4
+6. USDCAD → COMPRA · moderada · calidad B
+   🟡 USD +2.6 vs 🔴 CAD -4.2
+Sin dirección clara: EURGBP, AUDUSD, GBPAUD, GBPUSD
+
+━━━ 🔄 CAMBIOS RESPECTO AL PLAN ANTERIOR ━━━
+Frente al plan del 25/11 04:00:
+Divisas:
+   🟢→🟡 USD +5.5 → +2.6 (datos por venir -2.5)
+   🔴→🔴 CAD -6.0 → -4.2 (mercado (VIX/bonos/petróleo) +1.9)
+   🟢→🟢 JPY +5.7 → +7.4 (datos por venir +1.9)
+Pares:
+   USDCAD: ALCISTA +8.5 → ALCISTA +3.8 (moderada)
+   USDJPY: SIN DIRECCIÓN +0.2 → BAJISTA -4.1 (moderada)
+   AUDUSD: BAJISTA -4.9 → SIN DIRECCIÓN -1.5 (débil)
+   NZDUSD: BAJISTA -7.6 → BAJISTA -4.6 (moderada)
+   GBPUSD: BAJISTA -3.9 → SIN DIRECCIÓN -1.2 (débil)
+   USDCHF: SIN DIRECCIÓN -0.5 → BAJISTA -3.0 (moderada)
+   EURUSD: BAJISTA -5.5 → BAJISTA -3.0 (moderada)
+   EURJPY: BAJISTA -5.6 → BAJISTA -7.6 (muy fuerte)
+   GBPJPY: BAJISTA -3.2 → BAJISTA -5.1 (fuerte)
+   AUDJPY: BAJISTA -3.2 → BAJISTA -5.1 (fuerte)
+
+━━━ 🌍 CONTEXTO DE MERCADO ━━━
+😨 VIX 27.0 (-4.5%) — miedo alto → favorece USD, JPY y CHF
+🏦 Bono EE. UU. 10A 4.85% (-6 pb hoy · -22 en 5 d) · curva 10A–3M +0.69 → resta apoyo al USD
+   5A 4.66% (-5 pb) · 30A 5.24% (-6 pb)
+💵 Índice dólar DXY 103.75 (+0.07%)
+🛢 Petróleo WTI 83.9 (+0.2%) · Brent 90.5 (-4.3%) → sin cambio relevante
+🌍 Tensión geopolítica alta:
+   🔻 US announces new tariffs on host of countries including China
+   🔻 Five Russian military jets hit in airfield strike, says Ukraine
+   🔻 North Korea expels Swiss diplomat in sanctions row
+   🔻 California warns of flooding as King Tides peak over Thanksgiving
+
+━━━ SESIÓN CIERRE ESTADOUNIDENSE Y TRANSICIÓN A ASIA (16:00–19:00 COL) ━━━
+🔹 PRIORIDAD MEDIA — JPY: Inflación subyacente (IPC core)
+   🕐 18:30 COL (23:30 GMT) · Consenso 3.0% · Previo 2.6%
+   Vigilar: Inflación sin alimentos ni energía. Alto = más alzas esperadas.
+   ▲ Mayor que el consenso → JPY se FORTALECE · ▼ Menor → JPY se DEBILITA
+
+📒 Registro: 66 setups cerrados · acierto 41% · +0.07R promedio.
+⚙️ Fuentes: calendario: ✅ 7 eventos relevantes | ForexFactory (dato real): ✅ historial: 582 datos reales leídos (3 nuevos) | mercado: ✅ 8/8 series (VIX, bonos, DXY, petróleo) | titulares: ✅ 75 titulares leídos
+
+⚠️ Reglas: no operes 15 min antes de un dato ⭐/🔶 · espera la vela de 5 min tras el dato · stop más allá de la vela del dato y objetivo 1:2 · riesgo máximo 1%. Es información, no asesoría financiera.
